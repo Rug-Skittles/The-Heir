@@ -1,0 +1,93 @@
+[gd_scene load_steps=6 format=3 uid="uid://dauj5047ylwf7"]
+
+[ext_resource type="Script" path="res://scripts/startScreen.gd" id="1_g8uab"]
+[ext_resource type="Texture2D" uid="uid://bsbuijq3ifjby" path="res://resources/ui/Start Background.png" id="1_mna34"]
+[ext_resource type="FontFile" uid="uid://bwok4c27cqjh6" path="res://resources/fonts/OldEnglishGothicPixelRegular-ow2Bo.ttf" id="2_w6oic"]
+
+[sub_resource type="Theme" id="Theme_vjth5"]
+default_font = ExtResource("2_w6oic")
+default_font_size = 86
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aq71x"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(10, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(100, 1, 1)
+direction = Vector3(-0.5, 1, 0)
+spread = 0.0
+initial_velocity_min = 800.0
+initial_velocity_max = 1200.0
+gravity = Vector3(0, 0, 0)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g8uab")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -614.0
+offset_top = -503.0
+offset_right = -614.0
+offset_bottom = -503.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(480, 360)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_mna34")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -168.0
+offset_top = 137.0
+offset_right = 168.0
+offset_bottom = 241.0
+grow_horizontal = 2
+theme = SubResource("Theme_vjth5")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 12
+theme_override_constants/shadow_outline_size = 12
+theme_override_constants/outline_size = 12
+bbcode_enabled = true
+text = "The Heir"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+position = Vector2(701, -8)
+amount = 600
+process_material = SubResource("ParticleProcessMaterial_aq71x")
+randomness = 1.0
+trail_enabled = true
+trail_lifetime = 0.05
+trail_sections = 2
+trail_section_subdivisions = 1

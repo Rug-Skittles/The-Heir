@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://bac5hpy0xsm7f"]
+
+[ext_resource type="Script" path="res://scripts/Game.gd" id="1_a5c0y"]
+[ext_resource type="PackedScene" uid="uid://7cc7jqskf8v1" path="res://scenes/PlayerUnit.tscn" id="2_8mq7m"]
+[ext_resource type="PackedScene" uid="uid://pfvd4qd5a60k" path="res://scenes/EnemyUnit.tscn" id="2_lra1l"]
+[ext_resource type="Texture2D" uid="uid://c2guqk0eqv5ec" path="res://icon.svg" id="3_dkjyr"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_8ganr"]
+vertices = PackedVector2Array(526, 414, 578, 591, 42, 592, 43, 45, 514, 399, 575, 47, 575, 222, 537, 223, 516, 234, 579, 416)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(3, 5, 6, 7), PackedInt32Array(3, 7, 8), PackedInt32Array(0, 9, 1), PackedInt32Array(3, 8, 4)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(43, 45, 42, 592, 578, 591, 579, 416, 526, 414, 514, 399, 516, 234, 537, 223, 575, 222, 575, 47, 187.384, 45.5428)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_b0c4v"]
+vertices = PackedVector2Array(1119, 589, 578, 591, 579, 416, 628, 416, 641, 407, 1119, 48, 644, 235, 573, 48, 637, 224, 574, 223)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4), PackedInt32Array(5, 0, 4, 6), PackedInt32Array(7, 5, 6, 8), PackedInt32Array(7, 8, 9)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(573, 48, 574, 223, 637, 224, 644, 235, 641, 407, 628, 416, 579, 416, 578, 591, 1119, 589, 1119, 48)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 0.0
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_a5c0y")
+
+[node name="Test Obstacles" type="Node2D" parent="."]
+
+[node name="Sprite2D5" type="Sprite2D" parent="Test Obstacles"]
+position = Vector2(578, 321)
+scale = Vector2(0.947266, 1.48437)
+texture = ExtResource("3_dkjyr")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Test Obstacles"]
+position = Vector2(1182, 309)
+scale = Vector2(0.947266, 5.90625)
+texture = ExtResource("3_dkjyr")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Test Obstacles"]
+position = Vector2(-17, 325)
+scale = Vector2(0.947266, 5.90625)
+texture = ExtResource("3_dkjyr")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Test Obstacles"]
+position = Vector2(599, 654)
+scale = Vector2(9.92969, 1)
+texture = ExtResource("3_dkjyr")
+
+[node name="Sprite2D" type="Sprite2D" parent="Test Obstacles"]
+position = Vector2(584.5, -16)
+scale = Vector2(9.92969, 1)
+texture = ExtResource("3_dkjyr")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_8ganr")
+
+[node name="NavigationRegion2D2" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_b0c4v")
+
+[node name="EnemyUnit" parent="." instance=ExtResource("2_lra1l")]
+position = Vector2(891, 179)
+
+[node name="PlayerUnit" parent="." instance=ExtResource("2_8mq7m")]
+position = Vector2(244, 440)

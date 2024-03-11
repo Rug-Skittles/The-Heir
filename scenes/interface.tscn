@@ -1,0 +1,839 @@
+[gd_scene load_steps=16 format=3 uid="uid://cg5lg3sj61q22"]
+
+[ext_resource type="Script" path="res://scripts/interface.gd" id="1_6y3rl"]
+[ext_resource type="Theme" uid="uid://bljgju70bevpx" path="res://resources/themes/uiFontTheme2.tres" id="1_ttv5o"]
+[ext_resource type="Script" path="res://scripts/tooltip.gd" id="2_6cswn"]
+[ext_resource type="Texture2D" uid="uid://bonnmi81j0kyo" path="res://resources/sprites/Benas.png" id="2_08vuu"]
+[ext_resource type="Theme" uid="uid://dxaa23umg3c5f" path="res://resources/themes/uiFontTheme.tres" id="3_g7yyr"]
+[ext_resource type="Texture2D" uid="uid://bebkockj16s8r" path="res://resources/textures/dither gradient.png" id="3_hej70"]
+[ext_resource type="Texture2D" uid="uid://b5vb8yxoc2643" path="res://resources/textures/hungerBarOver.png" id="3_ncrym"]
+[ext_resource type="Texture2D" uid="uid://c5lfij5x3m3u6" path="res://resources/ui/talkActionActive.png" id="6_464c0"]
+[ext_resource type="Texture2D" uid="uid://4ox4y1qyvfbs" path="res://resources/ui/feastActionActive.png" id="7_ya8fb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vvees"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7sqht"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v4274"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hemhj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tt64p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_76qgn"]
+
+[node name="interface" type="CanvasLayer"]
+script = ExtResource("1_6y3rl")
+
+[node name="rightStatsContainer" type="Control" parent="."]
+custom_minimum_size = Vector2(320, 0)
+layout_direction = 2
+layout_mode = 3
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="rightStatsContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="vContainerOld" type="VBoxContainer" parent="rightStatsContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 1
+script = ExtResource("2_6cswn")
+
+[node name="characterNameLabel" type="RichTextLabel" parent="rightStatsContainer/vContainerOld"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme = ExtResource("1_ttv5o")
+bbcode_enabled = true
+text = "[center]CHARACTER NAME"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="spriteContainer" type="MarginContainer" parent="rightStatsContainer/vContainerOld"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+
+[node name="sprite" type="TextureRect" parent="rightStatsContainer/vContainerOld/spriteContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("2_08vuu")
+stretch_mode = 5
+
+[node name="woundsLabel" type="RichTextLabel" parent="rightStatsContainer/vContainerOld"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+theme = ExtResource("1_ttv5o")
+bbcode_enabled = true
+text = "[center]WOUNDS"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="woundsValueLabel" type="RichTextLabel" parent="rightStatsContainer/vContainerOld"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("1_ttv5o")
+bbcode_enabled = true
+text = "[center]10 / 10"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="statsMargin" type="MarginContainer" parent="rightStatsContainer/vContainerOld"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 96
+theme_override_constants/margin_right = 96
+
+[node name="statsHBox" type="HBoxContainer" parent="rightStatsContainer/vContainerOld/statsMargin"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = -48
+
+[node name="leftStatVBox" type="VBoxContainer" parent="rightStatsContainer/vContainerOld/statsMargin/statsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="mightLabel" type="RichTextLabel" parent="rightStatsContainer/vContainerOld/statsMargin/statsHBox/leftStatVBox"]
+custom_minimum_size = Vector2(50, 28)
+layout_mode = 2
+tooltip_text = "Thy measure of strength, of wild power, of physical force. Ye of great might wilt find thy potential for dealing higher damage increased."
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]MGT"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_6cswn")
+
+[node name="skillLabel" type="RichTextLabel" parent="rightStatsContainer/vContainerOld/statsMargin/statsHBox/leftStatVBox"]
+custom_minimum_size = Vector2(50, 28)
+layout_mode = 2
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]SKL"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="agiLabel" type="RichTextLabel" parent="rightStatsContainer/vContainerOld/statsMargin/statsHBox/leftStatVBox"]
+custom_minimum_size = Vector2(50, 38)
+layout_mode = 2
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]AGI"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="leftStatVBoxValues" type="VBoxContainer" parent="rightStatsContainer/vContainerOld/statsMargin/statsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="mightLabel" type="RichTextLabel" parent="rightStatsContainer/vContainerOld/statsMargin/statsHBox/leftStatVBoxValues"]
+custom_minimum_size = Vector2(32, 28)
+layout_mode = 2
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]7"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="skillLabel" type="RichTextLabel" parent="rightStatsContainer/vContainerOld/statsMargin/statsHBox/leftStatVBoxValues"]
+custom_minimum_size = Vector2(32, 28)
+layout_mode = 2
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]3"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="agiLabel" type="RichTextLabel" parent="rightStatsContainer/vContainerOld/statsMargin/statsHBox/leftStatVBoxValues"]
+custom_minimum_size = Vector2(32, 38)
+layout_mode = 2
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]5"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="rightStatVBox" type="VBoxContainer" parent="rightStatsContainer/vContainerOld/statsMargin/statsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="resilienceLabel" type="RichTextLabel" parent="rightStatsContainer/vContainerOld/statsMargin/statsHBox/rightStatVBox"]
+custom_minimum_size = Vector2(50, 28)
+layout_mode = 2
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]RES"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="survivalLabel" type="RichTextLabel" parent="rightStatsContainer/vContainerOld/statsMargin/statsHBox/rightStatVBox"]
+custom_minimum_size = Vector2(50, 28)
+layout_mode = 2
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]SUR"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="rangeLabel" type="RichTextLabel" parent="rightStatsContainer/vContainerOld/statsMargin/statsHBox/rightStatVBox"]
+custom_minimum_size = Vector2(50, 38)
+layout_mode = 2
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]RNG"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="rightStatVBoxValues" type="VBoxContainer" parent="rightStatsContainer/vContainerOld/statsMargin/statsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="resilienceLabel" type="RichTextLabel" parent="rightStatsContainer/vContainerOld/statsMargin/statsHBox/rightStatVBoxValues"]
+custom_minimum_size = Vector2(32, 28)
+layout_mode = 2
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]10"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="survivalLabel" type="RichTextLabel" parent="rightStatsContainer/vContainerOld/statsMargin/statsHBox/rightStatVBoxValues"]
+custom_minimum_size = Vector2(32, 28)
+layout_mode = 2
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]1"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="rangeLabel" type="RichTextLabel" parent="rightStatsContainer/vContainerOld/statsMargin/statsHBox/rightStatVBoxValues"]
+custom_minimum_size = Vector2(32, 38)
+layout_mode = 2
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]30"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="hungerLabel" type="RichTextLabel" parent="rightStatsContainer/vContainerOld"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme = ExtResource("1_ttv5o")
+bbcode_enabled = true
+text = "[center]Hunger"
+scroll_active = false
+
+[node name="hungerBar" type="TextureProgressBar" parent="rightStatsContainer/vContainerOld"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+value = 100.0
+texture_over = ExtResource("3_ncrym")
+texture_progress = ExtResource("3_hej70")
+
+[node name="stateLabel" type="RichTextLabel" parent="rightStatsContainer/vContainerOld"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme = ExtResource("1_ttv5o")
+bbcode_enabled = true
+text = "[center]STATE"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="MarginContainer" type="MarginContainer" parent="rightStatsContainer/vContainerOld"]
+layout_mode = 2
+theme_override_constants/margin_left = 96
+theme_override_constants/margin_right = 96
+
+[node name="stateHBox" type="HBoxContainer" parent="rightStatsContainer/vContainerOld/MarginContainer"]
+layout_mode = 2
+
+[node name="leftStateVBox" type="VBoxContainer" parent="rightStatsContainer/vContainerOld/MarginContainer/stateHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="fatigueState" type="RichTextLabel" parent="rightStatsContainer/vContainerOld/MarginContainer/stateHBox/leftStateVBox"]
+custom_minimum_size = Vector2(128, 28)
+layout_mode = 2
+tooltip_text = "This is a tooltip"
+theme = ExtResource("1_ttv5o")
+theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
+bbcode_enabled = true
+text = "[center]Fatigued"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_6cswn")
+
+[node name="diseaseState" type="RichTextLabel" parent="rightStatsContainer/vContainerOld/MarginContainer/stateHBox/leftStateVBox"]
+custom_minimum_size = Vector2(100, 28)
+layout_mode = 2
+tooltip_text = "T"
+theme = ExtResource("1_ttv5o")
+theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
+bbcode_enabled = true
+text = "[center]Diseased"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_6cswn")
+
+[node name="hostilityState" type="RichTextLabel" parent="rightStatsContainer/vContainerOld/MarginContainer/stateHBox/leftStateVBox"]
+custom_minimum_size = Vector2(100, 28)
+layout_mode = 2
+theme = ExtResource("1_ttv5o")
+theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
+bbcode_enabled = true
+text = "[center]Hostile"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="rightStateVBox2" type="VBoxContainer" parent="rightStatsContainer/vContainerOld/MarginContainer/stateHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="bleedingState" type="RichTextLabel" parent="rightStatsContainer/vContainerOld/MarginContainer/stateHBox/rightStateVBox2"]
+custom_minimum_size = Vector2(128, 28)
+layout_mode = 2
+theme = ExtResource("1_ttv5o")
+theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
+bbcode_enabled = true
+text = "[center]Bleeding"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="frenzyState" type="RichTextLabel" parent="rightStatsContainer/vContainerOld/MarginContainer/stateHBox/rightStateVBox2"]
+custom_minimum_size = Vector2(100, 28)
+layout_mode = 2
+theme = ExtResource("1_ttv5o")
+theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
+bbcode_enabled = true
+text = "[center]Frenzied"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="deathState" type="RichTextLabel" parent="rightStatsContainer/vContainerOld/MarginContainer/stateHBox/rightStateVBox2"]
+custom_minimum_size = Vector2(100, 28)
+layout_mode = 2
+theme = ExtResource("1_ttv5o")
+theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
+bbcode_enabled = true
+text = "[center]Deceased "
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="skillsLabel" type="RichTextLabel" parent="rightStatsContainer/vContainerOld"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme = ExtResource("1_ttv5o")
+bbcode_enabled = true
+text = "[center]ABILITIES"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="MarginContainer2" type="MarginContainer" parent="rightStatsContainer/vContainerOld"]
+layout_mode = 2
+theme_override_constants/margin_left = 96
+theme_override_constants/margin_right = 96
+
+[node name="abilityRow1" type="HBoxContainer" parent="rightStatsContainer/vContainerOld/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="talkButton" type="TextureButton" parent="rightStatsContainer/vContainerOld/MarginContainer2/abilityRow1"]
+layout_mode = 2
+texture_normal = ExtResource("6_464c0")
+
+[node name="feastButton" type="TextureButton" parent="rightStatsContainer/vContainerOld/MarginContainer2/abilityRow1"]
+layout_mode = 2
+texture_normal = ExtResource("7_ya8fb")
+
+[node name="vContainer" type="VBoxContainer" parent="rightStatsContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 1
+script = ExtResource("2_6cswn")
+
+[node name="characterNameLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme = ExtResource("1_ttv5o")
+bbcode_enabled = true
+text = "[center]CHARACTER NAME"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="spriteContainer" type="MarginContainer" parent="rightStatsContainer/vContainer"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+
+[node name="sprite" type="TextureRect" parent="rightStatsContainer/vContainer/spriteContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("2_08vuu")
+stretch_mode = 5
+
+[node name="woundsLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+tooltip_text = "Thy measure of meat and will, the punishment thou can withstand. Shouldst its count reach zero - meet thy maker."
+theme = ExtResource("1_ttv5o")
+bbcode_enabled = true
+text = "[center]WOUNDS"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_6cswn")
+
+[node name="woundsValueLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 0
+tooltip_text = "Thy measure of meat and will, the punishment thou can withstand. Shouldst its count reach zero - meet thy maker."
+theme = ExtResource("1_ttv5o")
+bbcode_enabled = true
+text = "[center]10 / 10"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_6cswn")
+
+[node name="statsMargin" type="MarginContainer" parent="rightStatsContainer/vContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="statsHBox" type="HBoxContainer" parent="rightStatsContainer/vContainer/statsMargin"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = -112
+
+[node name="leftStatVBox" type="VBoxContainer" parent="rightStatsContainer/vContainer/statsMargin/statsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="mightLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/statsMargin/statsHBox/leftStatVBox"]
+custom_minimum_size = Vector2(50, 28)
+layout_mode = 2
+tooltip_text = "Thy measure of strength, of wild power, of physical force. Ye of great might wilt find thy potential for dealing higher damage increased."
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]MGT"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_6cswn")
+
+[node name="skillLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/statsMargin/statsHBox/leftStatVBox"]
+custom_minimum_size = Vector2(50, 28)
+layout_mode = 2
+tooltip_text = "Be it with blade or bow, knuckle or claw, this be the measure of thy precision and thy mastery of combat. Ye of great skill will find all thy strikes true."
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]SKL"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_6cswn")
+
+[node name="agiLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/statsMargin/statsHBox/leftStatVBox"]
+custom_minimum_size = Vector2(50, 38)
+layout_mode = 2
+tooltip_text = "Speed of body and wit o' agile one! Thou wilt find great alacrity in thine movements whether to cover distance or evade a telling blow."
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]AGI"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_6cswn")
+
+[node name="leftStatVBoxValues" type="VBoxContainer" parent="rightStatsContainer/vContainer/statsMargin/statsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="mightLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/statsMargin/statsHBox/leftStatVBoxValues"]
+custom_minimum_size = Vector2(32, 28)
+layout_mode = 2
+tooltip_text = "Thy measure of strength, of wild power, of physical force. Ye of great might wilt find thy potential for dealing higher damage increased."
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]7"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_6cswn")
+
+[node name="skillLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/statsMargin/statsHBox/leftStatVBoxValues"]
+custom_minimum_size = Vector2(32, 28)
+layout_mode = 2
+tooltip_text = "Be it with blade or bow, knuckle or claw, this be the measure of thy precision and thy mastery of combat. Ye of great skill will find all thy strikes true."
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]3"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_6cswn")
+
+[node name="agiLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/statsMargin/statsHBox/leftStatVBoxValues"]
+custom_minimum_size = Vector2(32, 38)
+layout_mode = 2
+tooltip_text = "Speed of body and wit o' agile one! Thou wilt find great alacrity in thine movements whether to cover distance or evade a telling blow."
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]5"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_6cswn")
+
+[node name="rightStatVBox" type="VBoxContainer" parent="rightStatsContainer/vContainer/statsMargin/statsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="resilienceLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/statsMargin/statsHBox/rightStatVBox"]
+custom_minimum_size = Vector2(50, 28)
+layout_mode = 2
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]RES"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="survivalLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/statsMargin/statsHBox/rightStatVBox"]
+custom_minimum_size = Vector2(50, 28)
+layout_mode = 2
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]SUR"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="rangeLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/statsMargin/statsHBox/rightStatVBox"]
+custom_minimum_size = Vector2(50, 38)
+layout_mode = 2
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]RNG"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="rightStatVBoxValues" type="VBoxContainer" parent="rightStatsContainer/vContainer/statsMargin/statsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="resilienceLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/statsMargin/statsHBox/rightStatVBoxValues"]
+custom_minimum_size = Vector2(32, 28)
+layout_mode = 2
+tooltip_text = "Thy measure of grit, of bodily strength, Ye whom is resilient wilt find that no injury is too great, no blade too sharp to find purchase on thy flesh. "
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]10"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_6cswn")
+
+[node name="survivalLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/statsMargin/statsHBox/rightStatVBoxValues"]
+custom_minimum_size = Vector2(32, 28)
+layout_mode = 2
+tooltip_text = "Thy measure of resistance to the pains of hunger and disease as well as thy unswerving will. Ye of great survival will surely find the Sun's gaze once more."
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]1"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="rangeLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/statsMargin/statsHBox/rightStatVBoxValues"]
+custom_minimum_size = Vector2(32, 38)
+layout_mode = 2
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]30"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="hungerLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+tooltip_text = "O' how it gnaws, it creeps, it grabs hold of thee, threatening n'er to relinquish its chilling grasp. Ye should partake, of blood and flesh, lest ye be doomed to starvation in this wretched place. "
+theme = ExtResource("1_ttv5o")
+bbcode_enabled = true
+text = "[center]Hunger"
+scroll_active = false
+script = ExtResource("2_6cswn")
+
+[node name="hungerBar" type="TextureProgressBar" parent="rightStatsContainer/vContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+value = 100.0
+texture_over = ExtResource("3_ncrym")
+texture_progress = ExtResource("3_hej70")
+
+[node name="stateLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme = ExtResource("1_ttv5o")
+bbcode_enabled = true
+text = "[center]STATE"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="MarginContainer" type="MarginContainer" parent="rightStatsContainer/vContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="stateHBox" type="HBoxContainer" parent="rightStatsContainer/vContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = -48
+
+[node name="leftStateVBox" type="VBoxContainer" parent="rightStatsContainer/vContainer/MarginContainer/stateHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="fatigueState" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer/stateHBox/leftStateVBox"]
+custom_minimum_size = Vector2(128, 28)
+layout_mode = 2
+tooltip_text = "It sets into thy bones and dulls the senses. Each muscle and ligament begging to cease and be rid of it, yet still you push on. . ."
+theme = ExtResource("1_ttv5o")
+theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
+bbcode_enabled = true
+text = "[center]Fatigued"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_6cswn")
+
+[node name="diseaseState" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer/stateHBox/leftStateVBox"]
+custom_minimum_size = Vector2(100, 28)
+layout_mode = 2
+tooltip_text = "An illness, one rot, beware ye whom carry it for thee wilt surely find thyself drained of vim, of will, and no doubt of life."
+theme = ExtResource("1_ttv5o")
+theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
+bbcode_enabled = true
+text = "[center]Diseased"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_6cswn")
+
+[node name="hostilityState" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer/stateHBox/leftStateVBox"]
+custom_minimum_size = Vector2(100, 28)
+layout_mode = 2
+tooltip_text = "They whom art hostile wilt surely fly to attack thee, whilst they whom art not must surely be thy ally. . ."
+theme = ExtResource("1_ttv5o")
+theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
+bbcode_enabled = true
+text = "[center]Hostile"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_6cswn")
+
+[node name="rightStateVBox2" type="VBoxContainer" parent="rightStatsContainer/vContainer/MarginContainer/stateHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="bleedingState" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer/stateHBox/rightStateVBox2"]
+custom_minimum_size = Vector2(128, 28)
+layout_mode = 2
+tooltip_text = "Be warned for a great blow may leave thee hemorrhaging and quickly exsanguinated with time. Should thee be losing a deal of blood, seek a physician at once!"
+theme = ExtResource("1_ttv5o")
+theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
+bbcode_enabled = true
+text = "[center]Bleeding"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_6cswn")
+
+[node name="frenzyState" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer/stateHBox/rightStateVBox2"]
+custom_minimum_size = Vector2(100, 28)
+layout_mode = 2
+tooltip_text = "Ahh. . . It is bound to occur, when one imbibes deeply of the flesh of another it comes. A madness that takes of thee wit and will, replaced by feral strength and hunger yet deeper."
+theme = ExtResource("1_ttv5o")
+theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
+bbcode_enabled = true
+text = "[center]Frenzied"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_6cswn")
+
+[node name="deathState" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer/stateHBox/rightStateVBox2"]
+custom_minimum_size = Vector2(100, 28)
+layout_mode = 2
+tooltip_text = "Mors certa, hora incerta"
+theme = ExtResource("1_ttv5o")
+theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
+bbcode_enabled = true
+text = "[center]Deceased "
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_6cswn")
+
+[node name="skillsLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme = ExtResource("1_ttv5o")
+bbcode_enabled = true
+text = "[center]ACTIONS"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="MarginContainer2" type="MarginContainer" parent="rightStatsContainer/vContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="abilityRow1" type="HBoxContainer" parent="rightStatsContainer/vContainer/MarginContainer2"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="talkButton" type="TextureButton" parent="rightStatsContainer/vContainer/MarginContainer2/abilityRow1"]
+layout_mode = 2
+texture_normal = ExtResource("6_464c0")
+
+[node name="feastButton" type="TextureButton" parent="rightStatsContainer/vContainer/MarginContainer2/abilityRow1"]
+layout_mode = 2
+texture_normal = ExtResource("7_ya8fb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="rightStatsContainer/vContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="speakAction" type="Button" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 28)
+layout_mode = 2
+tooltip_text = "Perhaps words wilt suit thee better than blades, select another for this one to speak with."
+theme = ExtResource("1_ttv5o")
+theme_override_colors/font_color = Color(0.352941, 0.352941, 0.352941, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vvees")
+text = "             Speak"
+flat = true
+script = ExtResource("2_6cswn")
+
+[node name="feastAction" type="Button" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 28)
+layout_mode = 2
+tooltip_text = "Use to consume the only thing of which there is to sustain thee in these squalid halls. "
+theme = ExtResource("1_ttv5o")
+theme_override_colors/font_color = Color(0.352941, 0.352941, 0.352941, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7sqht")
+text = "Feast"
+flat = true
+script = ExtResource("2_6cswn")
+
+[node name="treatToggle" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Allows the physician to begin treating on those around them to staunch the loss of blood and patch minor wounds. Be warned, ye of the mind to heal can do no harm. Some time must pass before one may be treated again."
+theme = ExtResource("1_ttv5o")
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("2_6cswn")
+
+[node name="treatButton" type="Button" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer/treatToggle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v4274")
+flat = true
+icon_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="chaseLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 28)
+layout_mode = 2
+theme = ExtResource("1_ttv5o")
+theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
+bbcode_enabled = true
+text = "[center]Chase"
+scroll_active = false
+
+[node name="chaseButton" type="Button" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2/chaseLabel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hemhj")
+flat = true
+
+[node name="fightLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 28)
+layout_mode = 2
+theme = ExtResource("1_ttv5o")
+theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
+bbcode_enabled = true
+text = "[center]Fight"
+scroll_active = false
+
+[node name="fightButton" type="Button" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2/fightLabel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tt64p")
+flat = true
+
+[node name="focusLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 28)
+layout_mode = 2
+theme = ExtResource("1_ttv5o")
+theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
+bbcode_enabled = true
+text = "[center]Focus"
+scroll_active = false
+
+[node name="focusButton" type="Button" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2/focusLabel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_76qgn")
+flat = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="rightStatsContainer/vContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer3"]
+layout_mode = 2
+theme = ExtResource("3_g7yyr")
+bbcode_enabled = true
+text = "[center]Benas was a stalwart knight of the Heir's father. A lawful and conservative elder, they were implicated in connection with the coup. Perhaps falsely."
+
+[connection signal="button_down" from="rightStatsContainer/vContainerOld/MarginContainer2/abilityRow1/talkButton" to="." method="_on_talk_button_button_down"]
+[connection signal="button_down" from="rightStatsContainer/vContainerOld/MarginContainer2/abilityRow1/feastButton" to="." method="_on_feast_button_button_down"]
+[connection signal="button_down" from="rightStatsContainer/vContainer/MarginContainer2/abilityRow1/talkButton" to="." method="_on_talk_button_button_down"]
+[connection signal="button_down" from="rightStatsContainer/vContainer/MarginContainer2/abilityRow1/feastButton" to="." method="_on_feast_button_button_down"]
+[connection signal="button_down" from="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer/speakAction" to="." method="_on_speak_action_button_down"]
+[connection signal="button_down" from="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer/feastAction" to="." method="_on_feast_action_button_down"]
+[connection signal="button_down" from="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer/treatToggle/treatButton" to="." method="_on_treat_button_button_down"]
+[connection signal="button_down" from="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2/chaseLabel/chaseButton" to="." method="_on_chase_button_button_down"]
+[connection signal="button_down" from="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2/fightLabel/fightButton" to="." method="_on_fight_button_button_down"]
+[connection signal="button_down" from="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2/focusLabel/focusButton" to="." method="_on_focus_button_button_down"]

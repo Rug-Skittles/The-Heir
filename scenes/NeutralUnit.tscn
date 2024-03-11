@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://mu0jkaauwc6t"]
+
+[ext_resource type="PackedScene" uid="uid://7cc7jqskf8v1" path="res://scenes/PlayerUnit.tscn" id="1_hf1fy"]
+[ext_resource type="Script" path="res://scripts/NeutralUnit.gd" id="2_cgu8f"]
+
+[node name="NeutralUnit" instance=ExtResource("1_hf1fy")]
+script = ExtResource("2_cgu8f")
+sightRange = 300.0
+recruitmentDialog = Array[String]([])
+recruitmentScript = Array[String]([])
+aiDisabled = true
+isPlayer = false
+
+[node name="NavigationAgent2D" parent="." index="6"]
+radius = 10.0
+max_speed = 100.0
+debug_path_custom_color = Color(1, 1, 1, 1)
+debug_path_custom_line_width = -1.0
+
+[node name="bleedTimer" parent="." index="13"]
+wait_time = 1.0
+
+[connection signal="timeout" from="treatmentTimer" to="." method="_on_treatment_timer_timeout"]

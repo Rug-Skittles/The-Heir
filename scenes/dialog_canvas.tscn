@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://ck0r2ncdfmau7"]
+
+[ext_resource type="Script" path="res://scripts/dialog_canvas.gd" id="1_q5j4n"]
+[ext_resource type="StyleBox" uid="uid://cayqsvqoku223" path="res://resources/styles/2pxborderstyle.tres" id="1_vft0c"]
+[ext_resource type="Theme" uid="uid://dxaa23umg3c5f" path="res://resources/themes/uiFontTheme.tres" id="3_wnutn"]
+
+[sub_resource type="Theme" id="Theme_nr88r"]
+/styles/normal = ExtResource("1_vft0c")
+
+[node name="dialogCanvas" type="CanvasLayer"]
+script = ExtResource("1_q5j4n")
+
+[node name="textboxContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(0, 32)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -80.0
+offset_right = -320.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_vertical = 8
+theme = SubResource("Theme_nr88r")
+
+[node name="graphic" type="Panel" parent="textboxContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_vft0c")
+
+[node name="TextureRect" type="TextureRect" parent="textboxContainer/graphic"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="internalMargin" type="MarginContainer" parent="textboxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="text" type="RichTextLabel" parent="textboxContainer/internalMargin"]
+layout_mode = 2
+theme = ExtResource("3_wnutn")
+bbcode_enabled = true
+text = "[center]INSERT TEXT. . . . . . . . . here s"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+shortcut_keys_enabled = false

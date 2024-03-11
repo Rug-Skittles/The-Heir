@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://pfvd4qd5a60k"]
+
+[ext_resource type="PackedScene" uid="uid://k15ugp5m03u8" path="res://scenes/unit.tscn" id="1_nagyd"]
+[ext_resource type="Script" path="res://scripts/EnemyUnit.gd" id="2_xmhi4"]
+[ext_resource type="Script" path="res://scripts/enemyAISFM.gd" id="3_0gcuf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qk8y5"]
+radius = 6.0
+
+[node name="EnemyUnit" instance=ExtResource("1_nagyd")]
+y_sort_enabled = false
+script = ExtResource("2_xmhi4")
+sightRange = 500.0
+aiDisabled = false
+startingState = "CHASE"
+stateList = Array[String]([])
+maxPatrolRange = 500.0
+minWaitTime = 1.0
+maxWaitTime = 2.0
+fleeDistance = 300.0
+allySearchDistance = 1000.0
+guardDistance = 300.0
+actions = Array[Dictionary]([{
+"Speak": false
+}, {
+"Feast": false
+}])
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, 11)
+shape = SubResource("CircleShape2D_qk8y5")
+
+[node name="enemyAISFM" type="Node" parent="." index="12"]
+script = ExtResource("3_0gcuf")
+
+[connection signal="movementComplete" from="." to="enemyAISFM" method="_on_enemy_unit_movement_complete"]

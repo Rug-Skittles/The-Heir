@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3 uid="uid://k15ugp5m03u8"]
+
+[ext_resource type="Script" path="res://scripts/unit.gd" id="1_jqanj"]
+[ext_resource type="Texture2D" uid="uid://cxgw2hl3irgho" path="res://resources/sprites/attackSprites/rangedAttackSword.png" id="2_45lja"]
+[ext_resource type="Texture2D" uid="uid://bsp2vlpc8rci1" path="res://resources/sprites/heir.png" id="2_l5bri"]
+[ext_resource type="Script" path="res://scripts/unitMovementFSM.gd" id="3_rn35v"]
+[ext_resource type="Script" path="res://scripts/unitActionSFM.gd" id="4_spxlf"]
+[ext_resource type="Script" path="res://scripts/unitAttackingSFM.gd" id="6_pkcec"]
+[ext_resource type="Texture2D" uid="uid://bp68dr1tghx4s" path="res://resources/sprites/selection.png" id="8_0nvsj"]
+[ext_resource type="Script" path="res://scripts/attackRangeIndicator.gd" id="8_yrxjx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r2784"]
+size = Vector2(16, 16)
+
+[node name="Node2D" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_jqanj")
+attackSprite = ExtResource("2_45lja")
+
+[node name="selectionVisual" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 16)
+scale = Vector2(4, 4)
+texture = ExtResource("8_0nvsj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_l5bri")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_r2784")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+radius = 32.0
+max_speed = 200.0
+debug_path_custom_color = Color(0.984314, 0, 0.223529, 1)
+debug_path_custom_line_width = 3.77
+
+[node name="unitMovementSFM" type="Node" parent="."]
+script = ExtResource("3_rn35v")
+
+[node name="unitActionSFM" type="Node" parent="."]
+script = ExtResource("4_spxlf")
+
+[node name="unitAttackingSFM" type="Node" parent="."]
+script = ExtResource("6_pkcec")
+
+[node name="attackRangeIndicator" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_yrxjx")
+
+[node name="projectileContainer" type="Node2D" parent="."]
+
+[node name="idleTimer" type="Timer" parent="."]
+
+[node name="bleedTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="treatmentTimer" type="Timer" parent="."]
+
+[node name="fatigueTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="idleTimer" to="." method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="bleedTimer" to="." method="_on_bleed_timer_timeout"]
+[connection signal="timeout" from="fatigueTimer" to="." method="_on_fatigue_timer_timeout"]

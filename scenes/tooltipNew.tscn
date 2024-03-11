@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://din1pkppco7i4"]
+
+[ext_resource type="FontFile" uid="uid://p0txefpuqmai" path="res://resources/fonts/PixelMusketeer-vEXO.ttf" id="1_1ir48"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pusir"]
+font = ExtResource("1_1ir48")
+font_size = 20
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Control" type="Label"]
+offset_right = 1.0
+offset_bottom = 23.0
+text = "Fuck"
+label_settings = SubResource("LabelSettings_pusir")
+autowrap_mode = 2
