@@ -20,15 +20,10 @@ func handleAiState():
 		if enemiesInView.size() > 0:
 			target = enemiesInView[0]
 	
-	if aiState == 'fight' and target == null and velocity == Vector2(0,0):
-		var bodiesInView = []
-		var enemiesInView = []
-		for body in visionCone.get_node('Area2D').get_overlapping_bodies():
-			if !body.isPlayer and !body.isDead:
-				enemiesInView.append(body)
-		for unit in enemiesInView:
-			if unit.target == self:
-				target = unit
+	if lastAttacker != null:
+		if aiState == 'fight' and !lastAttacker.isDead and !lastAttacker.isPlayer:
+			if velocity == Vector2(0,0):
+				target = lastAttacker
 				
 	
 	if aiState == 'treat':
@@ -74,9 +69,9 @@ func _on_timer_timeout():
 		var hungerMsg = 2
 		var survivalModifier = modifiedStats['survival'] * 0.12
 		if velocity != Vector2(0,0):
-			hunger -= 1.5 - survivalModifier
+			hunger -= 1.0 - survivalModifier
 		else:
-			hunger -= 1.2 - survivalModifier
+			hunger -= 0.75 - survivalModifier
 		if hunger <= 0:
 			if !baseStats['curWounds'] <= 0:
 				baseStats['curWounds'] -= round(baseStats['maxWounds'] * .05)
@@ -100,6 +95,7 @@ func _on_treatmentTimer_timeout():
 	
 
 func _process(delta):
+	print(combatExperience)
 	targetCheck()
 	handleSpriteFacing()
 	checkDeath()

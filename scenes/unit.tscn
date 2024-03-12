@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://k15ugp5m03u8"]
+[gd_scene load_steps=14 format=3 uid="uid://k15ugp5m03u8"]
 
 [ext_resource type="Script" path="res://scripts/unit.gd" id="1_jqanj"]
 [ext_resource type="Texture2D" uid="uid://cxgw2hl3irgho" path="res://resources/sprites/attackSprites/rangedAttackSword.png" id="2_45lja"]
@@ -8,6 +8,10 @@
 [ext_resource type="Script" path="res://scripts/unitAttackingSFM.gd" id="6_pkcec"]
 [ext_resource type="Texture2D" uid="uid://bp68dr1tghx4s" path="res://resources/sprites/selection.png" id="8_0nvsj"]
 [ext_resource type="Script" path="res://scripts/attackRangeIndicator.gd" id="8_yrxjx"]
+[ext_resource type="AudioStream" uid="uid://4ykrcnnstfj" path="res://resources/audio/sfx/takeDamage 2.wav" id="9_b32f3"]
+[ext_resource type="AudioStream" uid="uid://cq8wd8wkpkhli" path="res://resources/audio/sfx/deathSound.wav" id="10_2wre0"]
+[ext_resource type="AudioStream" uid="uid://b3g4u66f1kp1c" path="res://resources/audio/sfx/feast.wav" id="11_euex1"]
+[ext_resource type="AudioStream" uid="uid://j0xe42ss7byj" path="res://resources/audio/sfx/textScroll.wav" id="12_elbc3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r2784"]
 size = Vector2(16, 16)
@@ -68,6 +72,22 @@ wait_time = 1.5
 
 [node name="fatigueTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="audioContainer" type="Node2D" parent="."]
+
+[node name="takeDamage" type="AudioStreamPlayer2D" parent="audioContainer"]
+stream = ExtResource("9_b32f3")
+volume_db = -10.0
+
+[node name="death" type="AudioStreamPlayer2D" parent="audioContainer"]
+stream = ExtResource("10_2wre0")
+volume_db = -10.0
+
+[node name="feast" type="AudioStreamPlayer2D" parent="audioContainer"]
+stream = ExtResource("11_euex1")
+
+[node name="textScroll" type="AudioStreamPlayer" parent="audioContainer"]
+stream = ExtResource("12_elbc3")
 
 [connection signal="timeout" from="idleTimer" to="." method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="bleedTimer" to="." method="_on_bleed_timer_timeout"]

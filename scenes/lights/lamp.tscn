@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://gvv28xactc08"]
+
+[ext_resource type="Texture2D" uid="uid://lg53cbtnwlj6" path="res://resources/2d_lights_and_shadows_neutral_point_light.webp" id="1_hvt61"]
+[ext_resource type="Texture2D" uid="uid://c3jjoiggymdjf" path="res://resources/lights/lamp.png" id="2_e5tcu"]
+
+[node name="lamp" type="Node2D"]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.7
+texture = ExtResource("1_hvt61")
+texture_scale = 1.1
+
+[node name="TileMap" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_e5tcu")

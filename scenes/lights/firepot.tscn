@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxmo0ot0xio7i"]
+
+[ext_resource type="Texture2D" uid="uid://lg53cbtnwlj6" path="res://resources/2d_lights_and_shadows_neutral_point_light.webp" id="1_a4v12"]
+[ext_resource type="Texture2D" uid="uid://dbxl6ndwxq3wd" path="res://resources/lights/firepot.png" id="2_bdedr"]
+
+[node name="firepot" type="Node2D"]
+position = Vector2(-9, -11)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(9, 9)
+energy = 0.75
+texture = ExtResource("1_a4v12")
+texture_scale = 1.5
+
+[node name="TileMap" type="Sprite2D" parent="."]
+position = Vector2(9, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("2_bdedr")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bac5hpy0xsm7f"]
+[gd_scene load_steps=13 format=3 uid="uid://bac5hpy0xsm7f"]
 
 [ext_resource type="Script" path="res://scripts/Game.gd" id="1_a5c0y"]
 [ext_resource type="TileSet" uid="uid://dh2jxukhfibwv" path="res://resources/tileSet/DungeonTileset.tres" id="2_7phqn"]
@@ -11,10 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://ck0r2ncdfmau7" path="res://scenes/dialog_canvas.tscn" id="11_kvaxv"]
 [ext_resource type="PackedScene" uid="uid://cndjjnsmsj2wi" path="res://scenes/dialog_trigger.tscn" id="12_f4bax"]
 [ext_resource type="Script" path="res://scenes/deathTriggers.gd" id="12_p5mr0"]
-[ext_resource type="AudioStream" uid="uid://4ykrcnnstfj" path="res://resources/audio/sfx/takeDamage 2.wav" id="13_owokc"]
-[ext_resource type="AudioStream" uid="uid://cq8wd8wkpkhli" path="res://resources/audio/sfx/deathSound.wav" id="14_6qpso"]
-[ext_resource type="AudioStream" uid="uid://b3g4u66f1kp1c" path="res://resources/audio/sfx/feast.wav" id="15_jrc47"]
-[ext_resource type="AudioStream" uid="uid://j0xe42ss7byj" path="res://resources/audio/sfx/textScroll.wav" id="16_5ting"]
 [ext_resource type="PackedScene" uid="uid://d2uirqchuktgf" path="res://scenes/cutsceneManager.tscn" id="17_3jlw7"]
 
 [node name="Game" type="Node2D"]
@@ -35,7 +31,6 @@ layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array(-65536, 65537, 0, -65535, 65537, 0, -65534, 65537, 0, -65533, 65537, 0, -65532, 65537, 0, -65531, 65537, 0, -65530, 65537, 0, -65529, 65537, 0, -65528, 65537, 0, -65527, 65537, 0, -65526, 65537, 0, -65525, 65537, 0, -65524, 65537, 0, -65523, 65537, 0, -65522, 65537, 0, -65521, 65537, 0, -65520, 65537, 0, -65519, 65537, 0)
 
 [node name="darkness" type="DirectionalLight2D" parent="."]
-visible = false
 blend_mode = 1
 height = 1.0
 
@@ -43,7 +38,7 @@ height = 1.0
 script = ExtResource("7_p6hp1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-63, 794)
+position = Vector2(2578, 1615)
 anchor_mode = 0
 limit_smoothed = true
 position_smoothing_enabled = true
@@ -112,21 +107,6 @@ actionDataToProcess = Array[Dictionary]([{
 
 [node name="deathTriggers" type="Node2D" parent="."]
 script = ExtResource("12_p5mr0")
-
-[node name="audioContainer" type="Node2D" parent="."]
-
-[node name="takeDamage" type="AudioStreamPlayer2D" parent="audioContainer"]
-stream = ExtResource("13_owokc")
-
-[node name="death" type="AudioStreamPlayer2D" parent="audioContainer"]
-stream = ExtResource("14_6qpso")
-
-[node name="feast" type="AudioStreamPlayer2D" parent="audioContainer"]
-stream = ExtResource("15_jrc47")
-volume_db = 20.0
-
-[node name="textScroll" type="AudioStreamPlayer" parent="audioContainer"]
-stream = ExtResource("16_5ting")
 
 [node name="dialogCanvas" parent="." instance=ExtResource("11_kvaxv")]
 

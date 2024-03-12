@@ -118,7 +118,9 @@ func _process(delta):
 			if Input.is_action_just_pressed("skipDialog"):
 				textContent.visible_ratio = 1
 				#tween.pause()
+				
 				tween.custom_step(100.0)
+				
 				#changeState(State.FINISHED)
 			if currentSpeaker != null:
 				#print(currentSpeaker)
@@ -190,6 +192,8 @@ func displayText(priority):
 		textContent.text = lineSpeaker + ': ' + textToAdd
 		for unit in get_parent().allUnits:
 			if unit.characterName == lineSpeaker:
+				if currentSpeaker != null:
+					currentSpeaker.get_node('selectionVisual').hide()
 				currentSpeaker = unit
 				#print(currentSpeaker)
 	elif scriptQueue != []:
@@ -197,6 +201,8 @@ func displayText(priority):
 		textContent.text = lineSpeaker + ': ' + textToAdd
 		for unit in get_parent().allUnits:
 			if unit.characterName == lineSpeaker:
+				if currentSpeaker != null:
+					currentSpeaker.get_node('selectionVisual').hide()
 				currentSpeaker = unit
 				#print(currentSpeaker)
 				

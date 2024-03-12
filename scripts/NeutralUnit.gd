@@ -10,7 +10,7 @@ extends Unit
 @export var recruitmentScript : Array[String]
 
 @export var aiDisabled : bool = true
-var isNeutral : bool = true
+
 var aiState = 'passive'
 var recruited : bool = false
 var treatmentTarget = null
@@ -21,21 +21,15 @@ func handleAiState():
 		var bodiesInView = []
 		var enemiesInView = []
 		for body in visionCone.get_node('Area2D').get_overlapping_bodies():
-			if !body.isPlayer and !body.isDead:
+			if !body.isPlayer and !body.isDead and body != self:
 				enemiesInView.append(body)
 		if enemiesInView.size() > 0:
 			target = enemiesInView[0]
 	
-	if aiState == 'fight' and target == null and velocity == Vector2(0,0):
-		var bodiesInView = []
-		var enemiesInView = []
-		for body in visionCone.get_node('Area2D').get_overlapping_bodies():
-			if !body.isPlayer and !body.isDead:
-				enemiesInView.append(body)
-		for unit in enemiesInView:
-			if unit.target == self:
-				target = unit
-				
+	if lastAttacker != null:
+		if aiState == 'fight' and !lastAttacker.isDead and !lastAttacker.isPlayer:
+			if velocity == Vector2(0,0):
+				target = lastAttacker
 	
 	if aiState == 'treat':
 		isTreating = true
@@ -68,8 +62,10 @@ func _ready():
 	agent = $NavigationAgent2D
 	sprite = $Sprite2D
 	
+	isNeutral = true
+	
 	game = get_node("/root/Game")
-	audioContainer = get_node("/root/Game/audioContainer")
+	
 	
 	game.allUnits.append(self)
 	
@@ -96,11 +92,21 @@ func handleSpriteFacing():
 ## Additionally more hunger will be reduced if the unit is moving.
 func _on_timer_timeout():
 	if isPlayer:
+		var hungerMsg = 2
 		var survivalModifier = modifiedStats['survival'] * 0.12
 		if velocity != Vector2(0,0):
-			hunger -= 1.5 - survivalModifier
+			hunger -= 1.0 - survivalModifier
 		else:
-			hunger -= 1.2 - survivalModifier
+			hunger -= 0.75 - survivalModifier
+		if hunger <= 0:
+			if !baseStats['curWounds'] <= 0:
+				baseStats['curWounds'] -= round(baseStats['maxWounds'] * .05)
+				hungerMsg += 1
+			if baseStats['curWounds'] <= 0:
+				generateCorpse()
+			if hungerMsg == 3:
+				dialogCanvas.processText([characterName + ' is starving!'])
+				hungerMsg = 1
 
 func _process(delta):
 	
@@ -109,6 +115,9 @@ func _process(delta):
 	handleSpriteFacing()
 	checkDeath()
 	_checkStatus()
+	handleLevelUp()
+	if isFrenzied:
+		aiState = 'chase'
 
 
 func _on_treatment_timer_timeout():
@@ -118,5 +127,5 @@ func _on_treatment_timer_timeout():
 	if treatmentTarget.baseStats['curWounds'] > treatmentTarget.baseStats['maxWounds']:
 		treatmentTarget.baseStats['curWounds'] = treatmentTarget.baseStats['maxWounds']
 	$treatmentTimer.stop()
-	dialogCanvas.processText('Treatment on ' + treatmentTarget.characterName + ' complete!')
+	dialogCanvas.processText(['Treatment on ' + treatmentTarget.characterName + ' complete!'])
 	treatmentTarget = null

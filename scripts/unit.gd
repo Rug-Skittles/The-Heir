@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Unit
 
 @export var characterName = 'placeholder'
+@export var level : int
 @export var sprite : Sprite2D
 @export var attackSprite : Texture
 @export var fatigue : int = 0
@@ -48,6 +49,7 @@ var combatExperience : float
 
 @export var isDead : bool = false
 @export var isPlayer : bool = false
+var isNeutral : bool = false
 @export var isFatigued : bool = false
 @export var isDiseased : bool = false
 @export var isFrenzied : bool = false
@@ -69,6 +71,8 @@ var combatExperience : float
 @export var emitDeathSignal : bool = false
 var deathSignalEmitted : bool = false
 
+var lastAttacker = null
+
 var currentAction = null
 var isTreating : bool = false
 var timeSinceLastTreatment = 0
@@ -88,7 +92,7 @@ var dialogCanvas
 var corpsesEaten : int = 0
 
 var game 
-var audioContainer
+
 
 var deathChecked : bool 
 var hiddenCorpse : bool = false
@@ -186,7 +190,7 @@ func _ready():
 	sprite = $Sprite2D
 	
 	game = get_node("/root/Game")
-	audioContainer = get_node("/root/Game/audioContainer")
+
 	
 	game.allUnits.append(self)
 	
@@ -232,10 +236,10 @@ func _takeDamage(damageToTake):
 	await get_tree().create_timer(0.15).timeout
 	sprite.modulate = Color.WHITE
 	var bleedRoll = randi() % 100 + 1
-	if bleedRoll <= 3 + round(damageToTake*0.4):
+	if bleedRoll <= 1 + round(damageToTake*0.4):
 		isBleeding = true
 		
-	audioContainer.get_node('takeDamage').play()
+	$audioContainer/takeDamage.play()
 
 func _tryAttackTarget():
 	var currentTime = Time.get_unix_time_from_system()
@@ -248,12 +252,14 @@ func _tryAttackTarget():
 		attackComplete.emit(self)
 		if fatigue <= 198:
 			fatigue += 2
+		if target != null:
+			target.lastAttacker = self
 
 func gainExperience(damageDealt, target):
 	combatExperience += damageDealt
 
 func handleLevelUp():
-	if combatExperience >= 100:
+	if combatExperience >= 50 + (level * 5):
 		var levelUpString = ''
 		for stat in growthRates:
 			if checkGrowths(stat):
@@ -264,6 +270,7 @@ func handleLevelUp():
 			dialogCanvas.processText([characterName + ' improved ' + levelUpString])
 		print('Level Up!')
 		combatExperience = 0
+		level += 1
 	else:
 		pass
 	
@@ -303,7 +310,7 @@ func checkGrowths(stat, feast=false):
 func consumeTargetCorpse():
 	currentAction = null
 	game.get_node('cursor').hide()
-	audioContainer.get_node('feast').play()
+	$audioContainer/feast.play()
 	print('eating')
 	actionDialog('feast')
 	corpsesEaten += 1
@@ -316,11 +323,11 @@ func consumeTargetCorpse():
 	else:
 		if target.isPlayer:
 			var roll = randi() % 100 + 1
-			if roll <= 2:
+			if roll <= 1:
 				eater.isDiseased = true
 		else:
 			var roll = randi() % 100 + 1
-			if roll <= 5:
+			if roll <= 3:
 				eater.isDiseased = true
 	var roll = randi() % 100 + 1
 	if roll <= 1 + corpsesEaten/2:
@@ -422,7 +429,7 @@ func checkDeath():
 		modifiedStats['attackRange'] = 0
 		modifiedStats['attackRate'] = 0
 		$NavigationAgent2D.process_mode = Node.PROCESS_MODE_DISABLED
-		if !isPlayer:
+		if !isPlayer and !isNeutral:
 			$enemyAISFM.process_mode = Node.PROCESS_MODE_DISABLED
 		if isDead and characterName == 'Heir':
 			gameOver.emit()
@@ -463,7 +470,7 @@ func targetCheck(): ## Determines how far away the target is from a unit and do 
 			navigationComplete = false
 			
 func generateCorpse(): 
-	audioContainer.get_node('death').play()
+	$audioContainer/death.play()
 	print(characterName + ' has died!')
 	isDead = true
 	sprite.texture = load("res://resources/sprites/corpse.png")
@@ -526,7 +533,8 @@ func _on_bleed_timer_timeout():
 		baseStats['curWounds'] -= round(baseStats['maxWounds'] * .10)
 		bleedMsg += 3
 	if baseStats['curWounds'] <= 0:
-		generateCorpse()
+		if !isDead:
+			generateCorpse()
 		
 	if bleedMsg == 4:
 		dialogCanvas.processText([characterName + ' is bleeding out!'])

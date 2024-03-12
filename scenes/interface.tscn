@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cg5lg3sj61q22"]
+[gd_scene load_steps=18 format=3 uid="uid://cg5lg3sj61q22"]
 
 [ext_resource type="Script" path="res://scripts/interface.gd" id="1_6y3rl"]
 [ext_resource type="Theme" uid="uid://bljgju70bevpx" path="res://resources/themes/uiFontTheme2.tres" id="1_ttv5o"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://b5vb8yxoc2643" path="res://resources/textures/hungerBarOver.png" id="3_ncrym"]
 [ext_resource type="Texture2D" uid="uid://c5lfij5x3m3u6" path="res://resources/ui/talkActionActive.png" id="6_464c0"]
 [ext_resource type="Texture2D" uid="uid://4ox4y1qyvfbs" path="res://resources/ui/feastActionActive.png" id="7_ya8fb"]
+[ext_resource type="Texture2D" uid="uid://bhfl48gogcsvn" path="res://resources/textures/treatment bar over.png" id="10_o63d5"]
+[ext_resource type="Texture2D" uid="uid://d3d8lhkvinufk" path="res://resources/textures/dither gradient 3.png" id="11_tlhgc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vvees"]
 
@@ -511,6 +513,7 @@ bbcode_enabled = true
 text = "[center]RES"
 scroll_active = false
 shortcut_keys_enabled = false
+script = ExtResource("2_6cswn")
 
 [node name="survivalLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/statsMargin/statsHBox/rightStatVBox"]
 custom_minimum_size = Vector2(50, 28)
@@ -520,6 +523,7 @@ bbcode_enabled = true
 text = "[center]SUR"
 scroll_active = false
 shortcut_keys_enabled = false
+script = ExtResource("2_6cswn")
 
 [node name="rangeLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/statsMargin/statsHBox/rightStatVBox"]
 custom_minimum_size = Vector2(50, 38)
@@ -575,19 +579,37 @@ scroll_active = false
 script = ExtResource("2_6cswn")
 
 [node name="hungerBar" type="TextureProgressBar" parent="rightStatsContainer/vContainer"]
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 value = 100.0
 texture_over = ExtResource("3_ncrym")
 texture_progress = ExtResource("3_hej70")
 
+[node name="TreatmentLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+tooltip_text = "'Tis the time since thy last check up. Shouldst it be empty, a physician wilt be able to do more for thy wounds."
+theme = ExtResource("1_ttv5o")
+bbcode_enabled = true
+text = "[center]Treatment Time"
+scroll_active = false
+script = ExtResource("2_6cswn")
+
+[node name="TreatmentTimeBar" type="TextureProgressBar" parent="rightStatsContainer/vContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+value = 100.0
+texture_over = ExtResource("10_o63d5")
+texture_progress = ExtResource("11_tlhgc")
+
 [node name="stateLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer"]
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 theme = ExtResource("1_ttv5o")
 bbcode_enabled = true
-text = "[center]STATE"
+text = "[center]- State -"
 scroll_active = false
 shortcut_keys_enabled = false
 
@@ -684,7 +706,7 @@ custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 theme = ExtResource("1_ttv5o")
 bbcode_enabled = true
-text = "[center]ACTIONS"
+text = "[center]- Actions -"
 scroll_active = false
 shortcut_keys_enabled = false
 
@@ -762,11 +784,13 @@ layout_mode = 2
 [node name="chaseLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(100, 28)
 layout_mode = 2
+tooltip_text = "Should thout find thyself with 'Chase' toggled, thee will pursue the first target thee lay eyes on with abandon without need for commands."
 theme = ExtResource("1_ttv5o")
 theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
 bbcode_enabled = true
 text = "[center]Chase"
 scroll_active = false
+script = ExtResource("2_6cswn")
 
 [node name="chaseButton" type="Button" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2/chaseLabel"]
 layout_mode = 1
@@ -781,11 +805,13 @@ flat = true
 [node name="fightLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(100, 28)
 layout_mode = 2
+tooltip_text = "Should thou find thyself with 'Fight' toggled on thee will retaliate against whatever foe should strike at thee without need for commands."
 theme = ExtResource("1_ttv5o")
 theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
 bbcode_enabled = true
 text = "[center]Fight"
 scroll_active = false
+script = ExtResource("2_6cswn")
 
 [node name="fightButton" type="Button" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2/fightLabel"]
 layout_mode = 1
@@ -800,11 +826,13 @@ flat = true
 [node name="focusLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(100, 28)
 layout_mode = 2
+tooltip_text = "Should thou find thyself with 'Focus' toggled on, the world's view shall ever affix upon thy selected unit."
 theme = ExtResource("1_ttv5o")
 theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
 bbcode_enabled = true
 text = "[center]Focus"
 scroll_active = false
+script = ExtResource("2_6cswn")
 
 [node name="focusButton" type="Button" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2/focusLabel"]
 layout_mode = 1

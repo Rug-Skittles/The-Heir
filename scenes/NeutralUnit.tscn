@@ -5,11 +5,32 @@
 
 [node name="NeutralUnit" instance=ExtResource("1_hf1fy")]
 script = ExtResource("2_cgu8f")
-sightRange = 300.0
-recruitmentDialog = Array[String]([])
-recruitmentScript = Array[String]([])
-aiDisabled = true
-isPlayer = false
+sightRange = null
+recruitmentDialog = null
+recruitmentScript = null
+aiDisabled = null
+characterName = null
+level = null
+fatigue = null
+hunger = null
+isMelee = null
+baseStats = null
+growthRates = null
+isDead = null
+isPlayer = null
+isFatigued = null
+isDiseased = null
+isFrenzied = null
+isBleeding = null
+isPhysician = null
+isRecruitable = null
+actions = null
+attackDialog = null
+idleDialog = null
+feastDialog = null
+deathDialog = null
+keepFocus = null
+emitDeathSignal = null
 
 [node name="NavigationAgent2D" parent="." index="6"]
 radius = 10.0

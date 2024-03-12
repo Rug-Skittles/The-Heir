@@ -7,12 +7,12 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_5tipd"]
 radius = 6.0
 
-[sub_resource type="Gradient" id="Gradient_65tsy"]
+[sub_resource type="Gradient" id="Gradient_xvaja"]
 offsets = PackedFloat32Array(0, 0.00304878, 0.0121951, 0.975871, 0.986595)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_4in4f"]
-gradient = SubResource("Gradient_65tsy")
+gradient = SubResource("Gradient_xvaja")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.923077, 0.205128)
@@ -28,7 +28,6 @@ position = Vector2(0, 11)
 shape = SubResource("CircleShape2D_5tipd")
 
 [node name="visionCone" type="PointLight2D" parent="." index="3"]
-visible = false
 position = Vector2(-4.76837e-07, 0)
 scale = Vector2(4.875, 3.60938)
 blend_mode = 2
@@ -43,7 +42,6 @@ position = Vector2(0.205128, 0)
 polygon = PackedVector2Array(-19.6923, 11.6363, -22.1538, 6.09523, -23.7949, 0, -23.5897, -5.26406, -22.1538, -12.4675, -20.3077, -17.7316, -16.2051, -22.4415, -12.3077, -26.8744, -6.35897, -30.4761, -0.615385, -32.4155, 5.74359, -32.4155, 11.0769, -30.4761, 16.2051, -27.1515, 19.0769, -22.4415, 22.7692, -16.0692, 23.5897, -9.69696, 25.0256, -1.10822, 23.7949, 6.64934, 21.5385, 10.5281, 57.2308, 117.472, 56, 124.121, 53.3333, 128.277, 48.2051, 129.385, -51.6923, 132.71, -54.7692, 130.77, -57.2308, 128, -57.641, 121.905)
 
 [node name="radialVision" type="PointLight2D" parent="." index="4"]
-visible = false
 energy = 0.6
 blend_mode = 2
 texture = SubResource("GradientTexture2D_4in4f")

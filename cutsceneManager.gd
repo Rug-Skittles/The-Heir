@@ -43,11 +43,14 @@ func processNextAction():
 				processAttack(action)
 			'setTarget':
 				processTarget(action)
+			#'light':
+				#processLight(action)
 				
 func processDialog(action):
 	dialogCanvas.processText(action.data['text'], 'pauseFocus', action.data['script'], 'high')
 
 func processMovement(action):
+	get_parent().get_node("currentWorld").get_node("unitContainer").process_mode = Node.PROCESS_MODE_INHERIT
 	startAction.emit()
 	for enemy in get_parent().enemyUnits:
 		enemy.aiDisabled = true
@@ -113,6 +116,14 @@ func processTarget(action):
 		if unitName == character.characterName:
 			character.target = targetToAttack
 			
+#func processLight(action):
+	#var unitName = action.data['character']
+	#if action.data['light'] == 'radial':
+		#for unit in get_parent().allUnits:
+			#if unit.characterName == unitName:
+				#unit.get_node('radialVision').show()
+		
+
 func onUnitMovementComplete(unit):
 	if unit == lastMovedUnit:
 		print('COMPLETE MOVE NOW')
@@ -123,6 +134,8 @@ func onUnitMovementComplete(unit):
 		currentSpeed = null
 		newSpeed = null	
 		lastMovedUnit = null
+
+
 
 func _process(delta):
 	#print(actionsQueue)

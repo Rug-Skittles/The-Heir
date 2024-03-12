@@ -120,6 +120,7 @@ func revealStats(unit):
 	survLabel.text =  '[center]' + str(unit.collider.modifiedStats['survival'])
 	rangeLabel.text = '[center]' + str(unit.collider.modifiedStats['attackRange'])
 	hungerBar.value = unit.collider.hunger
+	$rightStatsContainer/vContainer/TreatmentTimeBar.value = unit.collider.get_node('treatmentTimer').time_left
 	changeActiveStateColor(unit)
 	changeStatColor(unit)
 	if !unit.collider.isPlayer:
