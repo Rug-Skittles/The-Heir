@@ -18,7 +18,7 @@ var homePosition : Vector2
 @export_category('Guard Parameters')
 @export var guardDistance : float = 300
 
-
+var recruitmentDialog = []
 
 func _process(delta):
 	#print(aiDisabled)

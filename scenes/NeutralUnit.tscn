@@ -5,32 +5,11 @@
 
 [node name="NeutralUnit" instance=ExtResource("1_hf1fy")]
 script = ExtResource("2_cgu8f")
-sightRange = null
-recruitmentDialog = null
-recruitmentScript = null
-aiDisabled = null
-characterName = null
-level = null
-fatigue = null
-hunger = null
-isMelee = null
-baseStats = null
-growthRates = null
-isDead = null
-isPlayer = null
-isFatigued = null
-isDiseased = null
-isFrenzied = null
-isBleeding = null
-isPhysician = null
-isRecruitable = null
-actions = null
-attackDialog = null
-idleDialog = null
-feastDialog = null
-deathDialog = null
-keepFocus = null
-emitDeathSignal = null
+sightRange = 300.0
+recruitmentDialog = Array[String]([])
+recruitmentScript = Array[String]([])
+aiDisabled = true
+isPlayer = false
 
 [node name="NavigationAgent2D" parent="." index="6"]
 radius = 10.0
@@ -40,5 +19,8 @@ debug_path_custom_line_width = -1.0
 
 [node name="bleedTimer" parent="." index="13"]
 wait_time = 1.0
+
+[node name="treatmentBarTimer" parent="." index="16"]
+one_shot = false
 
 [connection signal="timeout" from="treatmentTimer" to="." method="_on_treatment_timer_timeout"]

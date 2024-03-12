@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bac5hpy0xsm7f"]
+[gd_scene load_steps=15 format=3 uid="uid://bac5hpy0xsm7f"]
 
 [ext_resource type="Script" path="res://scripts/Game.gd" id="1_a5c0y"]
 [ext_resource type="TileSet" uid="uid://dh2jxukhfibwv" path="res://resources/tileSet/DungeonTileset.tres" id="2_7phqn"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://ck0r2ncdfmau7" path="res://scenes/dialog_canvas.tscn" id="11_kvaxv"]
 [ext_resource type="PackedScene" uid="uid://cndjjnsmsj2wi" path="res://scenes/dialog_trigger.tscn" id="12_f4bax"]
 [ext_resource type="Script" path="res://scenes/deathTriggers.gd" id="12_p5mr0"]
+[ext_resource type="PackedScene" uid="uid://bpo2305wv6aun" path="res://scenes/unitBox.tscn" id="13_34526"]
+[ext_resource type="AudioStream" uid="uid://du6xnnafdnjt1" path="res://resources/audio/music/a_dungeon_ambience_loop-79423.mp3" id="14_sy76g"]
 [ext_resource type="PackedScene" uid="uid://d2uirqchuktgf" path="res://scenes/cutsceneManager.tscn" id="17_3jlw7"]
 
 [node name="Game" type="Node2D"]
@@ -110,6 +112,15 @@ script = ExtResource("12_p5mr0")
 
 [node name="dialogCanvas" parent="." instance=ExtResource("11_kvaxv")]
 
+[node name="unitBox" parent="." instance=ExtResource("13_34526")]
+
+[node name="musicContainer" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="musicContainer"]
+stream = ExtResource("14_sy76g")
+volume_db = -15.0
+
 [connection signal="buttonDown" from="interface" to="." method="_on_interface_button_down"]
 [connection signal="sendUnit" from="cutsceneManager" to="dialogCanvas" method="_on_cutscene_manager_send_unit"]
 [connection signal="startAction" from="cutsceneManager" to="dialogCanvas" method="_on_cutscene_manager_start_action"]
+[connection signal="finished" from="musicContainer/AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

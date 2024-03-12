@@ -17,6 +17,10 @@ var selectRectangle = RectangleShape2D.new() ## Collision shape for drag box
 var unitsInVision = []
 
 func _ready():
+	var tween = create_tween()
+	tween.tween_property($musicContainer/AudioStreamPlayer,'volume_db',0,5)
+	$musicContainer/AudioStreamPlayer.play()
+	
 	for unit in allUnits:
 		unit.connect('gameOver',handleGameOver)
 
@@ -43,12 +47,12 @@ func _input(event):
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if selectedPlayerUnits.size() != 0:
 				for unit in selectedPlayerUnits:
-					if unit.collider.currentAction == null:
+					if unit.currentAction == null:
 							_tryCommandUnit()
 					## If right clicking after selecting an action, it will unselect that action
-					elif unit.collider.currentAction != null:
+					elif unit.currentAction != null:
 						print('removing action')
-						unit.collider.currentAction = null
+						unit.currentAction = null
 						$cursor.visible = false
 				
 ## Searches all vision cones of players to see if the given unit is within.
@@ -70,8 +74,8 @@ func _unselectUnit():
 	$interface.removeStatInterface()
 	if selectedPlayerUnits.size() > 0:
 		for unit in selectedPlayerUnits:
-			unit.collider.selected = false
-			unit.collider.toggleSelectionVisual(false)
+			unit.selected = false
+			unit.toggleSelectionVisual(false)
 	selectedPlayerUnits = []
 	selectedEnemyUnit = []
 	unitToReveal = null
@@ -85,20 +89,20 @@ func _tryCommandUnit():
 	
 	if target != null and target.isPlayer == false:
 		for unit in selectedPlayerUnits:
-			unit.collider.setTarget(target)
+			unit.setTarget(target)
 	else:
 		for unit in selectedPlayerUnits:
-			unit.collider.moveToLocation(get_global_mouse_position())
+			unit.moveToLocation(get_global_mouse_position())
 			
 ## Used to add selection graphics to unit and to the selected array
 func selectUnit(selection):
 	for unit in selection:
-		#print(unit.collider)
+		#print(unit)
 		for playerUnit in playerUnits:
 			for unitToFind in playerUnit.visionCone.get_node('Area2D').get_overlapping_bodies():
 				if unit.collider == unitToFind:
-					unit.collider.selected = true
-					unitToReveal = selection[0]
+					unit.selected = true
+					unitToReveal = selection[0].collider
 					if unit.collider.isPlayer:
 						pass
 						unit.collider.toggleSelectionVisual(true)
@@ -121,10 +125,10 @@ func rotateVision(event):
 	if selectedPlayerUnits.size() > 0:
 		if Input.is_action_just_pressed("mouseWheelUp"):
 			for unit in selectedPlayerUnits:
-				unit.collider.visionCone.rotation += .075
+				unit.visionCone.rotation += .075
 		elif Input.is_action_just_pressed("mouseWheelDown"):
 			for unit in selectedPlayerUnits:
-				unit.collider.visionCone.rotation -= .075
+				unit.visionCone.rotation -= .075
 
 func handleSelectionInput(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -137,15 +141,15 @@ func handleSelectionInput(event):
 				unitToReveal = null
 				selectedPlayerUnits = []
 				for unit in selectedEnemyUnit:
-					unit.collider.selected = false
+					unit.selected = false
 				selectedEnemyUnit = []
 				
 			## Runs if you already have a unit selected and click off of them.
 			elif selectedPlayerUnits.size() != 0:
 				for unit in selectedEnemyUnit:
-					unit.collider.selected = false
+					unit.selected = false
 				for unit in selectedPlayerUnits:
-					if unit.collider.currentAction != 'feast':
+					if unit.currentAction != 'feast':
 						_unselectUnit()
 						dragSelect = true
 						dragStart = event.position
@@ -164,9 +168,9 @@ func handleSelectionInput(event):
 			query.transform = Transform2D(0, (((dragEnd + dragStart) / 2)+$Camera2D.position)/$Camera2D.zoom)
 			for unit in space.intersect_shape(query):
 				if !unit.collider.isPlayer and !unit.collider.hiddenCorpse:
-					selectedEnemyUnit.append(unit)
+					selectedEnemyUnit.append(unit.collider)
 				elif unit.collider.isPlayer and !unit.collider.hiddenCorpse:
-					selectedPlayerUnits.append(unit)
+					selectedPlayerUnits.append(unit.collider)
 			selectUnit(space.intersect_shape(query))
 			
 			
@@ -201,17 +205,17 @@ func _on_interface_button_down(button):
 	if button == 'chase' || button == 'fight' || button == 'passive' || button == 'treat':
 		if selectedPlayerUnits.size() != 0:
 			for unit in selectedPlayerUnits:
-				if unit.collider.aiState == button:
-					unit.collider.aiState = 'passive'
-					unit.collider.target = null
-					unit.collider.agent.target_position = unit.collider.global_position
+				if unit.aiState == button:
+					unit.aiState = 'passive'
+					unit.target = null
+					unit.agent.target_position = unit.global_position
 				else:
-					unit.collider.aiState = button
+					unit.aiState = button
 
 	if button == 'speak' || button == 'feast':
 		if selectedPlayerUnits.size() != 0:
 			for unit in selectedPlayerUnits:
-				unit.collider.currentAction = button
+				unit.currentAction = button
 		$cursor.visible = true
 		
 	if button == 'focus':
@@ -224,7 +228,7 @@ func _on_interface_button_down(button):
 
 func _process(delta):
 	if unitToReveal != null:
-		if !unitToReveal.collider.hiddenCorpse:
+		if !unitToReveal.hiddenCorpse:
 			$interface.revealStats(unitToReveal)
 		
 	$cursor.position = get_global_mouse_position()
@@ -232,7 +236,11 @@ func _process(delta):
 	#isInVision(playerUnits[0])
 
 	#for unit in selectedPlayerUnits:
-		#print(unit.collider.currentAction)
+		#print(unit.currentAction)
 
 
 
+
+
+func _on_audio_stream_player_finished():
+	$musicContainer/AudioStreamPlayer.play()

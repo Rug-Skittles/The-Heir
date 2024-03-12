@@ -275,7 +275,7 @@ func handleLevelUp():
 		pass
 	
 func handleCannialismGains(corpse):
-	var eater = game.selectedPlayerUnits[0].collider
+	var eater = game.selectedPlayerUnits[0]
 	eater.hunger += target.baseStats['maxWounds']
 	
 	## Healing
@@ -316,7 +316,7 @@ func consumeTargetCorpse():
 	corpsesEaten += 1
 	handleCannialismGains(target)
 	
-	var eater = game.selectedPlayerUnits[0].collider
+	var eater = game.selectedPlayerUnits[0]
 	
 	if target.isDiseased:
 		eater.isDiseased = true
@@ -405,7 +405,7 @@ func checkDeath():
 			$selectionVisual.hide()
 			
 			for i in range(game.selectedPlayerUnits.size() -1, -1, -1):
-				if self == game.selectedPlayerUnits[i].collider:
+				if self == game.selectedPlayerUnits[i]:
 					game.selectedPlayerUnits.remove_at(i)
 			for i in range(game.playerUnits.size() -1, -1, -1):
 				if self == game.playerUnits[i]:

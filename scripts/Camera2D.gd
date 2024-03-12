@@ -18,7 +18,7 @@ func _process(delta):
 	if keepFocus and get_parent().get_node('cutsceneManager').processing and get_parent().get_node('cutsceneManager').lastMovedUnit != null:
 		focusCamera(get_parent().get_node('cutsceneManager').lastMovedUnit, zoom.x)
 	if keepFocus and get_parent().selectedPlayerUnits.size() > 0:
-		focusCamera(get_parent().selectedPlayerUnits[0].collider, zoom.x)
+		focusCamera(get_parent().selectedPlayerUnits[0], zoom.x)
 	var direction = Vector2()
 	if Input.is_action_pressed("moveCameraNorth"):
 		direction.y -= 1

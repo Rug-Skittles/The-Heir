@@ -73,6 +73,10 @@ wait_time = 1.5
 [node name="fatigueTimer" type="Timer" parent="."]
 autostart = true
 
+[node name="treatmentBarTimer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+
 [node name="audioContainer" type="Node2D" parent="."]
 
 [node name="takeDamage" type="AudioStreamPlayer2D" parent="audioContainer"]

@@ -47,47 +47,47 @@ func removeStatInterface():
 	visible = false
 
 func changeStatColor(unit):
-	for statKey in unit.collider.modifiedStats:
+	for statKey in unit.modifiedStats:
 		if statValuesDisplay.has(statKey):
-			if unit.collider.modifiedStats[statKey] > unit.collider.baseStats[statKey]:
+			if unit.modifiedStats[statKey] > unit.baseStats[statKey]:
 				statValuesDisplay[statKey].add_theme_color_override("default_color",Color.DARK_GREEN)
-			if unit.collider.modifiedStats[statKey] < unit.collider.baseStats[statKey]:
+			if unit.modifiedStats[statKey] < unit.baseStats[statKey]:
 				statValuesDisplay[statKey].add_theme_color_override("default_color",Color.DARK_RED)
-			if unit.collider.modifiedStats[statKey] == unit.collider.baseStats[statKey]:
+			if unit.modifiedStats[statKey] == unit.baseStats[statKey]:
 				statValuesDisplay[statKey].add_theme_color_override("default_color",Color.WHITE)
 			
 func changeActiveStateColor(unit):
-	if unit.collider.isDead:
+	if unit.isDead:
 		deathState.add_theme_color_override("default_color",Color.WHITE)
 	else:
 		deathState.add_theme_color_override("default_color",Color.DIM_GRAY)
-	if unit.collider.isFatigued:
+	if unit.isFatigued:
 		fatigueState.add_theme_color_override("default_color",Color.WHITE)
 	else:
 		fatigueState.add_theme_color_override("default_color",Color.DIM_GRAY)
-	if unit.collider.isPlayer:
+	if unit.isPlayer:
 		hostilityState.add_theme_color_override("default_color",Color.DIM_GRAY)
 	else:
 		hostilityState.add_theme_color_override("default_color",Color.WHITE)
-	if unit.collider.isDiseased:
+	if unit.isDiseased:
 		diseaseState.add_theme_color_override("default_color",Color.WHITE)
 	else:
 		diseaseState.add_theme_color_override("default_color",Color.DIM_GRAY)
-	if unit.collider.isBleeding:
+	if unit.isBleeding:
 		bleedingState.add_theme_color_override("default_color",Color.WHITE)
 	else:
 		bleedingState.add_theme_color_override("default_color",Color.DIM_GRAY)
-	if unit.collider.isFrenzied:
+	if unit.isFrenzied:
 		frenzyState.add_theme_color_override("default_color",Color.WHITE)
 	else:
 		frenzyState.add_theme_color_override("default_color",Color.DIM_GRAY)
 
-	if unit.collider.isPlayer:
-		if unit.collider.aiState == 'chase':
+	if unit.isPlayer:
+		if unit.aiState == 'chase':
 			chaseToggle.add_theme_color_override("default_color",Color.WHITE)
 		else:
 			chaseToggle.add_theme_color_override("default_color",Color.DIM_GRAY)
-		if unit.collider.aiState == 'fight':
+		if unit.aiState == 'fight':
 			fightToggle.add_theme_color_override("default_color", Color.WHITE)
 		else:
 			fightToggle.add_theme_color_override("default_color", Color.DIM_GRAY)
@@ -97,33 +97,33 @@ func changeActiveStateColor(unit):
 	else:
 		focusToggle.add_theme_color_override("default_color", Color.DIM_GRAY)
 		
-	if unit.collider.isPhysician:
+	if unit.isPhysician:
 		treatToggle.text = '[center]Treat'
 		speakAction.text = 'Speak'
 	else:
 		treatToggle.text = ''
 		speakAction.text = '             Speak'
-	if unit.collider.isTreating:
+	if unit.isTreating:
 		treatToggle.add_theme_color_override("default_color", Color.WHITE)
 	else:
 		treatToggle.add_theme_color_override("default_color", Color.DIM_GRAY)
 		
 func revealStats(unit):
 	visible = true
-	characterNameLabel.text = '[center]' + unit.collider.characterName
-	spriteTexture.texture = unit.collider.sprite.texture
-	woundsVal.text =  '[center]' + str(unit.collider.baseStats['curWounds']) + ' / ' + str(unit.collider.baseStats['maxWounds'])
-	mightLabel.text = '[center]' + str(unit.collider.modifiedStats['might'])
-	skillLabel.text = '[center]' + str(unit.collider.modifiedStats['skill'])
-	agiLabel.text =   '[center]' + str(unit.collider.modifiedStats['agility'])
-	resLabel.text =   '[center]' + str(unit.collider.modifiedStats['resilience'])
-	survLabel.text =  '[center]' + str(unit.collider.modifiedStats['survival'])
-	rangeLabel.text = '[center]' + str(unit.collider.modifiedStats['attackRange'])
-	hungerBar.value = unit.collider.hunger
-	$rightStatsContainer/vContainer/TreatmentTimeBar.value = unit.collider.get_node('treatmentTimer').time_left
+	characterNameLabel.text = '[center]' + unit.characterName
+	spriteTexture.texture = unit.sprite.texture
+	woundsVal.text =  '[center]' + str(unit.baseStats['curWounds']) + ' / ' + str(unit.baseStats['maxWounds'])
+	mightLabel.text = '[center]' + str(unit.modifiedStats['might'])
+	skillLabel.text = '[center]' + str(unit.modifiedStats['skill'])
+	agiLabel.text =   '[center]' + str(unit.modifiedStats['agility'])
+	resLabel.text =   '[center]' + str(unit.modifiedStats['resilience'])
+	survLabel.text =  '[center]' + str(unit.modifiedStats['survival'])
+	rangeLabel.text = '[center]' + str(unit.modifiedStats['attackRange'])
+	hungerBar.value = unit.hunger
+	$rightStatsContainer/vContainer/TreatmentTimeBar.value = unit.get_node('treatmentBarTimer').time_left
 	changeActiveStateColor(unit)
 	changeStatColor(unit)
-	if !unit.collider.isPlayer:
+	if !unit.isPlayer:
 		$rightStatsContainer/vContainer/skillsLabel.hide()
 		speakAction.hide()
 		feastAction.hide()

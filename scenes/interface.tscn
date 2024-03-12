@@ -600,7 +600,8 @@ script = ExtResource("2_6cswn")
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 4
-value = 100.0
+max_value = 60.0
+value = 60.0
 texture_over = ExtResource("10_o63d5")
 texture_progress = ExtResource("11_tlhgc")
 
