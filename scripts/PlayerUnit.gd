@@ -98,7 +98,6 @@ func _on_treatmentTimer_timeout():
 	
 
 func _process(delta):
-	print(combatExperience)
 	targetCheck()
 	handleSpriteFacing()
 	checkDeath()

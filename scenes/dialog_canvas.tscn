@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://ck0r2ncdfmau7"]
+[gd_scene load_steps=6 format=3 uid="uid://ck0r2ncdfmau7"]
 
 [ext_resource type="Script" path="res://scripts/dialog_canvas.gd" id="1_q5j4n"]
 [ext_resource type="StyleBox" uid="uid://cayqsvqoku223" path="res://resources/styles/2pxborderstyle.tres" id="1_vft0c"]
 [ext_resource type="Theme" uid="uid://dxaa23umg3c5f" path="res://resources/themes/uiFontTheme.tres" id="3_wnutn"]
+[ext_resource type="AudioStream" uid="uid://j0xe42ss7byj" path="res://resources/audio/sfx/textScroll.wav" id="4_r4x3q"]
 
 [sub_resource type="Theme" id="Theme_nr88r"]
 /styles/normal = ExtResource("1_vft0c")
@@ -54,3 +55,10 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 2
 shortcut_keys_enabled = false
+
+[node name="audioContainer" type="Node" parent="."]
+
+[node name="textScroll" type="AudioStreamPlayer" parent="audioContainer"]
+stream = ExtResource("4_r4x3q")
+volume_db = -5.0
+pitch_scale = 0.9

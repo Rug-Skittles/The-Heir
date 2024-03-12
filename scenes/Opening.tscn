@@ -1,0 +1,63 @@
+[gd_scene load_steps=12 format=3 uid="uid://mmnllv75om71"]
+
+[ext_resource type="Script" path="res://scripts/Game.gd" id="1_y5uyq"]
+[ext_resource type="Script" path="res://scripts/selectionRect.gd" id="2_46c6m"]
+[ext_resource type="PackedScene" uid="uid://cy36n53gxn4ut" path="res://scenes/opening_scene.tscn" id="3_v5scr"]
+[ext_resource type="Script" path="res://scripts/Camera2D.gd" id="4_dsxvs"]
+[ext_resource type="Texture2D" uid="uid://d0cpy5r4ygmo0" path="res://resources/ui/cursorSprite.png" id="5_71o4x"]
+[ext_resource type="PackedScene" uid="uid://d2uirqchuktgf" path="res://scenes/cutsceneManager.tscn" id="6_78n4d"]
+[ext_resource type="Script" path="res://scenes/deathTriggers.gd" id="7_58gvy"]
+[ext_resource type="PackedScene" uid="uid://cg5lg3sj61q22" path="res://scenes/interface.tscn" id="8_yr2eo"]
+[ext_resource type="PackedScene" uid="uid://ck0r2ncdfmau7" path="res://scenes/dialog_canvas.tscn" id="9_nnbx3"]
+[ext_resource type="PackedScene" uid="uid://bpo2305wv6aun" path="res://scenes/unitBox.tscn" id="10_1h566"]
+[ext_resource type="AudioStream" uid="uid://fyw4qmg4pnm5" path="res://resources/audio/music/rain-heavy-wash-rolling-thunder-int-loop-77mel-190817-17774.mp3" id="11_7sm2h"]
+
+[node name="Game" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_y5uyq")
+
+[node name="darkness" type="DirectionalLight2D" parent="."]
+blend_mode = 1
+height = 1.0
+
+[node name="selectionRect" type="Node2D" parent="."]
+script = ExtResource("2_46c6m")
+
+[node name="currentWorld" parent="." instance=ExtResource("3_v5scr")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(2578, 1615)
+anchor_mode = 0
+limit_smoothed = true
+position_smoothing_enabled = true
+script = ExtResource("4_dsxvs")
+
+[node name="cursor" type="Sprite2D" parent="."]
+visible = false
+z_index = 2
+scale = Vector2(2, 2)
+texture = ExtResource("5_71o4x")
+
+[node name="cutsceneManager" parent="." instance=ExtResource("6_78n4d")]
+
+[node name="deathTriggers" type="Node2D" parent="."]
+script = ExtResource("7_58gvy")
+
+[node name="interface" parent="." instance=ExtResource("8_yr2eo")]
+visible = false
+
+[node name="dialogCanvas" parent="." instance=ExtResource("9_nnbx3")]
+
+[node name="unitBox" parent="." instance=ExtResource("10_1h566")]
+visible = false
+
+[node name="musicContainer" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="musicContainer"]
+stream = ExtResource("11_7sm2h")
+volume_db = -20.0
+
+[connection signal="sendUnit" from="cutsceneManager" to="dialogCanvas" method="_on_cutscene_manager_send_unit"]
+[connection signal="startAction" from="cutsceneManager" to="dialogCanvas" method="_on_cutscene_manager_start_action"]
+[connection signal="buttonDown" from="interface" to="." method="_on_interface_button_down"]
+[connection signal="finished" from="musicContainer/AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

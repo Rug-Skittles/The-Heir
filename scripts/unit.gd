@@ -7,7 +7,9 @@ class_name Unit
 @export var attackSprite : Texture
 @export var fatigue : int = 0
 @export var hunger : float = 100
-@export var isMelee : bool = true
+@export var canDie : bool = true
+
+@export var voicePitch : float = 1.0
 
 @export var baseStats : Dictionary = {
 									'maxWounds':10,
@@ -211,7 +213,7 @@ func _ready():
 	## May want to tweak the roll for balance later on
 
 func randRoll(target):
-	var modifier = (modifiedStats['might'] - round((target.modifiedStats['agility']*1.5)))
+	var modifier = (modifiedStats['might'] - round((target.modifiedStats['agility']*1.25)))
 	if modifier <= 0:
 		modifier = 0
 	var roll = randi() % (6 + int(modifier)) + 2
@@ -220,7 +222,7 @@ func randRoll(target):
 	
 func _damageCalculation(target):
 	if !target.isDead:
-		var damageDealt = (modifiedStats['skill'] - int(round((target.modifiedStats['resilience']*1.5)))) + randRoll(target)
+		var damageDealt = (modifiedStats['skill'] - int(round((target.modifiedStats['resilience']*1.25)))) + randRoll(target)
 		if damageDealt >= 0:
 			return damageDealt
 		elif damageDealt <= 0:
@@ -243,7 +245,7 @@ func _takeDamage(damageToTake):
 
 func _tryAttackTarget():
 	var currentTime = Time.get_unix_time_from_system()
-	if currentTime - lastAttackTime > (modifiedStats['attackRate']-(modifiedStats['agility']*0.0125)) and !target.isDead:
+	if currentTime - lastAttackTime > (modifiedStats['attackRate']-(modifiedStats['agility']*0.0125)) and !target.isDead and allowedToTarget:
 		actionDialog('attack')
 		var projectile = load("res://scenes/rangedAttack.tscn")
 		var projectileInstance = projectile.instantiate()
@@ -259,7 +261,7 @@ func gainExperience(damageDealt, target):
 	combatExperience += damageDealt
 
 func handleLevelUp():
-	if combatExperience >= 50 + (level * 5):
+	if combatExperience >= 70 + (level * 5):
 		var levelUpString = ''
 		for stat in growthRates:
 			if checkGrowths(stat):
@@ -400,39 +402,47 @@ func actionDialog(actionType):
 
 func checkDeath():
 	if isDead:
-		if !deathChecked:
-			selected = false
-			$selectionVisual.hide()
-			
-			for i in range(game.selectedPlayerUnits.size() -1, -1, -1):
-				if self == game.selectedPlayerUnits[i]:
-					game.selectedPlayerUnits.remove_at(i)
-			for i in range(game.playerUnits.size() -1, -1, -1):
-				if self == game.playerUnits[i]:
-					game.playerUnits.remove_at(i)
-			for i in range(game.enemyUnits.size() -1, -1, -1):
-				if self == game.enemyUnits[i]:
-					game.enemyUnits.remove_at(i)
-			if self.characterName != 'Heir':
-				for i in range(game.allUnits.size() -1, -1, -1):
-					if self == game.allUnits[i]:
-						game.allUnits.remove_at(i)
-			deathChecked = true
+		if canDie:
+			if !deathChecked:
+				selected = false
+				$selectionVisual.hide()
+				
+				if characterName != 'Sernas':
+					for i in range(game.selectedPlayerUnits.size() -1, -1, -1):
+						if self == game.selectedPlayerUnits[i]:
+							game.selectedPlayerUnits.remove_at(i)
+					for i in range(game.playerUnits.size() -1, -1, -1):
+						if self == game.playerUnits[i]:
+							game.playerUnits.remove_at(i)
+					for i in range(game.enemyUnits.size() -1, -1, -1):
+						if self == game.enemyUnits[i]:
+							game.enemyUnits.remove_at(i)
+					if self.characterName != 'Heir':
+						for i in range(game.allUnits.size() -1, -1, -1):
+							if self == game.allUnits[i]:
+								game.allUnits.remove_at(i)
+					deathChecked = true
 
-		if emitDeathSignal == true and !deathSignalEmitted:
-			deathSignal.emit(self)
-			deathSignalEmitted = true
-		target = null
-		velocity = Vector2(0,0)
-		baseStats['curWounds'] = 0
-		modifiedStats['movement'] = 0
-		modifiedStats['attackRange'] = 0
-		modifiedStats['attackRate'] = 0
-		$NavigationAgent2D.process_mode = Node.PROCESS_MODE_DISABLED
-		if !isPlayer and !isNeutral:
-			$enemyAISFM.process_mode = Node.PROCESS_MODE_DISABLED
-		if isDead and characterName == 'Heir':
-			gameOver.emit()
+			if emitDeathSignal == true and !deathSignalEmitted:
+				deathSignal.emit(self)
+				deathSignalEmitted = true
+			
+			target = null
+			velocity = Vector2(0,0)
+			baseStats['curWounds'] = 0
+			modifiedStats['movement'] = 0
+			modifiedStats['attackRange'] = 0
+			modifiedStats['attackRate'] = 0
+			$NavigationAgent2D.process_mode = Node.PROCESS_MODE_DISABLED
+			if !isPlayer and !isNeutral:
+				$enemyAISFM.process_mode = Node.PROCESS_MODE_DISABLED
+			if isDead and characterName == 'Heir':
+				gameOver.emit()
+		else:
+			if emitDeathSignal == true and !deathSignalEmitted:
+				deathSignal.emit(self)
+				deathSignalEmitted = true
+			target = null
 	else:
 		pass
 
@@ -470,10 +480,12 @@ func targetCheck(): ## Determines how far away the target is from a unit and do 
 			navigationComplete = false
 			
 func generateCorpse(): 
+	
 	$audioContainer/death.play()
 	print(characterName + ' has died!')
 	isDead = true
-	sprite.texture = load("res://resources/sprites/corpse.png")
+	if canDie:
+		sprite.texture = load("res://resources/sprites/corpse.png")
 	## Cease all enemy AI
 	## Player can no longer control it                     
 

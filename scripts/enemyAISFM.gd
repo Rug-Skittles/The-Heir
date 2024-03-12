@@ -117,7 +117,7 @@ func flee():
 	
 	
 func _on_enemy_unit_movement_complete(unitRecieved):
-	print('RECIEVED')
+	#print('RECIEVED')
 	if unitRecieved == unit and state == states.PATROL:
 		print(unitRecieved)
 		var waitTime = randf_range(unit.minWaitTime,unit.maxWaitTime)

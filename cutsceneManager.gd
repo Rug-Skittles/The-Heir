@@ -43,8 +43,35 @@ func processNextAction():
 				processAttack(action)
 			'setTarget':
 				processTarget(action)
-
+			'changeScene':
+				processChangeScene(action)
+			'toggleFlag':
+				processToggleFlag(action)
+			'modulate':
+				processModulate(action)
 				
+func processModulate(action):
+	startAction.emit()
+	for unit in get_parent().allUnits:
+		if unit.characterName == action.data['character']:
+			var tween = create_tween()
+			tween.tween_property(unit,'modulate',action.data['color'],action.data['duration'])
+
+func processToggleFlag(action):
+	startAction.emit()
+	for unit in get_parent().allUnits:
+		if unit.characterName == action.data['character']:
+			if unit.get(action.data['flag']) == true:
+				unit.set(action.data['flag'], false)
+			else:
+				unit.set(action.data['flag'], true)
+	processing = false
+
+func processChangeScene(action):
+	startAction.emit()
+	get_tree().change_scene_to_file(action.data['path'])
+	processing = false
+	
 func processDialog(action):
 	dialogCanvas.processText(action.data['text'], 'pauseFocus', action.data['script'], 'high')
 

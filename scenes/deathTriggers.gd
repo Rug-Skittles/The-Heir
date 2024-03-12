@@ -13,16 +13,25 @@ func _ready():
 			unit.connect('deathSignal',processDeathTrigger)
 
 
+func checkAlive(unit):
+	for item in get_parent().playerUnits:
+		if item.characterName == unit:
+			if !item.isDead:
+				return true
+			else:
+				return false
+
 func processDeathTrigger(unit):
 	#get_parent()._unselectUnit()
 	if unit.characterName == 'Graus':
+		get_parent().get_node('unitBox').show()
 		print('Graus is dead!')
 		cutsceneManager.addAction('dialog',{'text':['It seems thou hath nary forgotten thy training, good. Thou wilt have need of it here. . .',
 										'My liege, please SPEAK to me, I would hear thy voice that it would be pancaea on an aching mind.',
 										'LEFT CLICK the SPEAK action and then LEFT CLICK upon me.'],
 								'script':['Benas','Benas','Benas']
 								})
-	
+
 	
 	if unit.characterName == 'Ilga' || unit.characterName == 'Grimnr' || unit.characterName == 'Evalds':
 		daigaEventIncrement += 1
@@ -94,3 +103,58 @@ func processDeathTrigger(unit):
 						if oskars == get_parent().enemyUnits[i]:
 							get_parent().enemyUnits.remove_at(i)
 							get_parent().playerUnits.append(oskars)
+
+	if unit.characterName == 'Sernas':
+		cutsceneManager.addAction('dialog',
+								{'text':['Grllk. . . Urrk. . . W-What did I do wrong?',
+										'I only ever followed my heart. . .',
+										'Thy heart was black and vile, be glad we hath cut it out for thee.',
+										'Ghehe. . . Thou want spite? This key is the only that will open that door. . .',
+										'Be not a fool Sernas, hand it to me, now!',
+										'Squeal piglet, squeal!'],
+								'script':['Sernas','Sernas','Heir', 'Sernas','Heir','Sernas']})
+		cutsceneManager.addAction('movement',
+								{'character':'Sernas',
+								'destination':Vector2(915,5598),
+								'speed':255})
+		cutsceneManager.addAction('toggleFlag',{'character':'Sernas', 'flag':'canDie'})
+		cutsceneManager.addAction('modulate',{'character':'Sernas','color':Color(0,0,0,0),'duration':3})
+		cutsceneManager.addAction('dialog',
+								{'text':['Confound it all! A blighted villain to the end.'],
+								'script':['Heir']})
+		if checkAlive('Benas'):
+			cutsceneManager.addAction('dialog',
+									{'text':['My liege. . . Suffice it to say that threshold is solid iron, and yet more gates lay beyond.',
+											'And soldiers just as well, no doubt loyal to that usurper for now.'],
+									'script':['Benas','Heir']})
+		else:
+			cutsceneManager.addAction('dialog',
+						{'text':['Such a threshold, couldst we find a way through? And shouldst we, wilt yet more dungeon lay beyond?'],
+						'script':['Heir']})
+		if checkAlive('Ralfs'):
+			cutsceneManager.addAction('dialog',
+						{'text':['Dare I say that nary even Ralfs with their prodigious body could collapse this door',
+								"Aye, looks to be outta my league boss. Sorry 'bout that."],
+						'script':['Heir','Ralfs']})
+		if checkAlive('Daiga') and checkAlive('Oskars'):
+			cutsceneManager.addAction('dialog',
+						{'text':["Let's wait it out and ambush the next party that comes through eh? Surely ye can't have but ONE key to the place.",
+								"Afraid so friend. Only the warden carries the dungeon keys, and now they art lost to the abyss. . .",
+								"Utterly stupid!"],
+						'script':['Daiga','Oskars','Daiga']})
+		else:
+			cutsceneManager.addAction('dialog',
+						{'text':['Who can say how long we may have to lay in wait for these doors to open. An eternity mayhaps. . .'],
+						'script':['Heir']})
+		cutsceneManager.addAction('dialog',
+						{'text':['And what of this tunnel? Doth any know its terminus?'],
+						'script':['Heir']})
+		if checkAlive('Akvile'):
+			cutsceneManager.addAction('dialog',
+						{'text':["I have yet to hear an echo of the heavy one's demise. . ."],
+						'script':['Akvile']})
+		if checkAlive('')
+
+		#cutsceneManager.addAction('dialog',
+								#{'text':[],
+								#'script':[]})

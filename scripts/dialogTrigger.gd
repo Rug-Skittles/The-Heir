@@ -1,6 +1,6 @@
 extends Node
 
-@export var characterToTrigger : String = ''
+@export var characterToTrigger : String
 @export var multiCharacterTrigger : bool
 @export var multiCharactersToTrigger : Array[String]
 
@@ -30,35 +30,18 @@ func _ready():
 	dialogCanvas = get_node('/root/Game/dialogCanvas')
 
 func _on_area_2d_body_entered(body):
-	if characterToTrigger != '':
-		if body.characterName == characterToTrigger:
-			if recruitmentTrigger:
-				for item in game.allUnits:
-					if recruitmentUnit == item.characterName:
-						item.isPlayer = true
-						item.isRecruitable = false
-						item.target = null
-						item.get_node('visionCone').show()
-						item.get_node('radialVision').show()
-						for i in range(game.enemyUnits.size() -1, -1, -1):
-							if item == game.enemyUnits[i]:
-								game.enemyUnits.remove_at(i)
-								game.playerUnits.append(item)
-						queue_free()
-	else:
-		if recruitmentTrigger:
-			for item in game.allUnits:
-				if recruitmentUnit == item.characterName:
-					item.isPlayer = true
-					item.isRecruitable = false
-					item.target = null
-					item.get_node('visionCone').show()
-					item.get_node('radialVision').show()
-					for i in range(game.enemyUnits.size() -1, -1, -1):
-						if item == game.enemyUnits[i]:
-							game.enemyUnits.remove_at(i)
-							game.playerUnits.append(item)
-					queue_free()
+	if recruitmentTrigger:
+		for item in game.allUnits:
+			if recruitmentUnit == item.characterName:
+				item.isPlayer = true
+				item.isRecruitable = false
+				item.target = null
+				item.get_node('visionCone').show()
+				item.get_node('radialVision').show()
+				for i in range(game.enemyUnits.size() -1, -1, -1):
+					if item == game.enemyUnits[i]:
+						game.enemyUnits.remove_at(i)
+						game.playerUnits.append(item)
 	if !multiCharacterTrigger:
 		if body.characterName == characterToTrigger:
 			if isCutscene:

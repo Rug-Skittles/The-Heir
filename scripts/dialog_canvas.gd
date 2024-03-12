@@ -79,6 +79,12 @@ func _ready():
 	
 	
 func _process(delta):
+	if priorityTextQueue.is_empty():
+		for unit in get_parent().allUnits:
+			unit.allowedToTarget = true
+	else:
+		for unit in get_parent().allUnits:
+			unit.allowedToTarget = false
 	#print(textQueue)
 	#print(priorityTextQueue)
 	#print(currentState)
@@ -100,12 +106,16 @@ func _process(delta):
 					get_parent().get_node('Camera2D').unfocusCamera()
 		State.TYPING:
 			if Input.is_action_just_pressed("skipDialog"):
+				for timer in get_tree().get_nodes_in_group('textTimers'):
+					timer.queue_free()
 				textContent.percent_visible = 1.0
 				#tween.pause()
 				tween.custom_step(100.0)
 				#changeState(State.FINISHED)
 		State.PAUSE_TYPING:
 			if Input.is_action_just_pressed("skipDialog"):
+				for timer in get_tree().get_nodes_in_group('textTimers'):
+					timer.queue_free()
 				textContent.percent_visible = 1.0
 				#tween.pause()
 				tween.custom_step(100.0)
@@ -116,6 +126,8 @@ func _process(delta):
 			get_parent().get_node('currentWorld').get_node('unitContainer').process_mode = Node.PROCESS_MODE_DISABLED
 		State.PAUSE_FOCUS_TYPING:
 			if Input.is_action_just_pressed("skipDialog"):
+				for timer in get_tree().get_nodes_in_group('textTimers'):
+					timer.queue_free()
 				textContent.visible_ratio = 1
 				#tween.pause()
 				
@@ -213,15 +225,29 @@ func displayText(priority):
 	showTexbox()
 	#ween.kill()
 	tween = create_tween()
-	#for i in textToAdd:
-		#await get_tree().create_timer(CHAR_READ_RATE).timeout
-		#$"../audioContainer/textScroll".play()
-		#print(audioContainer)
+	for i in range (textToAdd.length()):
+		if textToAdd[i] != ' ':
+			var letterTimer : Timer = Timer.new()
+			get_parent().add_child(letterTimer)
+			letterTimer.add_to_group('textTimers')
+			letterTimer.wait_time = CHAR_READ_RATE*i
+			letterTimer.autostart = false
+			letterTimer.one_shot = true
+			letterTimer.timeout.connect(letterTimerTimeout)
+			letterTimer.start()
+	
+
 		
 	tween.tween_property(textContent,'visible_ratio',1,len(textToAdd)*CHAR_READ_RATE)
 	tween.tween_property(textboxContainer,'modulate',Color(0,0,0,0),3)
 	tween.connect("finished", onTweenFinished)
 	
+func letterTimerTimeout():
+	if currentSpeaker != null:
+		get_node("audioContainer/textScroll").pitch_scale = currentSpeaker.voicePitch
+	else:
+		get_node("audioContainer/textScroll").pitch_scale = 1
+	get_node("audioContainer/textScroll").play()
 	
 	
 func onTweenFinished():
@@ -252,7 +278,6 @@ func changeState(newState):
 			print('Dialog box PAUSE FOCUS TYPING')
 		State.FINISHED:
 			get_parent().get_node('currentWorld').get_node('unitContainer').process_mode = Node.PROCESS_MODE_INHERIT
-			print(get_parent().get_node('currentWorld').get_node('unitContainer').process_mode)
 			if currentSpeaker != null:
 				currentSpeaker.get_node('selectionVisual').hide()
 			print('Dialog box FINISHED')
@@ -268,6 +293,7 @@ func onUnitMovementComplete(unit):
 		#print('CHANGING TO READY')
 		changeState(State.READY)
 		cutsceneManager.processing = false
+		
 		
 func onUnitAttackComplete(unit):
 	if unit == recievedUnit:
