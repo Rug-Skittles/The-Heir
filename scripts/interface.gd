@@ -21,12 +21,13 @@ extends CanvasLayer
 
 @onready var speakAction = $rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer/speakAction
 @onready var feastAction = $rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer/feastAction
-@onready var treatToggle = $rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer/treatToggle
+@onready var treatToggle = $rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer/treatToggle
 
-@onready var focusToggle = $rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2/focusLabel
-@onready var chaseToggle = $rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2/chaseLabel
-@onready var fightToggle = $rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2/fightLabel
+@onready var focusToggle = $rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer2/focusLabel
+@onready var chaseToggle = $rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer2/chaseLabel
+@onready var fightToggle = $rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer2/fightLabel
 
+@onready var statusToggle = $rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer/chaseLabel
 
 @onready var statValuesDisplay =   {'might':$rightStatsContainer/vContainer/statsMargin/statsHBox/leftStatVBoxValues/mightLabel, 
 									'skill':$rightStatsContainer/vContainer/statsMargin/statsHBox/leftStatVBoxValues/skillLabel,
@@ -98,11 +99,11 @@ func changeActiveStateColor(unit):
 		focusToggle.add_theme_color_override("default_color", Color.DIM_GRAY)
 		
 	if unit.isPhysician:
-		treatToggle.text = '[center]Treat'
-		speakAction.text = 'Speak'
+		treatToggle.text = '[center]   Treat'
+		statusToggle.text = '[center]   Show Status'
 	else:
 		treatToggle.text = ''
-		speakAction.text = '             Speak'
+		statusToggle.text = '[center]                Show Status'
 	if unit.isTreating:
 		treatToggle.add_theme_color_override("default_color", Color.WHITE)
 	else:
@@ -125,6 +126,8 @@ func revealStats(unit):
 	changeStatColor(unit)
 	if !unit.isPlayer:
 		$rightStatsContainer/vContainer/skillsLabel.hide()
+		$rightStatsContainer/vContainer/skillsLabel2.hide()
+		statusToggle.hide()
 		speakAction.hide()
 		feastAction.hide()
 		treatToggle.hide()
@@ -133,6 +136,8 @@ func revealStats(unit):
 		focusToggle.hide()
 	else:
 		$rightStatsContainer/vContainer/skillsLabel.show()
+		$rightStatsContainer/vContainer/skillsLabel2.show()
+		statusToggle.show()
 		speakAction.show()
 		feastAction.show()
 		treatToggle.show()

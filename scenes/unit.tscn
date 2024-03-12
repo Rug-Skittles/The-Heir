@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://k15ugp5m03u8"]
+[gd_scene load_steps=16 format=3 uid="uid://k15ugp5m03u8"]
 
 [ext_resource type="Script" path="res://scripts/unit.gd" id="1_jqanj"]
 [ext_resource type="Texture2D" uid="uid://cxgw2hl3irgho" path="res://resources/sprites/attackSprites/rangedAttackSword.png" id="2_45lja"]
@@ -15,6 +15,12 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r2784"]
 size = Vector2(16, 16)
+
+[sub_resource type="Gradient" id="Gradient_nkwyw"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2to62"]
+gradient = SubResource("Gradient_nkwyw")
+height = 2
 
 [node name="Node2D" type="CharacterBody2D"]
 z_index = 1
@@ -92,6 +98,32 @@ stream = ExtResource("11_euex1")
 
 [node name="textScroll" type="AudioStreamPlayer" parent="audioContainer"]
 stream = ExtResource("12_elbc3")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -22.0
+offset_top = 24.0
+offset_right = 42.0
+offset_bottom = 30.0
+grow_horizontal = 2
+value = 100.0
+texture_progress = SubResource("GradientTexture2D_2to62")
+
+[node name="TextureProgressBar2" type="TextureProgressBar" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -22.0
+offset_top = 30.0
+offset_right = 42.0
+offset_bottom = 36.0
+grow_horizontal = 2
+value = 100.0
+texture_progress = SubResource("GradientTexture2D_2to62")
 
 [connection signal="timeout" from="idleTimer" to="." method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="bleedTimer" to="." method="_on_bleed_timer_timeout"]

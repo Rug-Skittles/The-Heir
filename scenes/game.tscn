@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://bac5hpy0xsm7f"]
+[gd_scene load_steps=16 format=3 uid="uid://bac5hpy0xsm7f"]
 
 [ext_resource type="Script" path="res://scripts/Game.gd" id="1_a5c0y"]
 [ext_resource type="TileSet" uid="uid://dh2jxukhfibwv" path="res://resources/tileSet/DungeonTileset.tres" id="2_7phqn"]
 [ext_resource type="PackedScene" uid="uid://pfvd4qd5a60k" path="res://scenes/EnemyUnit.tscn" id="2_lra1l"]
+[ext_resource type="PackedScene" uid="uid://cy36n53gxn4ut" path="res://scenes/opening_scene.tscn" id="6_7u1y5"]
 [ext_resource type="PackedScene" uid="uid://b7qj07sbbyhs6" path="res://scenes/map_1.tscn" id="6_8ns3c"]
 [ext_resource type="Script" path="res://scripts/selectionRect.gd" id="7_p6hp1"]
 [ext_resource type="Script" path="res://scripts/Camera2D.gd" id="8_24t1b"]
@@ -52,7 +53,9 @@ z_index = 2
 scale = Vector2(2, 2)
 texture = ExtResource("10_mdak7")
 
-[node name="currentWorld" parent="." instance=ExtResource("6_8ns3c")]
+[node name="currentWorld" parent="." instance=ExtResource("6_7u1y5")]
+
+[node name="currentWorldMAP" parent="." instance=ExtResource("6_8ns3c")]
 position = Vector2(73, 720)
 
 [node name="unitContainer" type="Node2D" parent="."]

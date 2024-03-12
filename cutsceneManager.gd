@@ -10,9 +10,9 @@ var newSpeed = null
 var lastMovedUnit = null
 
 
-
 signal startAction
 signal sendUnit(unit)
+
 
 func _ready():
 	dialogCanvas = get_parent().get_node('dialogCanvas')
@@ -43,8 +43,7 @@ func processNextAction():
 				processAttack(action)
 			'setTarget':
 				processTarget(action)
-			#'light':
-				#processLight(action)
+
 				
 func processDialog(action):
 	dialogCanvas.processText(action.data['text'], 'pauseFocus', action.data['script'], 'high')
@@ -115,7 +114,11 @@ func processTarget(action):
 	for character in get_parent().allUnits:
 		if unitName == character.characterName:
 			character.target = targetToAttack
+	processing = false
 			
+			
+
+	
 #func processLight(action):
 	#var unitName = action.data['character']
 	#if action.data['light'] == 'radial':
@@ -138,6 +141,7 @@ func onUnitMovementComplete(unit):
 
 
 func _process(delta):
+
 	#print(actionsQueue)
 	if processing and lastMovedUnit != null:
 		get_parent().get_node('Camera2D').focusCamera(lastMovedUnit,1.5)

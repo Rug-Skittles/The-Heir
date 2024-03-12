@@ -93,9 +93,9 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 agent_radius = 8.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_schhu"]
-vertices = PackedVector2Array(-492, 3040, -580, 3128, -828, 3128, -916, 3040, -828, 2952, -580, 2952)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-832, 2944, -708, 2944, -708, 2944, -644, 2944, -644, 2944, -576, 2944, -480, 3040, -480, 3040, -576, 3136, -832, 3136, -928, 3040, -928, 3040)])
+vertices = PackedVector2Array(-655, 2952, -580, 2952, -492, 3040, -580, 3128, -828, 3128, -916, 3040, -702, 2952, -702, 2904, -655, 2904, -828, 2952)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 0), PackedInt32Array(6, 0, 5), PackedInt32Array(6, 5, 9)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-832, 2944, -710, 2944, -710, 2896, -647, 2896, -647, 2944, -576, 2944, -480, 3040, -480, 3040, -576, 3136, -832, 3136, -928, 3040, -928, 3040)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 agent_radius = 8.0
 
@@ -293,7 +293,7 @@ layer_1/tile_data = PackedInt32Array(262143, 131073, 2, 327679, 131073, 3, 39321
 y_sort_enabled = true
 
 [node name="Heir" parent="unitContainer" instance=ExtResource("3_syj1i")]
-position = Vector2(572, 536)
+position = Vector2(573, -1541)
 characterName = "Heir"
 baseStats = {
 "agility": 4,
@@ -331,15 +331,9 @@ wait_time = 1.0
 
 [node name="Benas - Neutral" parent="unitContainer" instance=ExtResource("4_nmso7")]
 position = Vector2(476, 348)
-sightRange = 300.0
 recruitmentDialog = Array[String](["I. . . Ser Benas, why doth thou find thyself in such a place?", "Surely thou know of thy father's growing. . . Worry. . . Yes, it seems even his dearest friends were not above suspicion.", "I can't imagine it, I had thought thee off quelling the rebel forces. How glad I am to see thee yet living.", "There is a matter of far greater import than my imprisonment, what of thee young master?", "It's over ser knight. General Zydrunas has claimed his seat, and I a mere whelp not even worth the dignity of execution.", "Don't speak such things! This is nary a malus, but a boon. Let us escape this labyrinthian halls and cut out that traitor's heart!", "Yes. Let's."])
 recruitmentScript = Array[String](["Heir", "Benas", "Heir", "Benas", "Heir", "Benas", "Heir"])
-aiDisabled = true
 characterName = "Benas"
-level = 0
-fatigue = 0
-hunger = 100.0
-isMelee = true
 baseStats = {
 "agility": 3,
 "attackRange": 100,
@@ -363,24 +357,11 @@ growthRates = {
 "skill": 5,
 "survival": 5
 }
-isDead = false
-isPlayer = false
-isFatigued = false
-isDiseased = false
-isFrenzied = false
-isBleeding = false
-isPhysician = false
 isRecruitable = true
-actions = Array[Dictionary]([{
-"Speak": true
-}, {
-"Feast": true
-}])
 attackDialog = Array[String](["Whatever it takes, I shall strike thee down!", "Raise thy blade!", "For my liege!"])
 idleDialog = Array[String](["This darkness. . . It encroaches. Threatening to snuff out our very lives. Let us be wary.", "Careful, careful. Watch thy step.", "Ahh. . . We shalt taste the Sun's kiss again, I'm certain."])
 feastDialog = Array[String](["Disgusting. . .", "Whatever it takes. . .", "We must survive this trial."])
 deathDialog = Array[String](["Aagh. . ! My leige. . . Claim what is thine!"])
-keepFocus = false
 emitDeathSignal = true
 
 [node name="Sprite2D" parent="unitContainer/Benas - Neutral" index="1"]
@@ -394,16 +375,10 @@ wait_time = 1.0
 
 [node name="Eimantas - Neutral" parent="unitContainer" instance=ExtResource("4_nmso7")]
 position = Vector2(204, 260)
-sightRange = 300.0
 recruitmentDialog = Array[String](["Will you not leap at these bars to do me harm like that one?", "Hmm. . . Oh, tis merely the erstwhile heir. And why praytell, would I do that?", "Doth thou not hate me for what my father has done to thee?", "Thy father has wronged me, yes. But I do not despair, I hath forseen thy coming.", "Forseen. . ? Could it be that you are Eimantas, the Sage of the Well?", "I hath been called that name, yes. . .", "Please! I beg thee aid. Let us at least abscond from these cages that I may repay my father's debt.", "Hmm, yes. Our departure is also forseen.", "But know that while I am not stout of body, I have a keen medicinal sense. Should there be any minor wounds need tending, I can handle such a trifle. Merely toggle the TREAT action."])
 recruitmentScript = Array[String](["Heir", "Eimantas", "Heir", "Eimantas", "Heir", "Eimantas", "Heir", "Eimantas", "Eimantas"])
-aiDisabled = true
 characterName = "Eimantas"
-level = 0
 attackSprite = ExtResource("6_hi8x2")
-fatigue = 0
-hunger = 100.0
-isMelee = true
 baseStats = {
 "agility": 3,
 "attackRange": 200,
@@ -427,38 +402,18 @@ growthRates = {
 "skill": 5,
 "survival": 6
 }
-isDead = false
-isPlayer = false
-isFatigued = false
-isDiseased = false
-isFrenzied = false
-isBleeding = false
 isPhysician = true
 isRecruitable = true
-actions = Array[Dictionary]([{
-"Speak": true
-}, {
-"Feast": true
-}])
 attackDialog = Array[String](["An expected outcome.", "Thou might as well drop thy weapon and weep, for I hath seen thy demise.", "Hmm, this battle is uncertain."])
 idleDialog = Array[String](["Mine clairvoyance wilt pierce yonder veil of ink.", "Even these eyes of mine cannot see all ends, always be ready.", "Thine father hath constructed a monstrosity for true in this place, oh erstwhile Heir."])
 feastDialog = Array[String](["Such a pity. . . I see a family in their eyes.", "With our bodies made one, so shalt our eyes.", "An oddly enamouring taste."])
 deathDialog = Array[String](["Even this I hath foreseen."])
-keepFocus = false
 emitDeathSignal = true
 
 [node name="Daiga - Neutral" parent="unitContainer" instance=ExtResource("4_nmso7")]
 position = Vector2(-1438, 1282)
-sightRange = 300.0
-recruitmentDialog = Array[String]([])
-recruitmentScript = Array[String]([])
-aiDisabled = true
 characterName = "Daiga"
-level = 0
 attackSprite = ExtResource("20_yqcg7")
-fatigue = 0
-hunger = 100.0
-isMelee = true
 baseStats = {
 "agility": 6,
 "attackRange": 350,
@@ -482,24 +437,10 @@ growthRates = {
 "skill": 10,
 "survival": 10
 }
-isDead = false
-isPlayer = false
-isFatigued = false
-isDiseased = false
-isFrenzied = false
-isBleeding = false
-isPhysician = false
-isRecruitable = false
-actions = Array[Dictionary]([{
-"Speak": true
-}, {
-"Feast": true
-}])
 attackDialog = Array[String](["Beast, I'll stick ye right between those sunken eyes!", "Watch yer heads fellows!", "I'll have ye skinned a strung like a doe."])
 idleDialog = Array[String](["Listen. . . Listen. . . Don't you hear that? That thrumming. . .", "Keep quiet, breathing ahead.", "'Tis a forest deeper and denser than any wood, this place."])
 feastDialog = Array[String](["Let's dig in!", "Well, it is fresh.", "Can't let it go to waste now can we?"])
 deathDialog = Array[String](["Guhh. . . Guess I'll finally see dad again. . ."])
-keepFocus = false
 emitDeathSignal = true
 
 [node name="Sprite2D" parent="unitContainer/Daiga - Neutral" index="1"]
@@ -513,16 +454,10 @@ wait_time = 1.0
 
 [node name="Jalena - Neutral" parent="unitContainer" instance=ExtResource("4_nmso7")]
 position = Vector2(-769, 3031)
-sightRange = 300.0
 recruitmentDialog = Array[String](["Oh, oh hey! Hey you! Please if you don't mind helping me out. . .", "By The Beast, a child!", "Hey! I'm fully grown, just sm-- Uuuurgh. . . Please help, these awful guards haven't given me anything to eat for days. I'm dying in here!", "And how shouldst we know thee nary belong 'hind younder bars?", "Come'on pleease? Look I just came here to find my daddy! He's been hear a long while, I just want him to. . . To eat mom's raspberry pie again. . .", "Okay, okay. Forgive me, I merely found some mirth in thy youth. We wilt see what can be done.", "Maybe if you have a big burly friend they can bust down this door?"])
 recruitmentScript = Array[String](["Jalena", "Heir", "Jalena", "Heir", "Jalena", "Heir", "Jalena"])
-aiDisabled = true
 characterName = "Jalena"
-level = 0
 attackSprite = ExtResource("18_tyvm7")
-fatigue = 0
-hunger = 100.0
-isMelee = true
 baseStats = {
 "agility": 6,
 "attackRange": 200,
@@ -537,33 +472,10 @@ baseStats = {
 "skill": 4,
 "survival": 4
 }
-growthRates = {
-"agility": 0,
-"maxWounds": 0,
-"might": 0,
-"movement": 0,
-"resilience": 0,
-"skill": 0,
-"survival": 0
-}
-isDead = false
-isPlayer = false
-isFatigued = false
-isDiseased = false
-isFrenzied = false
-isBleeding = false
-isPhysician = false
-isRecruitable = false
-actions = Array[Dictionary]([{
-"Speak": true
-}, {
-"Feast": true
-}])
 attackDialog = Array[String](["Fight? I-I'm not cut out for this!", "Hey-Hey do I have to?!", "I'll give it my best shot."])
 idleDialog = Array[String](["With a dungeon like this I really expected there to be more treasure. . . What's wrong with the King?", "Oi move quicker ya lumps! I'm tired of this.", "Hey! Don't leave me behind jus cause I'm small got it?"])
 feastDialog = Array[String](["Ughh, I miss mom's cooking.", "How can anyone eat this. . ?", "Wow. . . It really does taste like pork."])
 deathDialog = Array[String](["Mommy. . !"])
-keepFocus = false
 emitDeathSignal = true
 
 [node name="Sprite2D" parent="unitContainer/Jalena - Neutral" index="1"]
@@ -577,16 +489,10 @@ wait_time = 1.0
 
 [node name="Ignas - Neutral" parent="unitContainer" instance=ExtResource("4_nmso7")]
 position = Vector2(102, 1983)
-sightRange = 300.0
 recruitmentDialog = Array[String](["Oh. . . More hooligans come to taste my fine meats? AWAY with thee I say!", "No! We art no roving band of starved souls, let us speak that we may know thee.", "Hmm. . . Thou and thine seem an affable enough sort. Come 'round eastwards, mine alcove is quite hidden, but thee will find it I suspect.", "Pray that I doth nary regret this."])
 recruitmentScript = Array[String](["Ignas", "Heir", "Ignas", "Ignas"])
-aiDisabled = true
 characterName = "Ignas"
-level = 0
 attackSprite = ExtResource("18_tyvm7")
-fatigue = 0
-hunger = 100.0
-isMelee = true
 baseStats = {
 "agility": 5,
 "attackRange": 100,
@@ -610,24 +516,11 @@ growthRates = {
 "skill": 15,
 "survival": 7
 }
-isDead = false
-isPlayer = false
-isFatigued = false
-isDiseased = false
-isFrenzied = false
-isBleeding = false
 isPhysician = true
-isRecruitable = false
-actions = Array[Dictionary]([{
-"Speak": true
-}, {
-"Feast": true
-}])
 attackDialog = Array[String](["Have at thee wastrel!", "Do no harm? A silly mantra!", "One incision, 'tis all I need."])
 idleDialog = Array[String](["I must say, bleak as this ordeal is, mine skills have quite the polish about them now.", "Thy father, and thy father's father, bless their heart, had quite the. . . Inspiration building this fine place.", "Truly is a shame we can't seem to collect a live specimen. . ."])
 feastDialog = Array[String](["Fascinating. . . I never would have imagined the mere act of eating to be so. . . Exhilerating!", "A bit off the flank, just a mouthful.", "Careful everyone, thou dare not eat this matter here, dreadful things it'll do to thee."])
 deathDialog = Array[String](["So this. . . Is what it feels like. . . Hah. . . Haa."])
-keepFocus = false
 emitDeathSignal = true
 
 [node name="selectionVisual" parent="unitContainer/Ignas - Neutral" index="0"]
@@ -643,17 +536,9 @@ position = Vector2(0, 10)
 wait_time = 1.0
 
 [node name="Ralfs - Neutral" parent="unitContainer" instance=ExtResource("4_nmso7")]
-position = Vector2(1064, 1576)
-sightRange = 300.0
-recruitmentDialog = Array[String]([])
-recruitmentScript = Array[String]([])
-aiDisabled = true
+position = Vector2(1051, 1573)
 characterName = "Ralfs"
-level = 0
 attackSprite = ExtResource("12_mnity")
-fatigue = 0
-hunger = 100.0
-isMelee = true
 baseStats = {
 "agility": 1,
 "attackRange": 100,
@@ -677,24 +562,10 @@ growthRates = {
 "skill": 5,
 "survival": 5
 }
-isDead = false
-isPlayer = false
-isFatigued = false
-isDiseased = false
-isFrenzied = false
-isBleeding = false
-isPhysician = false
-isRecruitable = false
-actions = Array[Dictionary]([{
-"Speak": true
-}, {
-"Feast": true
-}])
 attackDialog = Array[String](["'Ere I go boss!", "Ye should give up! Boss'll be kind to ye.", "Please lower ye weapon!"])
 idleDialog = Array[String](["Huum-dum dee dum. . . Da da dum.", "Dah-dah-dum dah-dah-dum, dum-dum dum dum-duh-duh-dum. . .", "'Ow'd that one go again? Da-daaa- da da. . . Naw, that ain't it. . ."])
 feastDialog = Array[String](["Sorry friend, promise we'll put ye to good use.", "Listen eh? If I go feral an' all that, jus' put me down. Promise?", "Thought I was 'ungry. . . But now I jus' feel sick."])
 deathDialog = Array[String](["Heh. . . Twas a good life. . ."])
-keepFocus = false
 emitDeathSignal = true
 
 [node name="selectionVisual" parent="unitContainer/Ralfs - Neutral" index="0"]
@@ -711,16 +582,8 @@ wait_time = 1.0
 
 [node name="Katre - Neutral" parent="unitContainer" instance=ExtResource("4_nmso7")]
 position = Vector2(2801, 1131)
-sightRange = 300.0
-recruitmentDialog = Array[String]([])
-recruitmentScript = Array[String]([])
-aiDisabled = true
 characterName = "Katre"
-level = 0
 attackSprite = ExtResource("6_hi8x2")
-fatigue = 0
-hunger = 100.0
-isMelee = true
 baseStats = {
 "agility": 4,
 "attackRange": 200,
@@ -744,24 +607,11 @@ growthRates = {
 "skill": 10,
 "survival": 15
 }
-isDead = false
-isPlayer = false
-isFatigued = false
-isDiseased = false
-isFrenzied = false
-isBleeding = false
 isPhysician = true
-isRecruitable = false
-actions = Array[Dictionary]([{
-"Speak": true
-}, {
-"Feast": true
-}])
 attackDialog = Array[String](["Burn thou wretched heathen!", "May The Beast sort thee out.", "Me and mine shall pray for thy soul."])
 idleDialog = Array[String](["Oh Beast whose blood lies in all, thy courage will deliver us through these beating hearts.", "Tremble in terror, o' enemy, tremble in terror. Our blood is hot, our will tempered, thou cannot harm us!", "It is certain that we are ritcheous, for still we stand. Though thy honored father was a heretic true, the fellow raised a fine Heir."])
 feastDialog = Array[String](["Blood given unto me, how I am blessed.", "Come, gather, let us revere the passing of this one and the strength they hath given us.", "Sweeter this tastes than any pastry. Ambrosia to be sure."])
 deathDialog = Array[String](["Haa. . . Ha ha! I do not fear death. . !"])
-keepFocus = false
 emitDeathSignal = true
 
 [node name="Sprite2D" parent="unitContainer/Katre - Neutral" index="1"]
@@ -775,16 +625,9 @@ wait_time = 1.0
 
 [node name="Vrikolas - Neutral" parent="unitContainer" instance=ExtResource("4_nmso7")]
 position = Vector2(2891, 572)
-sightRange = 300.0
-recruitmentDialog = Array[String]([])
-recruitmentScript = Array[String]([])
 aiDisabled = false
 characterName = "Vrikolaz"
-level = 0
 attackSprite = ExtResource("22_0su6l")
-fatigue = 0
-hunger = 100.0
-isMelee = true
 baseStats = {
 "agility": 7,
 "attackRange": 80,
@@ -808,24 +651,11 @@ growthRates = {
 "skill": 10,
 "survival": 5
 }
-isDead = false
-isPlayer = false
-isFatigued = false
-isDiseased = false
 isFrenzied = true
-isBleeding = false
-isPhysician = false
-isRecruitable = false
-actions = Array[Dictionary]([{
-"Speak": true
-}, {
-"Feast": true
-}])
 attackDialog = Array[String](["Ooowwuaaah!", "Meat!!!", "OOOOOooWwaaaaahhh!"])
 idleDialog = Array[String](["Ja. . . Ja. . . Lee nah. . .", "M-my. . . Wi. . . Wi. . .", "Ras. . . Berry. . ."])
 feastDialog = Array[String](["*Fervently shreds into the corpse*", "*Consumes with abandon*", "*Laps up every last morsel*"])
 deathDialog = Array[String](["Ja. . . Le-!"])
-keepFocus = false
 emitDeathSignal = true
 
 [node name="selectionVisual" parent="unitContainer/Vrikolas - Neutral" index="0"]
@@ -842,16 +672,8 @@ wait_time = 1.0
 
 [node name="Oskars - Neutral" parent="unitContainer" instance=ExtResource("4_nmso7")]
 position = Vector2(2650, 3005)
-sightRange = 300.0
-recruitmentDialog = Array[String]([])
-recruitmentScript = Array[String]([])
-aiDisabled = true
 characterName = "Oskars"
-level = 0
 attackSprite = ExtResource("18_70ol7")
-fatigue = 0
-hunger = 100.0
-isMelee = true
 baseStats = {
 "agility": 2,
 "attackRange": 150,
@@ -875,24 +697,11 @@ growthRates = {
 "skill": 20,
 "survival": 10
 }
-isDead = false
-isPlayer = false
-isFatigued = false
-isDiseased = false
-isFrenzied = false
-isBleeding = false
-isPhysician = false
 isRecruitable = true
-actions = Array[Dictionary]([{
-"Speak": true
-}, {
-"Feast": true
-}])
 attackDialog = Array[String](["Aaah! Ahhhh!!!!", "Please don't hurt me, please!", "I-I have to protect them!"])
 idleDialog = Array[String](["What a fool I was, what a fool! How long hath I been letting this nightmare continue?", "Please, keep thy lights near and undamp. . . I fear there is more to this darkness than mere shadow.", "O' true liege, I wilt follow thee wherever thy journey permits. . . Even should it be such black and vile halls."])
 feastDialog = Array[String](["Please. . . I-I can't.", "No, no, not another bite. . .", "This is the last time. . . Would that I rather perish."])
 deathDialog = Array[String](["Please! Ohh my liege! I don't want to die. . !"])
-keepFocus = false
 emitDeathSignal = true
 
 [node name="selectionVisual" parent="unitContainer/Oskars - Neutral" index="0"]
@@ -909,15 +718,9 @@ wait_time = 1.0
 
 [node name="Akvile - Neutral" parent="unitContainer" instance=ExtResource("4_nmso7")]
 position = Vector2(2272, 41)
-sightRange = 300.0
 recruitmentDialog = Array[String](["Thy footfalls weigh a heavy sum. Thou hath frightened my meal away. ", "Has not a new meal traipsed across thy door? ", "Hm. Thou do sound of something sweet. Yet I would nary raise my blade at thee o' Heir. ", "Surely mine eyes art playing tricks. Brave knight Akvile couldst not possibly be found in such a place, no, this darkness must be to blame. ", "Be not decieved my Liege as thy father hath no doubt decieved thee. ", "Thou did not retire to life of peace then. . . ", "Nay, that be the truth. I hath found a peace here that I could nary whilst leading an army. The King felt it necessary to send me on to a task of violence that even I then could not stomach. In protest I took my own sight, yet such a bold action did not move my liege, rather I was discarded for my uselessness.", "Worry not, let us guide thee from this place. We shalt have all the time we need to discuss such dire things when we've awayed.", "Mine only regret be that I cannot see what a fine person thee've grown into. Let us go."])
 recruitmentScript = Array[String](["Akvile", "Heir", "Akvile", "Heir", "Akvile", "Heir", "Akvile", "Heir", "Akvile"])
-aiDisabled = true
 characterName = "Akvile"
-level = 0
-fatigue = 0
-hunger = 100.0
-isMelee = true
 baseStats = {
 "agility": 2,
 "attackRange": 80,
@@ -941,24 +744,11 @@ growthRates = {
 "skill": 15,
 "survival": 15
 }
-isDead = false
-isPlayer = false
-isFatigued = false
-isDiseased = false
-isFrenzied = false
-isBleeding = false
-isPhysician = false
 isRecruitable = true
-actions = Array[Dictionary]([{
-"Speak": true
-}, {
-"Feast": true
-}])
 attackDialog = Array[String](["I need not see thee!", "Thy form sloppy, thou cannot even best a blind fool!", "That I must raise this blade again. . . How pitiful."])
 idleDialog = Array[String](["In truth, I am glad to have lost these eyes of mine. For true. Else I would not have met thee.", "O' Liege, I swear it. Zydrunas wilt be felled by these hands.", "To know that such a place existed 'neathe mine own country. 'Neathe the feet of delicate children. . . What else hath thy father hidden from view?"])
 feastDialog = Array[String](["Well. . . 'Tis better than vermin.", "Forgive us. ", "The need is there, the desire is not."])
 deathDialog = Array[String](["'Twas bound to happen one day. . . My only regret is not see this country bloom. . ."])
-keepFocus = false
 emitDeathSignal = true
 
 [node name="Sprite2D" parent="unitContainer/Akvile - Neutral" index="1"]
@@ -2613,7 +2403,7 @@ position = Vector2(-8, -13)
 scale = Vector2(1.2, 1.2)
 
 [node name="jalenaRecruitment" parent="eventTriggers" instance=ExtResource("4_nrfsd")]
-position = Vector2(-682, 2881)
+position = Vector2(-700, 2861)
 characterToTrigger = "Ralfs"
 recruitmentTrigger = true
 recruitmentUnit = "Jalena"
@@ -2780,12 +2570,6 @@ navigation_polygon = SubResource("NavigationPolygon_ik2nr")
 
 [node name="NavigationRegion2D35" type="NavigationRegion2D" parent="navigationRegions"]
 navigation_polygon = SubResource("NavigationPolygon_siwye")
-
-[node name="JalenaCellLink" type="NavigationLink2D" parent="navigationRegions"]
-position = Vector2(-668, 2976)
-enabled = false
-start_position = Vector2(-7, -90)
-end_position = Vector2(-7, -5)
 
 [node name="lightContainer" type="Node2D" parent="."]
 z_index = 1

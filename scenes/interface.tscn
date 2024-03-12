@@ -558,6 +558,7 @@ bbcode_enabled = true
 text = "[center]1"
 scroll_active = false
 shortcut_keys_enabled = false
+script = ExtResource("2_6cswn")
 
 [node name="rangeLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/statsMargin/statsHBox/rightStatVBoxValues"]
 custom_minimum_size = Vector2(32, 38)
@@ -775,14 +776,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+tooltip_text = "Allows the physician to begin treating on those around them to staunch the loss of blood and patch minor wounds. Be warned, ye of the mind to heal can do no harm. Some time must pass before one may be treated again."
 theme_override_styles/focus = SubResource("StyleBoxEmpty_v4274")
 flat = true
 icon_alignment = 1
+script = ExtResource("2_6cswn")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 
 [node name="chaseLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2"]
+visible = false
 custom_minimum_size = Vector2(100, 28)
 layout_mode = 2
 tooltip_text = "Should thout find thyself with 'Chase' toggled, thee will pursue the first target thee lay eyes on with abandon without need for commands."
@@ -800,10 +804,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+tooltip_text = "Should thout find thyself with 'Chase' toggled, thee will pursue the first target thee lay eyes on with abandon without need for commands."
 theme_override_styles/focus = SubResource("StyleBoxEmpty_hemhj")
 flat = true
+script = ExtResource("2_6cswn")
 
 [node name="fightLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2"]
+visible = false
 custom_minimum_size = Vector2(100, 28)
 layout_mode = 2
 tooltip_text = "Should thou find thyself with 'Fight' toggled on thee will retaliate against whatever foe should strike at thee without need for commands."
@@ -821,10 +828,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+tooltip_text = "Should thou find thyself with 'Fight' toggled on thee will retaliate against whatever foe should strike at thee without need for commands."
 theme_override_styles/focus = SubResource("StyleBoxEmpty_tt64p")
 flat = true
+script = ExtResource("2_6cswn")
 
 [node name="focusLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2"]
+visible = false
 custom_minimum_size = Vector2(100, 28)
 layout_mode = 2
 tooltip_text = "Should thou find thyself with 'Focus' toggled on, the world's view shall ever affix upon thy selected unit."
@@ -842,8 +852,157 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+tooltip_text = "Should thou find thyself with 'Focus' toggled on, the world's view shall ever affix upon thy selected unit."
 theme_override_styles/focus = SubResource("StyleBoxEmpty_76qgn")
 flat = true
+script = ExtResource("2_6cswn")
+
+[node name="skillsLabel2" type="RichTextLabel" parent="rightStatsContainer/vContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme = ExtResource("1_ttv5o")
+bbcode_enabled = true
+text = "[center]- Behaviors -"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="MarginContainer4" type="MarginContainer" parent="rightStatsContainer/vContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="rightStatsContainer/vContainer/MarginContainer4"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="rightStatsContainer/vContainer/MarginContainer4/VBoxContainer"]
+layout_mode = 2
+
+[node name="chaseLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 28)
+layout_mode = 2
+tooltip_text = "Should thout find thyself with 'Chase' toggled, thee will pursue the first target thee lay eyes on with abandon without need for commands."
+theme = ExtResource("1_ttv5o")
+theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
+bbcode_enabled = true
+text = "[center]Chase"
+scroll_active = false
+script = ExtResource("2_6cswn")
+
+[node name="chaseButton" type="Button" parent="rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer2/chaseLabel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Should thout find thyself with 'Chase' toggled, thee will pursue the first target thee lay eyes on with abandon without need for commands."
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hemhj")
+flat = true
+script = ExtResource("2_6cswn")
+
+[node name="fightLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 28)
+layout_mode = 2
+tooltip_text = "Should thou find thyself with 'Fight' toggled on thee will retaliate against whatever foe should strike at thee without need for commands."
+theme = ExtResource("1_ttv5o")
+theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
+bbcode_enabled = true
+text = "[center]Fight"
+scroll_active = false
+script = ExtResource("2_6cswn")
+
+[node name="fightButton" type="Button" parent="rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer2/fightLabel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Should thou find thyself with 'Fight' toggled on thee will retaliate against whatever foe should strike at thee without need for commands."
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tt64p")
+flat = true
+script = ExtResource("2_6cswn")
+
+[node name="focusLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(100, 28)
+layout_mode = 2
+tooltip_text = "Should thou find thyself with 'Focus' toggled on, the world's view shall ever affix upon thy selected unit."
+theme = ExtResource("1_ttv5o")
+theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
+bbcode_enabled = true
+text = "[center]Focus"
+scroll_active = false
+script = ExtResource("2_6cswn")
+
+[node name="focusButton" type="Button" parent="rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer2/focusLabel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Should thou find thyself with 'Focus' toggled on, the world's view shall ever affix upon thy selected unit."
+theme_override_styles/focus = SubResource("StyleBoxEmpty_76qgn")
+flat = true
+script = ExtResource("2_6cswn")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="rightStatsContainer/vContainer/MarginContainer4/VBoxContainer"]
+layout_mode = 2
+
+[node name="chaseLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 28)
+layout_mode = 2
+tooltip_text = "Should thout find thyself with 'Chase' toggled, thee will pursue the first target thee lay eyes on with abandon without need for commands."
+theme = ExtResource("1_ttv5o")
+theme_override_colors/default_color = Color(0.352941, 0.352941, 0.352941, 1)
+bbcode_enabled = true
+text = "[center]                Show Status
+"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("2_6cswn")
+
+[node name="showStatus" type="Button" parent="rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer/chaseLabel"]
+custom_minimum_size = Vector2(100, 28)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Perhaps words wilt suit thee better than blades, select another for this one to speak with."
+theme = ExtResource("1_ttv5o")
+theme_override_colors/font_color = Color(0.352941, 0.352941, 0.352941, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vvees")
+flat = true
+script = ExtResource("2_6cswn")
+
+[node name="treatToggle" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Allows the physician to begin treating on those around them to staunch the loss of blood and patch minor wounds. Be warned, ye of the mind to heal can do no harm. Some time must pass before one may be treated again."
+theme = ExtResource("1_ttv5o")
+bbcode_enabled = true
+text = "   Treat"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("2_6cswn")
+
+[node name="treatButton" type="Button" parent="rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer/treatToggle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Allows the physician to begin treating on those around them to staunch the loss of blood and patch minor wounds. Be warned, ye of the mind to heal can do no harm. Some time must pass before one may be treated again."
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v4274")
+flat = true
+icon_alignment = 1
+script = ExtResource("2_6cswn")
 
 [node name="MarginContainer3" type="MarginContainer" parent="rightStatsContainer/vContainer"]
 visible = false
@@ -866,3 +1025,8 @@ text = "[center]Benas was a stalwart knight of the Heir's father. A lawful and c
 [connection signal="button_down" from="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2/chaseLabel/chaseButton" to="." method="_on_chase_button_button_down"]
 [connection signal="button_down" from="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2/fightLabel/fightButton" to="." method="_on_fight_button_button_down"]
 [connection signal="button_down" from="rightStatsContainer/vContainer/MarginContainer2/VBoxContainer/HBoxContainer2/focusLabel/focusButton" to="." method="_on_focus_button_button_down"]
+[connection signal="button_down" from="rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer2/chaseLabel/chaseButton" to="." method="_on_chase_button_button_down"]
+[connection signal="button_down" from="rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer2/fightLabel/fightButton" to="." method="_on_fight_button_button_down"]
+[connection signal="button_down" from="rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer2/focusLabel/focusButton" to="." method="_on_focus_button_button_down"]
+[connection signal="button_down" from="rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer/chaseLabel/showStatus" to="." method="_on_speak_action_button_down"]
+[connection signal="button_down" from="rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer/treatToggle/treatButton" to="." method="_on_treat_button_button_down"]

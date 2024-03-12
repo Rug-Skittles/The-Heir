@@ -101,7 +101,7 @@ func selectUnit(selection):
 		for playerUnit in playerUnits:
 			for unitToFind in playerUnit.visionCone.get_node('Area2D').get_overlapping_bodies():
 				if unit.collider == unitToFind:
-					unit.selected = true
+					unit.collider.selected = true
 					unitToReveal = selection[0].collider
 					if unit.collider.isPlayer:
 						pass

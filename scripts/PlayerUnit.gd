@@ -27,22 +27,25 @@ func handleAiState():
 				
 	
 	if aiState == 'treat':
-		isTreating = true
-		for unit in get_parent().get_parent().playerUnits:
-			if unit != self and treatmentTarget == null:
-				if unit.isBleeding || unit.timeSinceLastTreatment <= Time.get_unix_time_from_system() - 60 and unit.baseStats['curWounds'] < unit.baseStats['maxWounds']:
-					if global_position.distance_to(unit.global_position) <= modifiedStats['attackRange']:
-						#print('TREATING!')
-						agent.target_position = unit.global_position
-						unit.agent.target_position = unit.global_position
-						treatmentTarget = unit
-						if $treatmentTimer.is_stopped():
-							$treatmentTimer.timeout.connect(_on_treatmentTimer_timeout)
-							$treatmentTimer.start(4.0)
+		if isPhysician:
+			isTreating = true
+			for unit in get_parent().get_parent().playerUnits:
+				if unit != self and treatmentTarget == null:
+					if unit.isBleeding || unit.timeSinceLastTreatment <= Time.get_unix_time_from_system() - 60 and unit.baseStats['curWounds'] < unit.baseStats['maxWounds']:
+						if global_position.distance_to(unit.global_position) <= modifiedStats['attackRange']:
+							#print('TREATING!')
+							agent.target_position = unit.global_position
+							unit.agent.target_position = unit.global_position
+							treatmentTarget = unit
+							if $treatmentTimer.is_stopped():
+								$treatmentTimer.timeout.connect(_on_treatmentTimer_timeout)
+								$treatmentTimer.start(4.0)
 
-			elif treatmentTarget != null:
-				agent.target_position = treatmentTarget.global_position
-				treatmentTarget.agent.target_position = treatmentTarget.global_position		
+				elif treatmentTarget != null:
+					agent.target_position = treatmentTarget.global_position
+					treatmentTarget.agent.target_position = treatmentTarget.global_position		
+		else:
+			aiState = 'passive'
 	else:
 		isTreating = false
 					
