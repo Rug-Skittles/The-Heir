@@ -5,10 +5,10 @@
 
 [node name="lamp" type="Node2D"]
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 0.7
+[node name="PointLight2D" type="PointLight2D" parent="." groups=["lights"]]
+energy = 0.75
 texture = ExtResource("1_hvt61")
-texture_scale = 1.1
+texture_scale = 1.15
 
 [node name="TileMap" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)

@@ -481,6 +481,7 @@ func targetCheck(): ## Determines how far away the target is from a unit and do 
 			
 func generateCorpse(): 
 	
+	get_node('CollisionShape2D').disabled = true
 	$audioContainer/death.play()
 	print(characterName + ' has died!')
 	isDead = true

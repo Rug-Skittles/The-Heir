@@ -9,6 +9,7 @@ var playerUnits : Array[CharacterBody2D]
 var enemyUnits : Array[CharacterBody2D]
 var allUnits : Array[CharacterBody2D]
 var unitToReveal 
+var selectionCycle = 1
 
 var dragSelect = false ## Whether or not dragging is happening
 var dragStart = Vector2.ZERO ## Location where drag begins
@@ -203,6 +204,43 @@ func _unhandled_input(event):
 
 ## Handles all the behavior of buttons on the interface, mainly for actions
 func _on_interface_button_down(button):
+	if button == 'cycleUnitForward':
+		_unselectUnit()
+		if playerUnits.size() > selectionCycle:
+			selectionCycle += 1
+			print(selectionCycle)
+			selectedPlayerUnits.append(playerUnits[selectionCycle-1])
+			playerUnits[selectionCycle-1].selected = true
+			playerUnits[selectionCycle-1].toggleSelectionVisual(true)
+			unitToReveal = playerUnits[selectionCycle-1]
+		else:
+			selectionCycle = 1
+			selectedPlayerUnits.append(playerUnits[selectionCycle-1])
+			print(selectionCycle)
+			playerUnits[selectionCycle-1].selected = true
+			playerUnits[selectionCycle-1].toggleSelectionVisual(true)
+			unitToReveal = playerUnits[selectionCycle-1]
+	if button == 'cycleUnitBack':
+		_unselectUnit()
+		
+		if selectionCycle > 1:
+			print('GREATER THAN 1')
+			selectionCycle -= 1
+			print(selectionCycle)
+			selectedPlayerUnits.append(playerUnits[selectionCycle-1])
+			playerUnits[selectionCycle-1].selected = true
+			playerUnits[selectionCycle-1].toggleSelectionVisual(true)
+			unitToReveal = playerUnits[selectionCycle-1]
+		else:
+			selectionCycle = playerUnits.size()
+			selectedPlayerUnits.append(playerUnits[selectionCycle-1])
+			print(selectionCycle)
+			playerUnits[selectionCycle-1].selected = true
+			playerUnits[selectionCycle-1].toggleSelectionVisual(true)
+			unitToReveal = playerUnits[selectionCycle-1]
+		
+
+	
 	if button == 'chase' || button == 'fight' || button == 'passive' || button == 'treat':
 		if selectedPlayerUnits.size() != 0:
 			for unit in selectedPlayerUnits:
@@ -245,3 +283,7 @@ func _process(delta):
 
 func _on_audio_stream_player_finished():
 	$musicContainer/AudioStreamPlayer.play()
+
+
+func _on_localized_rain_finished():
+	$musicContainer/localizedRain.play()

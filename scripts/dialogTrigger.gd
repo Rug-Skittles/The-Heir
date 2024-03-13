@@ -30,7 +30,8 @@ func _ready():
 	dialogCanvas = get_node('/root/Game/dialogCanvas')
 
 func _on_area_2d_body_entered(body):
-	if recruitmentTrigger:
+	
+	if recruitmentTrigger and body.characterName == characterToTrigger:
 		for item in game.allUnits:
 			if recruitmentUnit == item.characterName:
 				item.isPlayer = true
@@ -52,6 +53,18 @@ func _on_area_2d_body_entered(body):
 
 			queue_free()
 	else:
+		if recruitmentTrigger:
+			for item in game.allUnits:
+				if recruitmentUnit == item.characterName:
+					item.isPlayer = true
+					item.isRecruitable = false
+					item.target = null
+					item.get_node('visionCone').show()
+					item.get_node('radialVision').show()
+					for i in range(game.enemyUnits.size() -1, -1, -1):
+						if item == game.enemyUnits[i]:
+							game.enemyUnits.remove_at(i)
+							game.playerUnits.append(item)
 		var characterIncrement = 0
 		for unit in game.allUnits:
 			for triggerUnit in multiCharactersToTrigger:
@@ -60,11 +73,19 @@ func _on_area_2d_body_entered(body):
 						characterIncrement += 1
 						
 		if characterIncrement == multiCharactersToTrigger.size():
-			if isCutscene:
-				for i in range(actionTypeToProcess.size()):
-					cutsceneManager.addAction(actionTypeToProcess[i],actionDataToProcess[i])
+			if characterToTrigger != '':
+				if characterToTrigger == body.characterName:
+					if isCutscene:
+						for i in range(actionTypeToProcess.size()):
+							cutsceneManager.addAction(actionTypeToProcess[i],actionDataToProcess[i])
+					else:
+						dialogCanvas.processText(textToQueue,textState,textScript,'high')
 			else:
-				dialogCanvas.processText(textToQueue,textState,textScript,'high')
+				if isCutscene:
+					for i in range(actionTypeToProcess.size()):
+						cutsceneManager.addAction(actionTypeToProcess[i],actionDataToProcess[i])
+				else:
+					dialogCanvas.processText(textToQueue,textState,textScript,'high')
 		else:
 			pass
 		queue_free()

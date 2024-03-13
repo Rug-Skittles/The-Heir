@@ -72,7 +72,7 @@ texture = ExtResource("3_enjx3")
 wait_time = 1.0
 
 [node name="NeutralUnit" parent="unitContainer" instance=ExtResource("5_dav3u")]
-position = Vector2(19, 354)
+position = Vector2(-810, 359)
 characterName = "Zydrunas"
 attackSprite = ExtResource("6_rlf8p")
 voicePitch = 0.8
@@ -102,8 +102,12 @@ texture = ExtResource("6_ak5k4")
 position = Vector2(224, 363)
 characterToTrigger = "Heir"
 isCutscene = true
-actionTypeToProcess = Array[String](["dialog", "movement", "dialog", "attack", "movement", "movement", "movement", "dialog", "movement", "dialog", "movement", "movement", "changeScene"])
+actionTypeToProcess = Array[String](["movement", "dialog", "movement", "dialog", "attack", "movement", "movement", "movement", "dialog", "movement", "dialog", "movement", "movement", "audioTween", "changeScene"])
 actionDataToProcess = Array[Dictionary]([{
+"character": "Zydrunas",
+"destination": Vector2(29, 354),
+"speed": 120.0
+}, {
 "script": ["Zydrunas", "Heir", "Zydrunas"],
 "text": [". . . As far as rulers go, thy father was the most pitable wretch of them all. A weak and witless tyrant of inaction.", "Stay thy tongue traitor!", "Ahh. . . Wouldst that thou not harbor such meaningless grudges, I wouldst not have to punish thee so. A pity."]
 }, {
@@ -127,7 +131,7 @@ actionDataToProcess = Array[Dictionary]([{
 "speed": 1200
 }, {
 "character": "Heir",
-"destination": Vector2(580, 720),
+"destination": Vector2(580, 500),
 "speed": 800
 }, {
 "script": ["Zydrunas"],
@@ -146,8 +150,10 @@ actionDataToProcess = Array[Dictionary]([{
 "speed": 150.0
 }, {
 "character": "Heir",
-"destination": Vector2(580, 1500),
+"destination": Vector2(580, 1000),
 "speed": 100.0
+}, {
+"duuhh": "buhhhh"
 }, {
 "path": "res://scenes/game.tscn"
 }])

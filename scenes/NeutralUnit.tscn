@@ -20,7 +20,4 @@ debug_path_custom_line_width = -1.0
 [node name="bleedTimer" parent="." index="13"]
 wait_time = 1.0
 
-[node name="treatmentBarTimer" parent="." index="16"]
-one_shot = false
-
 [connection signal="timeout" from="treatmentTimer" to="." method="_on_treatment_timer_timeout"]

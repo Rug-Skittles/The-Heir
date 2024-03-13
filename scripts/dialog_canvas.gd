@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-const CHAR_READ_RATE = 0.035
+const CHAR_READ_RATE = 0.0375
 
 @onready var textboxContainer = $textboxContainer
 @onready var textboxGraphic = $textboxContainer/graphic

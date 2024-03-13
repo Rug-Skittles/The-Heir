@@ -1,0 +1,135 @@
+[gd_scene load_steps=3 format=3 uid="uid://biw5wsppwm4ra"]
+
+[ext_resource type="Script" path="res://scenes/endScreen.gd" id="1_147no"]
+[ext_resource type="Theme" uid="uid://dxaa23umg3c5f" path="res://resources/themes/uiFontTheme.tres" id="1_mwsht"]
+
+[node name="Control" type="CanvasLayer"]
+script = ExtResource("1_147no")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="background" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="text1" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 78.0
+offset_right = 145.0
+offset_bottom = 118.0
+theme = ExtResource("1_mwsht")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "And so they descended. . ."
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="text2" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 140.0
+offset_right = 640.0
+offset_bottom = 180.0
+theme = ExtResource("1_mwsht")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "By rope and chain, hand over hand. . ."
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="text3" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 322.0
+offset_top = 209.0
+offset_right = 1142.0
+offset_bottom = 249.0
+theme = ExtResource("1_mwsht")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Deep into the abysmal bowels even further below. . ."
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="text4" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 285.0
+offset_right = 1045.0
+offset_bottom = 325.0
+theme = ExtResource("1_mwsht")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "What, I wonder, will become of them?"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="text5" type="RichTextLabel" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -410.0
+offset_top = -5.0
+offset_right = 410.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_mwsht")
+theme_override_font_sizes/normal_font_size = 38
+bbcode_enabled = true
+text = "[center]TO BE CONTINUED"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="text6" type="RichTextLabel" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -410.0
+offset_top = 119.0
+offset_right = 410.0
+offset_bottom = 166.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_mwsht")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "From the bottom of my heart, I thank thee for playing.
+"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+visible_characters = 0
+visible_ratio = 0.0

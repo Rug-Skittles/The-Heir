@@ -7,7 +7,7 @@ extends Node2D
 func _draw():
 	if get_parent().dragSelect:
 		draw_rect(Rect2(((get_parent().dragStart+($"../Camera2D".position*$"../Camera2D".zoom))/$"../Camera2D".zoom), ((get_viewport().get_mouse_position()) - get_parent().dragStart)/$"../Camera2D".zoom),
-				Color.YELLOW, false, 2.0)	
+				Color.CRIMSON, false, 2.0)	
 		
 ##			
 ##

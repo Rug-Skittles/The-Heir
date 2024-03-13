@@ -60,5 +60,5 @@ shortcut_keys_enabled = false
 
 [node name="textScroll" type="AudioStreamPlayer" parent="audioContainer"]
 stream = ExtResource("4_r4x3q")
-volume_db = -5.0
+volume_db = -7.5
 pitch_scale = 0.9

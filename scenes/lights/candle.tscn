@@ -4,7 +4,7 @@
 
 [node name="candle" type="Node2D"]
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 0.45
+[node name="PointLight2D" type="PointLight2D" parent="." groups=["lights"]]
+energy = 0.5
 texture = ExtResource("1_bt5jl")
-texture_scale = 0.75
+texture_scale = 0.85

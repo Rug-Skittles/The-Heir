@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bac5hpy0xsm7f"]
+[gd_scene load_steps=15 format=3 uid="uid://bac5hpy0xsm7f"]
 
 [ext_resource type="Script" path="res://scripts/Game.gd" id="1_a5c0y"]
 [ext_resource type="PackedScene" uid="uid://b7qj07sbbyhs6" path="res://scenes/map_1.tscn" id="6_8ns3c"]
@@ -7,29 +7,29 @@
 [ext_resource type="PackedScene" uid="uid://cg5lg3sj61q22" path="res://scenes/interface.tscn" id="8_i7e8c"]
 [ext_resource type="Texture2D" uid="uid://d0cpy5r4ygmo0" path="res://resources/ui/cursorSprite.png" id="10_mdak7"]
 [ext_resource type="PackedScene" uid="uid://ck0r2ncdfmau7" path="res://scenes/dialog_canvas.tscn" id="11_kvaxv"]
+[ext_resource type="AudioStream" uid="uid://dbgalvfkpt30r" path="res://resources/audio/music/indoor-raining-ambiance-loop-96803.mp3" id="12_34yjb"]
 [ext_resource type="Script" path="res://scenes/deathTriggers.gd" id="12_p5mr0"]
 [ext_resource type="AudioStream" uid="uid://j0xe42ss7byj" path="res://resources/audio/sfx/textScroll.wav" id="12_ytxds"]
 [ext_resource type="PackedScene" uid="uid://bpo2305wv6aun" path="res://scenes/unitBox.tscn" id="13_34526"]
 [ext_resource type="AudioStream" uid="uid://du6xnnafdnjt1" path="res://resources/audio/music/a_dungeon_ambience_loop-79423.mp3" id="14_sy76g"]
 [ext_resource type="PackedScene" uid="uid://d2uirqchuktgf" path="res://scenes/cutsceneManager.tscn" id="17_3jlw7"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f7hrr"]
+bg_color = Color(0, 0, 0, 1)
+
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_a5c0y")
 
 [node name="darkness" type="DirectionalLight2D" parent="."]
-visible = false
 blend_mode = 1
 height = 1.0
 
 [node name="currentWorld" parent="." instance=ExtResource("6_8ns3c")]
 position = Vector2(80, 720)
 
-[node name="selectionRect" type="Node2D" parent="."]
-script = ExtResource("7_p6hp1")
-
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(284, 5389)
+position = Vector2(223, -1083)
 anchor_mode = 0
 limit_left = -2400
 limit_top = -1400
@@ -61,12 +61,36 @@ visible = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="musicContainer"]
 stream = ExtResource("14_sy76g")
-volume_db = -15.0
+volume_db = -30.0
 
 [node name="textScroll" type="AudioStreamPlayer" parent="musicContainer"]
 stream = ExtResource("12_ytxds")
+
+[node name="localizedRain" type="AudioStreamPlayer2D" parent="musicContainer"]
+position = Vector2(658, 1175)
+stream = ExtResource("12_34yjb")
+volume_db = -12.5
+autoplay = true
+
+[node name="selectionRect" type="Node2D" parent="."]
+z_index = 3
+y_sort_enabled = true
+script = ExtResource("7_p6hp1")
+
+[node name="fadeScreen" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="fadeScreen"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f7hrr")
 
 [connection signal="sendUnit" from="cutsceneManager" to="dialogCanvas" method="_on_cutscene_manager_send_unit"]
 [connection signal="startAction" from="cutsceneManager" to="dialogCanvas" method="_on_cutscene_manager_start_action"]
 [connection signal="buttonDown" from="interface" to="." method="_on_interface_button_down"]
 [connection signal="finished" from="musicContainer/AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]
+[connection signal="finished" from="musicContainer/localizedRain" to="." method="_on_localized_rain_finished"]

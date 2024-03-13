@@ -147,6 +147,23 @@ func revealStats(unit):
 	
 
 
+func _input(event):
+	if Input.is_action_just_pressed("speak"):
+		buttonDown.emit('speak')
+	if Input.is_action_just_pressed("feast"):
+		buttonDown.emit('feast')
+	if Input.is_action_just_pressed("treat"):
+		buttonDown.emit('treat')
+	if Input.is_action_just_pressed("fight"):
+		buttonDown.emit('fight')
+	if Input.is_action_just_pressed("chase"):
+		buttonDown.emit('chase')
+	if Input.is_action_just_pressed("focus"):
+		buttonDown.emit('focus')
+	if Input.is_action_just_pressed("cycleUnitBack"):
+		buttonDown.emit('cycleUnitBack')
+	if Input.is_action_just_pressed("cycleUnitForward"):
+		buttonDown.emit('cycleUnitForward')
 
 
 func _on_speak_action_button_down():

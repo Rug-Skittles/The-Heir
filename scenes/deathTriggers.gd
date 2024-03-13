@@ -28,7 +28,7 @@ func processDeathTrigger(unit):
 		print('Graus is dead!')
 		cutsceneManager.addAction('dialog',{'text':['It seems thou hath nary forgotten thy training, good. Thou wilt have need of it here. . .',
 										'My liege, please SPEAK to me, I would hear thy voice that it would be pancaea on an aching mind.',
-										'LEFT CLICK the SPEAK action and then LEFT CLICK upon me.'],
+										'LEFT CLICK the SPEAK action and then LEFT CLICK upon me. If thou canst see me, use the MOUSE WEEL to rotate thy vision.'],
 								'script':['Benas','Benas','Benas']
 								})
 
@@ -105,6 +105,9 @@ func processDeathTrigger(unit):
 							get_parent().playerUnits.append(oskars)
 
 	if unit.characterName == 'Sernas':
+		for enemy in get_parent().enemyUnits:
+			if enemy.characterName != 'Sernas':
+				enemy.process_mode = PROCESS_MODE_DISABLED
 		cutsceneManager.addAction('dialog',
 								{'text':['Grllk. . . Urrk. . . W-What did I do wrong?',
 										'I only ever followed my heart. . .',
@@ -153,8 +156,104 @@ func processDeathTrigger(unit):
 			cutsceneManager.addAction('dialog',
 						{'text':["I have yet to hear an echo of the heavy one's demise. . ."],
 						'script':['Akvile']})
-		if checkAlive('')
-
+		if checkAlive('Oskars'):
+			cutsceneManager.addAction('dialog',
+							{'text':['If I am not mistaken my liege, ruinous constructs of old run deep below.', 'Ruinous constructs?', 'Of time begotten, mayhaps before this land was known by its current name.'],
+							'script':['Oskars','Heir','Oskars']})
+		if checkAlive('Benas'):
+			cutsceneManager.addAction('dialog',
+						{'text':["This land is built upon a great natural cavern from whence we source much of our water. 'Haps 'tis drop off therein?"],
+						'script':['Benas']})
+		if get_parent().playerUnits.size() == 1:
+			cutsceneManager.addAction('dialog',
+							{'text':["'Twould seem I am to make a decision of mine own."],
+							'script':['Heir']})
+		else:
+			cutsceneManager.addAction('dialog',
+						{'text':['Let us commune friends, hath thee thoughts for how we shouldst proceed?'],
+						'script':['Heir']})
+		if checkAlive('Jalena'):
+			cutsceneManager.addAction('dialog',
+						{'text':['I saw plenty of rope and chain on my way in here. We could get it all together and go spelunking!'],
+						'script':['Jalena']})
+		if checkAlive('Ignas'):
+			cutsceneManager.addAction('dialog',
+						{'text':['Whatever lay down in such portal shouldst stay right well put. I would not climb down there, nor would I recommend we all do so.',
+								'Would thee rather wait it out?',
+								'Well. . . Yes, I WAS quite comfortable in mine alcove before thee and thine appeared.',
+								'Thou art welcome to stay, shouldst we locate the key we will find you whence we return.',
+								'Well. . . Thee do have need of a proper surgeon, suppose I shant excise thee of mine company just yet.'],
+						'script':['Ignas','Heir','Ignas','Heir','Ignas']})
+		if checkAlive('Katre'):
+			cutsceneManager.addAction('dialog',
+						{'text':['Tis times as these that make me feel most in line with the Beast. The idlers be punished, let us forge a path into this dark!'],
+						'script':['Katre']})
+		if checkAlive('Eimantas'):
+			cutsceneManager.addAction('dialog',
+						{'text':['Sage of the Well, what of thee?', 'Whence the lamb doth descend, they art a lion made. So I have spoken, so it shall be.','Thou flatter me Sage, I would have thy advice.','I give no advice young Heir. Rather I only speak what I have seen.'],
+						'script':['Heir','Eimantas','Heir','Eimantas']})
+		if checkAlive('Benas'):
+			cutsceneManager.addAction('dialog',
+						{'text':['My liege, what is thy decision?'],
+						'script':['Benas']})
+		if get_parent().playerUnits.size() == 1:
+			cutsceneManager.addAction('dialog',
+							{'text':['So be it. I alone shall retrieve this key. No shadow may quell me. Begone fear!'],
+							'script':['Heir']})
+		else:
+			cutsceneManager.addAction('dialog',
+						{'text':["Let us descend and find our own path, at worst we may spit upon Sernas' corpse as we take the keys. At best, a new route shall open to us.", 'I am well glad to have thee by my side.'],
+						'script':['Heir','Heir']})
+			if checkAlive('Benas'):
+				cutsceneManager.addAction('dialog',
+						{'text':["Old though I may be, I am ever behind thee my Liege, until the day of mine dying breath."],
+						'script':['Benas']})
+			if checkAlive('Eimantas'):
+				cutsceneManager.addAction('dialog',
+						{'text':['Rest assured, this is a minor tribulation that we shalt see through, and far more beyond it.'],
+						'script':['Eimantas']})
+			if checkAlive('Daiga'):
+				cutsceneManager.addAction('dialog',
+						{'text':["I've no fear of the dark, let's be off while the momentum is upon us!"],
+						'script':['Daiga']})
+			if checkAlive('Jalena'):
+				if checkAlive('Vrikolaz'):
+					cutsceneManager.addAction('dialog',
+							{'text':["Come on daddy, it won't be all that long til it's mom's raspberry pie every night!", "Ade-Adele. . . P-Pie. . !", "Ohmygosh! You remember mom's name?!!"],
+							'script':['Jalena','Vrikolaz','Jalena']})
+				else:
+					cutsceneManager.addAction('dialog',
+						{'text':["I hate to leave my dad like this. . . But. . . But we'll be back for him right?", "Of course Jalena, we'll put him to rest in the castle garden, 'midst the fruiting bushes.", "*sniff. . . He'd really love that. . ."],
+						'script':['Jalena','Heir','Jalena']})
+			if !checkAlive('Jalena') and checkAlive('Vrikolaz'):
+				cutsceneManager.addAction('dialog',
+						{'text':['Oooowuuuaaaaaghhhhhhhhh!'],
+						'script':['Vrikolaz']})
+			if checkAlive('Ignas'):
+				cutsceneManager.addAction('dialog',
+						{'text':['Come then, let us be off before I miss my little paradise. . .'],
+						'script':['Ignas']})
+			if checkAlive('Ralfs'):
+				cutsceneManager.addAction('dialog',
+						{'text':["At first I was worried it'd be the same. That you lot would use me like 'em all. . . But this time I feel like I found some proper friends."],
+						'script':['Ralfs']})
+			if checkAlive('Katre'):
+				cutsceneManager.addAction('dialog',
+						{'text':['Blessed are we whom strike at the heart of opportunity and sup upon its juices.'],
+						'script':['Katre']})
+			if checkAlive('Oskars'):
+				cutsceneManager.addAction('dialog',
+						{'text':['Thee open my mind with every step, my liege. This meagre one shalt follow thee anywhere, even into such an abyss. . .'],
+						'script':['Oskars']})
+			if checkAlive('Akvile'):
+				cutsceneManager.addAction('dialog',
+						{'text':['Thy father may have been the author of my tragedy, but I have forgiven them. I cannot however forgive their killer, whatever it takes to cut down that treasonous toad Zydrunas!'],
+						'script':['Akvile']})
+			cutsceneManager.addAction('dialog',
+						{'text':['Let us be off everyone!'],
+						'script':['Heir']})
+		cutsceneManager.addAction('modulate',{'node':get_parent().get_node('fadeScreen').get_node('Panel'),'color':Color(0,0,0,1),'duration':5})
+		cutsceneManager.addAction('changeScene',{'path':"res://scenes/endScreen.tscn"})
 		#cutsceneManager.addAction('dialog',
 								#{'text':[],
 								#'script':[]})

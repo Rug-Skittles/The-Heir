@@ -5,11 +5,11 @@
 
 [node name="brazier" type="Node2D"]
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="." groups=["lights"]]
 position = Vector2(0, -24)
-energy = 0.5
+energy = 0.55
 texture = ExtResource("1_6o63i")
-texture_scale = 1.25
+texture_scale = 1.3
 
 [node name="TileMap" type="Sprite2D" parent="."]
 position = Vector2(-2, -7)

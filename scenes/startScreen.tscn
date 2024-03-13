@@ -43,6 +43,7 @@ scale = Vector2(4, 4)
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 custom_minimum_size = Vector2(480, 360)
 layout_mode = 1
 anchors_preset = 15
@@ -58,6 +59,7 @@ stretch_mode = 5
 anchor_mode = 0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5

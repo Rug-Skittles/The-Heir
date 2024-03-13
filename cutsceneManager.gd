@@ -49,14 +49,39 @@ func processNextAction():
 				processToggleFlag(action)
 			'modulate':
 				processModulate(action)
-				
+			'recruitment':
+				processRecruitment(action)
+			'audioTween':
+				processTween(action)
+
+func processRecruitment(action):
+	for item in get_parent().allUnits:
+		if item.characterName == action.data['character']:
+			item.isPlayer = true
+			item.isRecruitable = false
+			item.target = null
+			item.get_node('visionCone').show()
+			item.get_node('radialVision').show()
+			for i in range(get_parent().enemyUnits.size() -1, -1, -1):
+				if item == get_parent().enemyUnits[i]:
+					get_parent().enemyUnits.remove_at(i)
+					get_parent().playerUnits.append(item)
+	
+
+
 func processModulate(action):
 	startAction.emit()
-	for unit in get_parent().allUnits:
-		if unit.characterName == action.data['character']:
-			var tween = create_tween()
-			tween.tween_property(unit,'modulate',action.data['color'],action.data['duration'])
-
+	if action.data.has('character'):
+		for unit in get_parent().allUnits:
+			if unit.characterName == action.data['character']:
+				var tween = create_tween()
+				tween.tween_property(unit,'modulate',action.data['color'],action.data['duration'])
+	if action.data.has('node'):
+		var tween = create_tween()
+		tween.tween_property(action.data['node'],'modulate',action.data['color'],action.data['duration'])
+		await tween.finished
+	processing = false
+	
 func processToggleFlag(action):
 	startAction.emit()
 	for unit in get_parent().allUnits:
@@ -65,6 +90,13 @@ func processToggleFlag(action):
 				unit.set(action.data['flag'], false)
 			else:
 				unit.set(action.data['flag'], true)
+	processing = false
+
+func processTween(action):
+	startAction.emit()
+	var tween = create_tween()
+	tween.tween_property(get_parent().get_node('musicContainer').get_node('AudioStreamPlayer'),'volume_db',-80,5)
+	await tween.finished
 	processing = false
 
 func processChangeScene(action):
