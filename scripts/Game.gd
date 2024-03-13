@@ -255,7 +255,7 @@ func _on_interface_button_down(button):
 		if selectedPlayerUnits.size() != 0:
 			for unit in selectedPlayerUnits:
 				unit.currentAction = button
-		$cursor.visible = true
+			$cursor.visible = true
 		
 	if button == 'focus':
 		if $Camera2D.keepFocus == true:

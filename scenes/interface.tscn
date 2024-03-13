@@ -958,6 +958,7 @@ script = ExtResource("2_6cswn")
 layout_mode = 2
 
 [node name="chaseLabel" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(100, 28)
 layout_mode = 2
 tooltip_text = "Should thout find thyself with 'Chase' toggled, thee will pursue the first target thee lay eyes on with abandon without need for commands.
@@ -973,6 +974,7 @@ autowrap_mode = 0
 script = ExtResource("2_6cswn")
 
 [node name="showStatus" type="Button" parent="rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer/chaseLabel"]
+visible = false
 custom_minimum_size = Vector2(100, 28)
 layout_mode = 1
 anchors_preset = 15
@@ -988,14 +990,13 @@ flat = true
 script = ExtResource("2_6cswn")
 
 [node name="treatToggle" type="RichTextLabel" parent="rightStatsContainer/vContainer/MarginContainer4/VBoxContainer/HBoxContainer"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 4
 tooltip_text = "Allows the physician to begin treating on those around them to staunch the loss of blood and patch minor wounds. Be warned, ye of the mind to heal can do no harm. Some time must pass before one may be treated again.
 Hotkey : V"
 theme = ExtResource("1_ttv5o")
 bbcode_enabled = true
-text = "   Treat"
+text = "                        Treat"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0

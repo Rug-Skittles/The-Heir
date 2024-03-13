@@ -29,7 +29,7 @@ height = 1.0
 position = Vector2(80, 720)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(223, -1083)
+position = Vector2(123, -1472)
 anchor_mode = 0
 limit_left = -2400
 limit_top = -1400

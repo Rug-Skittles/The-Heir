@@ -95,7 +95,7 @@ func processToggleFlag(action):
 func processTween(action):
 	startAction.emit()
 	var tween = create_tween()
-	tween.tween_property(get_parent().get_node('musicContainer').get_node('AudioStreamPlayer'),'volume_db',-80,5)
+	tween.tween_property(get_parent().get_node('musicContainer').get_node('AudioStreamPlayer'),'volume_db',-60,4)
 	await tween.finished
 	processing = false
 

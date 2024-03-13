@@ -109,11 +109,11 @@ func handleSpriteFacing():
 func _on_timer_timeout():
 	if isPlayer:
 		var hungerMsg = 2
-		var survivalModifier = modifiedStats['survival'] * 0.12
+		var survivalModifier = modifiedStats['survival'] * 0.1
 		if velocity != Vector2(0,0):
-			hunger -= 1.0 - survivalModifier
+			hunger -= 1.05 - survivalModifier
 		else:
-			hunger -= 0.75 - survivalModifier
+			hunger -= 0.8 - survivalModifier
 		if hunger <= 0:
 			if !baseStats['curWounds'] <= 0:
 				baseStats['curWounds'] -= round(baseStats['maxWounds'] * .05)

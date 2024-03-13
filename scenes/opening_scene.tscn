@@ -127,7 +127,7 @@ actionDataToProcess = Array[Dictionary]([{
 "speed": 1000
 }, {
 "character": "Heir",
-"destination": Vector2(518, 430),
+"destination": Vector2(480, 430),
 "speed": 1200
 }, {
 "character": "Heir",
@@ -151,7 +151,7 @@ actionDataToProcess = Array[Dictionary]([{
 }, {
 "character": "Heir",
 "destination": Vector2(580, 1000),
-"speed": 100.0
+"speed": 160.0
 }, {
 "duuhh": "buhhhh"
 }, {

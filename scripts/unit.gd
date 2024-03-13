@@ -253,7 +253,7 @@ func _tryAttackTarget():
 		lastAttackTime = currentTime
 		attackComplete.emit(self)
 		if fatigue <= 198:
-			fatigue += 2
+			fatigue += 2.5
 		if target != null:
 			target.lastAttacker = self
 
@@ -279,6 +279,8 @@ func handleLevelUp():
 func handleCannialismGains(corpse):
 	var eater = game.selectedPlayerUnits[0]
 	eater.hunger += target.baseStats['maxWounds']
+	if eater.hunger > 100:
+		eater.hunger = 100
 	
 	## Healing
 	if eater.baseStats['curWounds'] < eater.baseStats['maxWounds']:
@@ -481,7 +483,7 @@ func targetCheck(): ## Determines how far away the target is from a unit and do 
 			
 func generateCorpse(): 
 	
-	get_node('CollisionShape2D').disabled = true
+	#get_node('CollisionShape2D').disabled = true
 	$audioContainer/death.play()
 	print(characterName + ' has died!')
 	isDead = true
@@ -558,7 +560,7 @@ func _on_fatigue_timer_timeout():
 	#print(fatigue)
 	if velocity != Vector2(0,0):
 		if fatigue <= 199:
-			fatigue += 1.5
+			fatigue += 3.75
 	elif velocity == Vector2(0,0):
 		if fatigue >= 2:
-			fatigue -= 2
+			fatigue -= 1.5

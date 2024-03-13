@@ -99,7 +99,7 @@ func changeActiveStateColor(unit):
 		focusToggle.add_theme_color_override("default_color", Color.DIM_GRAY)
 		
 	if unit.isPhysician:
-		treatToggle.text = '[center]   Treat'
+		treatToggle.text = '                        Treat'
 		statusToggle.text = '[center]   Show Status'
 	else:
 		treatToggle.text = ''
@@ -127,7 +127,7 @@ func revealStats(unit):
 	if !unit.isPlayer:
 		$rightStatsContainer/vContainer/skillsLabel.hide()
 		$rightStatsContainer/vContainer/skillsLabel2.hide()
-		statusToggle.hide()
+		#statusToggle.hide()
 		speakAction.hide()
 		feastAction.hide()
 		treatToggle.hide()
@@ -137,7 +137,7 @@ func revealStats(unit):
 	else:
 		$rightStatsContainer/vContainer/skillsLabel.show()
 		$rightStatsContainer/vContainer/skillsLabel2.show()
-		statusToggle.show()
+		#statusToggle.show()
 		speakAction.show()
 		feastAction.show()
 		treatToggle.show()

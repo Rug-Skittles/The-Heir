@@ -108,7 +108,7 @@ func _process(delta):
 			if Input.is_action_just_pressed("skipDialog"):
 				for timer in get_tree().get_nodes_in_group('textTimers'):
 					timer.queue_free()
-				textContent.percent_visible = 1.0
+				textContent.visible_ratio = 1
 				#tween.pause()
 				tween.custom_step(100.0)
 				#changeState(State.FINISHED)
@@ -116,7 +116,7 @@ func _process(delta):
 			if Input.is_action_just_pressed("skipDialog"):
 				for timer in get_tree().get_nodes_in_group('textTimers'):
 					timer.queue_free()
-				textContent.percent_visible = 1.0
+				textContent.visible_ratio = 1
 				#tween.pause()
 				tween.custom_step(100.0)
 				#changeState(State.FINISHED)
