@@ -6,6 +6,8 @@ extends Unit
 var aiState = 'passive'
 var treatmentTarget = null
 
+var hungerMsg = 2
+
 
 
 
@@ -69,13 +71,14 @@ func handleSpriteFacing():
 ## Additionally more hunger will be reduced if the unit is moving.
 func _on_timer_timeout():
 	if isPlayer:
-		var hungerMsg = 2
+
 		var survivalModifier = modifiedStats['survival'] * 0.1
 		if velocity != Vector2(0,0):
 			hunger -= 1.05 - survivalModifier
 		else:
 			hunger -= 0.8 - survivalModifier
 		if hunger <= 0:
+			hunger = 0
 			if !baseStats['curWounds'] <= 0:
 				baseStats['curWounds'] -= round(baseStats['maxWounds'] * .05)
 				hungerMsg += 1

@@ -8,6 +8,7 @@ class_name Unit
 @export var fatigue : int = 0
 @export var hunger : float = 100
 @export var canDie : bool = true
+var bleedMsg = 3
 
 @export var voicePitch : float = 1.0
 
@@ -408,7 +409,10 @@ func checkDeath():
 			if !deathChecked:
 				selected = false
 				$selectionVisual.hide()
-				
+				set_collision_layer_value(1,false)
+				set_collision_mask_value(1,false)
+				set_collision_layer_value(2,true)
+				set_collision_mask_value(2,true)
 				if characterName != 'Sernas':
 					for i in range(game.selectedPlayerUnits.size() -1, -1, -1):
 						if self == game.selectedPlayerUnits[i]:
@@ -543,10 +547,10 @@ func _on_idle_timer_timeout():
 
 ## Handles bleeding damage 
 func _on_bleed_timer_timeout():
-	var bleedMsg = 1
+
 	if !baseStats['curWounds'] <= 0:
 		baseStats['curWounds'] -= round(baseStats['maxWounds'] * .10)
-		bleedMsg += 3
+		bleedMsg += 1
 	if baseStats['curWounds'] <= 0:
 		if !isDead:
 			generateCorpse()
