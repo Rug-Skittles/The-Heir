@@ -28,21 +28,21 @@ func handleAiState():
 		if enemiesInView.size() > 0:
 			target = enemiesInView[0]
 	
-	if lastAttacker != null:
-		if aiState == 'fight' and !lastAttacker.isDead and !lastAttacker.isPlayer:
+	if aiState == 'fight':
+		if lastAttacker != null and !lastAttacker.isDead and !lastAttacker.isPlayer:
 			if velocity == Vector2(0,0):
 				target = lastAttacker
-	else:
-		if aiState == 'fight':
-			var bodiesInView = []
-			var enemiesInView = []
-			for body in visionCone.get_node('Area2D').get_overlapping_bodies():
-				if !body.isNeutral and !body.isPlayer and !body.isDead and body != self:
-					enemiesInView.append(body)
-			if enemiesInView.size() > 0:
-				for enemy in enemiesInView:
-					if global_position.distance_to(enemy.global_position) <= modifiedStats['attackRange']:
-						target = enemy
+		else:
+			if aiState == 'fight':
+				var bodiesInView = []
+				var enemiesInView = []
+				for body in visionCone.get_node('Area2D').get_overlapping_bodies():
+					if !body.isNeutral and !body.isPlayer and !body.isDead and body != self:
+						enemiesInView.append(body)
+				if enemiesInView.size() > 0:
+					for enemy in enemiesInView:
+						if global_position.distance_to(enemy.global_position) <= modifiedStats['attackRange']:
+							target = enemy
 	
 	if aiState == 'treat':
 		if isPhysician:

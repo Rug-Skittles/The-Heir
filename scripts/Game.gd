@@ -20,6 +20,7 @@ var unitsInVision = []
 
 func _ready():
 	var tween = create_tween()
+	tween.tween_property($fadeInCanvas/ColorRect,'color',Color(0,0,0,0),4)
 	tween.tween_property($musicContainer/AudioStreamPlayer,'volume_db',0,5)
 	$musicContainer/AudioStreamPlayer.play()
 	

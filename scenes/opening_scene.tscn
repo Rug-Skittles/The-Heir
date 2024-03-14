@@ -96,6 +96,14 @@ position = Vector2(260, 420)
 [node name="Sprite2D" parent="unitContainer/NeutralUnit3" index="1"]
 texture = ExtResource("6_ak5k4")
 
+[node name="NeutralUnit4" parent="unitContainer" instance=ExtResource("5_dav3u")]
+visible = false
+position = Vector2(507, 329)
+characterName = "cameraAdjust"
+
+[node name="Sprite2D" parent="unitContainer/NeutralUnit4" index="1"]
+texture = ExtResource("6_ak5k4")
+
 [node name="dialogTriggers" type="Node2D" parent="."]
 
 [node name="dialogTrigger2" parent="dialogTriggers" instance=ExtResource("6_wxi7p")]
@@ -109,14 +117,14 @@ actionDataToProcess = Array[Dictionary]([{
 "speed": 120.0
 }, {
 "script": ["Zydrunas", "Heir", "Zydrunas"],
-"text": [". . . As far as rulers go, thy father was the most pitable wretch of them all. A weak and witless tyrant of inaction.", "Stay thy tongue traitor!", "Ahh. . . Wouldst that thou not harbor such meaningless grudges, I wouldst not have to punish thee so. A pity."]
+"text": [". . . As far as rulers go, thy father was the most pitable wretch of them all. A weak and witless tyrant of inaction.", "Stay thy tongue traitor!", "Ahh. . . Wouldst that thou not harbor such meaningless grudges, thee wouldn't be punished so. A pity."]
 }, {
 "character": "Zydrunas",
 "destination": Vector2(175, 356),
 "speed": 150.0
 }, {
 "script": ["Zydrunas", "Heir", "Zydrunas", "Zydrunas"],
-"text": ["It is a shame what will become of thee. Have thou words for thy father's slayer?", "Vengence shall be mine. . .", "Hmm. I welcome it!", "May I see thee again, whelp!"]
+"text": ["It is a shame what will become of thee. Have thou words for thy father's slayer?", "May thy reign be short and eventful.", "Hmm. I welcome it!", "May I see thee again, whelp!"]
 }, {
 "character": "Zydrunas",
 "target": "Heir"
@@ -149,9 +157,9 @@ actionDataToProcess = Array[Dictionary]([{
 "destination": Vector2(-300, 356),
 "speed": 150.0
 }, {
-"character": "Heir",
-"destination": Vector2(580, 1000),
-"speed": 160.0
+"character": "cameraAdjust",
+"destination": Vector2(507, 1000),
+"speed": 165.0
 }, {
 "duuhh": "buhhhh"
 }, {
@@ -269,3 +277,4 @@ occluder = SubResource("OccluderPolygon2D_g375y")
 [editable path="unitContainer/NeutralUnit"]
 [editable path="unitContainer/NeutralUnit2"]
 [editable path="unitContainer/NeutralUnit3"]
+[editable path="unitContainer/NeutralUnit4"]

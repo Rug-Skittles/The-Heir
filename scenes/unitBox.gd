@@ -77,3 +77,7 @@ func _on_texture_button_pressed_9():
 func _on_texture_button_pressed_10():
 	if get_parent().playerUnits.size() >= 11:
 		getSelectedUnit(get_parent().playerUnits[10])
+
+func _on_texture_button_pressed_11():
+	if get_parent().playerUnits.size() >= 12:
+		getSelectedUnit(get_parent().playerUnits[11])

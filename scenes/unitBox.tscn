@@ -170,6 +170,18 @@ layout_mode = 2
 texture_normal = ExtResource("2_ef1vw")
 stretch_mode = 5
 
+[node name="MarginContainer12" type="MarginContainer" parent="Control/VBoxContainer" groups=["unitContainer"]]
+visible = false
+custom_minimum_size = Vector2(40, 42)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="TextureButton" type="TextureButton" parent="Control/VBoxContainer/MarginContainer12"]
+z_index = 10
+layout_mode = 2
+texture_normal = ExtResource("2_ef1vw")
+stretch_mode = 5
+
 [connection signal="pressed" from="Control/VBoxContainer/MarginContainer/TextureButton" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/MarginContainer2/TextureButton" to="." method="_on_texture_button_pressed_1"]
 [connection signal="pressed" from="Control/VBoxContainer/MarginContainer3/TextureButton" to="." method="_on_texture_button_pressed_2"]
@@ -181,3 +193,4 @@ stretch_mode = 5
 [connection signal="pressed" from="Control/VBoxContainer/MarginContainer9/TextureButton" to="." method="_on_texture_button_pressed_8"]
 [connection signal="pressed" from="Control/VBoxContainer/MarginContainer10/TextureButton" to="." method="_on_texture_button_pressed_9"]
 [connection signal="pressed" from="Control/VBoxContainer/MarginContainer11/TextureButton" to="." method="_on_texture_button_pressed_10"]
+[connection signal="pressed" from="Control/VBoxContainer/MarginContainer12/TextureButton" to="." method="_on_texture_button_pressed_11"]

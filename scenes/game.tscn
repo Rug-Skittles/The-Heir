@@ -31,9 +31,9 @@ position = Vector2(80, 720)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(123, -1472)
 anchor_mode = 0
-limit_left = -2400
+limit_left = -3700
 limit_top = -1400
-limit_right = 3600
+limit_right = 5300
 limit_bottom = 6500
 limit_smoothed = true
 position_smoothing_enabled = true
@@ -88,6 +88,18 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_f7hrr")
+
+[node name="fadeInCanvas" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="fadeInCanvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
 
 [connection signal="sendUnit" from="cutsceneManager" to="dialogCanvas" method="_on_cutscene_manager_send_unit"]
 [connection signal="startAction" from="cutsceneManager" to="dialogCanvas" method="_on_cutscene_manager_start_action"]

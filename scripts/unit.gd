@@ -540,8 +540,8 @@ func _physics_process(delta):
 
 ## Fires dialog from this character's idleDialog array and resets the idletimer
 func _on_idle_timer_timeout():
-	$idleTimer.wait_time = randi_range(240,480)
-	if idleDialog:
+	$idleTimer.wait_time = randi_range(120,480)
+	if !idleDialog.is_empty() and isPlayer:
 		var randomText = randi() % idleDialog.size()
 		dialogCanvas.processText([characterName + ': ' + idleDialog[randomText]])
 

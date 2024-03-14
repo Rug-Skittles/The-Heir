@@ -53,6 +53,19 @@ func processNextAction():
 				processRecruitment(action)
 			'audioTween':
 				processTween(action)
+			'statChange':
+				processStatChange(action)
+
+func processStatChange(action):
+	for item in get_parent().allUnits:
+		if item.characterName == action.data['character']:
+			for stat in item.baseStats:
+				if action.data['statToChange'] == stat:
+					item.baseStats[stat] += action.data['value']
+					if action.data['value'] > 0:
+						dialogCanvas.processText(["My " + action.data['statToChange'] + ' has grown by ' + str(action.data['value']) + '!'], 'pauseFocus', [item.characterName], 'high')
+					else:
+						dialogCanvas.processText(["My " + action.data['statToChange'] + ' has fallen by ' + str(action.data['value']) + '!'], 'pauseFocus', [item.characterName], 'high')
 
 func processRecruitment(action):
 	for item in get_parent().allUnits:
@@ -95,7 +108,7 @@ func processToggleFlag(action):
 func processTween(action):
 	startAction.emit()
 	var tween = create_tween()
-	tween.tween_property(get_parent().get_node('musicContainer').get_node('AudioStreamPlayer'),'volume_db',-60,4)
+	tween.tween_property(get_parent().get_node('musicContainer').get_node('AudioStreamPlayer'),'volume_db',-50,2.5)
 	await tween.finished
 	processing = false
 
