@@ -25,3 +25,7 @@ func _ready():
 
 func _on_retry_button_down():
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
+
+
+func _on_start_from_beginning_button_down():
+	get_tree().change_scene_to_file("res://scenes/Opening.tscn")

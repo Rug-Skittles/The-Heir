@@ -71,6 +71,9 @@ texture = ExtResource("3_enjx3")
 [node name="bleedTimer" parent="unitContainer/Heir" index="13"]
 wait_time = 1.0
 
+[node name="feast" parent="unitContainer/Heir/audioContainer" index="2"]
+volume_db = 0.0
+
 [node name="NeutralUnit" parent="unitContainer" instance=ExtResource("5_dav3u")]
 position = Vector2(-810, 359)
 characterName = "Zydrunas"

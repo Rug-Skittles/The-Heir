@@ -89,6 +89,7 @@ volume_db = -10.0
 
 [node name="feast" type="AudioStreamPlayer2D" parent="audioContainer"]
 stream = ExtResource("11_euex1")
+volume_db = 15.0
 
 [node name="textScroll" type="AudioStreamPlayer" parent="audioContainer"]
 stream = ExtResource("12_elbc3")

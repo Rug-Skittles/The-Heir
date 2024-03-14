@@ -71,6 +71,8 @@ func processRecruitment(action):
 	for item in get_parent().allUnits:
 		if item.characterName == action.data['character']:
 			item.isPlayer = true
+			if item.aiState == 'hostile':
+				item.aiState = 'fight'
 			item.isRecruitable = false
 			item.target = null
 			item.get_node('visionCone').show()

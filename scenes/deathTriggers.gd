@@ -23,6 +23,12 @@ func checkAlive(unit):
 
 func processDeathTrigger(unit):
 	#get_parent()._unselectUnit()
+	if unit.characterName == 'Vrikolaz' and unit.isPlayer:
+		cutsceneManager.addAction('dialog',{'text':['Daddy! Noooo!!!!','We were supposed to get back to mom, together. . .','How could this happen. . ?',"I'll make them pay!!!"],
+											'script':['Jalena','Jalena','Jalena','Jalena']})
+		cutsceneManager.addAction('statChange',{'character':'Jalena','statToChange':'might','value':2})
+		cutsceneManager.addAction('statChange',{'character':'Jalena','statToChange':'survival','value':-1})
+		
 	if unit.characterName == 'Graus':
 		get_parent().get_node('unitBox').show()
 		print('Graus is dead!')
@@ -249,6 +255,9 @@ func processDeathTrigger(unit):
 				cutsceneManager.addAction('dialog',
 						{'text':['Thy father may have been the author of my tragedy, but I have forgiven them. I cannot however forgive their killer, whatever it takes to cut down that treasonous toad Zydrunas!'],
 						'script':['Akvile']})
+			if checkAlive('Ilya'):
+				cutsceneManager.addAction('dialog',{'text':['Ilya is ready, yes-yes. Ilya to go home.'],'script':['Ilya']})
+				
 			cutsceneManager.addAction('dialog',
 						{'text':['Let us be off everyone!'],
 						'script':['Heir']})

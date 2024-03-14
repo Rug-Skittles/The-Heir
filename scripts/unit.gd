@@ -69,6 +69,7 @@ var isNeutral : bool = false
 @export var feastDialog : Array[String]
 @export var deathDialog : Array[String]
 
+
 @export var keepFocus : bool = false
 
 @export var emitDeathSignal : bool = false
@@ -253,7 +254,7 @@ func _tryAttackTarget():
 		$projectileContainer.add_child(projectileInstance)
 		lastAttackTime = currentTime
 		if fatigue <= 198:
-			fatigue += 2.5
+			fatigue += 2.35
 		if target != null:
 			target.lastAttacker = self
 		await get_tree().create_timer(global_position.distance_to(target.global_position)/600).timeout
@@ -371,6 +372,8 @@ func trySpeak():
 		if target == unit:
 			if target.isRecruitable:
 				target.isPlayer = true
+				if target.aiState == 'hostile':
+					target.aiState = 'fight'
 				target.isRecruitable = false
 				target.target = null
 				target.get_node('visionCone').show()
@@ -487,7 +490,9 @@ func targetCheck(): ## Determines how far away the target is from a unit and do 
 			navigationComplete = false
 			
 func generateCorpse(): 
-	
+	if isPlayer:
+		game.get_node('cutsceneManager').addAction('dialog',{'text':deathDialog,
+											'script':[characterName]})
 	#get_node('CollisionShape2D').disabled = true
 	$audioContainer/death.play()
 	print(characterName + ' has died!')
@@ -565,7 +570,7 @@ func _on_fatigue_timer_timeout():
 	#print(fatigue)
 	if velocity != Vector2(0,0):
 		if fatigue <= 199:
-			fatigue += 3.75
+			fatigue += 3.5
 	elif velocity == Vector2(0,0):
 		if fatigue >= 2:
-			fatigue -= 1.5
+			fatigue -= 1.75

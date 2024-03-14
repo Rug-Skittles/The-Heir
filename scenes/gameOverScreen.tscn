@@ -113,3 +113,4 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_l3y3i")
 flat = true
 
 [connection signal="button_down" from="VBoxContainer/HBoxContainer/Tempt Fate Once More?/retry" to="." method="_on_retry_button_down"]
+[connection signal="button_down" from="VBoxContainer/HBoxContainer/Begin Anew?/startFromBeginning" to="." method="_on_start_from_beginning_button_down"]

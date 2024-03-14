@@ -13,12 +13,22 @@ extends Unit
 
 var hungerMsg = 2
 
-var aiState = 'passive'
+@export var aiState = 'passive'
 var recruited : bool = false
 var treatmentTarget = null
 
 func handleAiState():
-	#print(aiState)
+	
+	if aiState == 'hostile':
+		for unit in gameManager.playerUnits:
+			#print(unit)
+			#print(global_position.distance_to(unit.global_position))
+			if global_position.distance_to(unit.global_position) <= sightRange and !unit.isDead and unit != self:
+				#print('GETTING THIS')
+				
+				target = unit
+				#print(target)
+	
 	if aiState == 'chase' and target == null and velocity == Vector2(0,0):
 		var bodiesInView = []
 		var enemiesInView = []
@@ -76,7 +86,7 @@ func _ready():
 	dialogCanvas = get_node("/root/Game/dialogCanvas")
 	add_to_group("units")
 	
-	isPlayer = false
+	#isPlayer = false
 	agent = $NavigationAgent2D
 	sprite = $Sprite2D
 	
@@ -110,11 +120,11 @@ func handleSpriteFacing():
 ## Additionally more hunger will be reduced if the unit is moving.
 func _on_timer_timeout():
 	if isPlayer:
-		var survivalModifier = modifiedStats['survival'] * 0.1
+		var survivalModifier = modifiedStats['survival'] * 0.105
 		if velocity != Vector2(0,0):
-			hunger -= 1.05 - survivalModifier
+			hunger -= (1.00 - survivalModifier)
 		else:
-			hunger -= 0.8 - survivalModifier
+			hunger -= (0.7 - survivalModifier)
 		if hunger <= 0:
 			hunger = 0
 			if !baseStats['curWounds'] <= 0:
@@ -128,13 +138,14 @@ func _on_timer_timeout():
 
 func _process(delta):
 	
-	handleAiState()
+	
 	targetCheck()
+	handleAiState()
 	handleSpriteFacing()
 	checkDeath()
 	_checkStatus()
 	handleLevelUp()
-	if isFrenzied:
+	if isFrenzied and isPlayer:
 		aiState = 'chase'
 
 
