@@ -6,6 +6,8 @@ var distanceBufferToTarget = 0
 
 @onready var sprite = $sprite
 
+
+
 func _ready():
 	sprite.texture = get_parent().get_parent().attackSprite
 	target = get_parent().get_parent().target

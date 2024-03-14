@@ -22,6 +22,7 @@ y_sort_enabled = true
 script = ExtResource("1_a5c0y")
 
 [node name="darkness" type="DirectionalLight2D" parent="."]
+visible = false
 blend_mode = 1
 height = 1.0
 
@@ -100,6 +101,9 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(1966, 3613)
 
 [connection signal="sendUnit" from="cutsceneManager" to="dialogCanvas" method="_on_cutscene_manager_send_unit"]
 [connection signal="startAction" from="cutsceneManager" to="dialogCanvas" method="_on_cutscene_manager_start_action"]

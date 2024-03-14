@@ -252,12 +252,13 @@ func _tryAttackTarget():
 		var projectileInstance = projectile.instantiate()
 		$projectileContainer.add_child(projectileInstance)
 		lastAttackTime = currentTime
-		attackComplete.emit(self)
 		if fatigue <= 198:
 			fatigue += 2.5
 		if target != null:
 			target.lastAttacker = self
-
+		await get_tree().create_timer(global_position.distance_to(target.global_position)/600).timeout
+		attackComplete.emit(self)
+		
 func gainExperience(damageDealt, target):
 	combatExperience += damageDealt
 

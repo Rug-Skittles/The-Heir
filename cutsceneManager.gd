@@ -125,10 +125,15 @@ func processMovement(action):
 	startAction.emit()
 	for enemy in get_parent().enemyUnits:
 		enemy.aiDisabled = true
+		enemy.target = null
 	var unit = action.data['character']
 	
 	for character in get_parent().allUnits:
 		if unit == character.characterName:
+			character.set_collision_layer_value(1,false)
+			character.set_collision_mask_value(1,false)
+			character.set_collision_layer_value(3,true)
+			character.set_collision_mask_value(3,true)
 			lastMovedUnit = character
 			if action.data.has('flip'):
 				if action.data['flip'] == 'true':
@@ -201,6 +206,10 @@ func processTarget(action):
 
 func onUnitMovementComplete(unit):
 	if unit == lastMovedUnit:
+		unit.set_collision_layer_value(1,true)
+		unit.set_collision_mask_value(1,true)
+		unit.set_collision_layer_value(3,false)
+		unit.set_collision_mask_value(3,false)
 		print('COMPLETE MOVE NOW')
 		for enemy in get_parent().enemyUnits:
 			if !enemy.isNeutral:

@@ -350,7 +350,7 @@ layer_1/tile_data = PackedInt32Array(262143, 131073, 2, 327679, 131073, 3, 39321
 y_sort_enabled = true
 
 [node name="Heir" parent="unitContainer" instance=ExtResource("3_syj1i")]
-position = Vector2(574, -1548)
+position = Vector2(2032, 2897)
 characterName = "Heir"
 voicePitch = 1.05
 baseStats = {
@@ -471,7 +471,7 @@ deathDialog = Array[String](["Even this I hath foreseen."])
 emitDeathSignal = true
 
 [node name="Daiga - Neutral" parent="unitContainer" instance=ExtResource("4_nmso7")]
-position = Vector2(-1438, 1282)
+position = Vector2(1876, 2944)
 characterName = "Daiga"
 attackSprite = ExtResource("20_yqcg7")
 voicePitch = 1.11
@@ -1450,6 +1450,30 @@ isFrenzied = true
 emitDeathSignal = true
 
 [node name="Sprite2D" parent="unitContainer/EnemyUnit - Admir" index="1"]
+texture = ExtResource("20_6arv5")
+
+[node name="EnemyUnit - Janja" parent="unitContainer" instance=ExtResource("3_sa4ml")]
+position = Vector2(1912, 2635)
+sightRange = 0.0
+characterName = "Janja"
+attackSprite = ExtResource("22_0su6l")
+baseStats = {
+"agility": 6,
+"attackRange": 0,
+"attackRate": 0.45,
+"curWounds": 22,
+"fatigue": 0,
+"hunger": 100,
+"maxWounds": 22,
+"might": 3,
+"movement": 150,
+"resilience": 2,
+"skill": 1,
+"survival": 2
+}
+isFrenzied = true
+
+[node name="Sprite2D" parent="unitContainer/EnemyUnit - Janja" index="1"]
 texture = ExtResource("20_6arv5")
 
 [node name="EnemyUnit - Kryspin" parent="unitContainer" instance=ExtResource("3_sa4ml")]
@@ -2817,6 +2841,7 @@ multiCharacterTrigger = true
 multiCharactersToTrigger = Array[String](["Oskars", "Sernas"])
 textToQueue = Array[String](["Captain Oskars, help! Strike down that noble brat!", "I won't be doing that Warden. . .", "All these years I thought thee favored me to keep me from the ground floor proper. Yet after seeing the state of this place I realize now that thee were merely frightened of my response.", "W-What are you saying?", "That thou art iredeemable. I. . . Can never forgive thee Sernas.", "No, no! Oskars! My Oskars! Please. . . 'Twas all the King's doing I swear it!", "Farewell. . ."])
 textScript = Array[String](["Sernas", "Oskars", "Oskars", "Sernas", "Oskars", "Sernas", "Oskars"])
+textState = "pauseFocus"
 
 [node name="Oskars and the Skull Pit" parent="eventTriggers" instance=ExtResource("4_nrfsd")]
 position = Vector2(773, -113)
@@ -2846,6 +2871,43 @@ multiCharactersToTrigger = Array[String](["Bosko", "Cilka", "Elias", "Heir"])
 textToQueue = Array[String](["This place is in shambles eh?", "Aye, that it 'tis. 'Ere since the ol' King 'ad their way of it.", "'Haps Lord Zydrunas will see to it that our lot gets better conditions.", "We can hope so, though the way our number of wards is swelling and Sernas getting freer reign, hard to say. . .", "Oi look! Escapees!", "You lot! Get back in yer cells right away ya hear?!", "Ooh no, they're covered in blood, look at em, don't think we've a choice lads!"])
 textScript = Array[String](["Bosko", "Elias", "Cilka", "Bosko", "Elias", "Cilka", "Bosko"])
 textState = "pauseFocus"
+
+[node name="Daiga & Ilya" parent="eventTriggers" instance=ExtResource("4_nrfsd")]
+position = Vector2(1916, 2948)
+characterToTrigger = "Daiga"
+multiCharacterTrigger = true
+multiCharactersToTrigger = Array[String](["Daiga", "Ilya", "Janja"])
+textState = "pauseFocus"
+isCutscene = true
+actionTypeToProcess = Array[String](["dialog", "movement", "dialog", "movement", "dialog", "attack", "dialog", "statChange"])
+actionDataToProcess = Array[Dictionary]([{
+"script": ["Ilya", "Daiga", "Ilya", "Daiga", "Ilya", "Daiga", "Heir", "Daiga"],
+"text": ["You-you youngling.", "Speakin' to me doghead?", "Yes-yes, you shoot like little waif. Let Ilya show you the way.", "Yer gonna show ME? I'll have you know my pops taught me to shoot!", "They too must shoot like child.", "What did ya say?!", "Now now Daiga. Ilya seems to have taken an interest in thee, take it as a compliment. 'Haps let your fellow show you what they know?", "Guh. . . Fine. But I ain't gonna learn anythin'."]
+}, {
+"character": "Ilya",
+"destination": Vector2(2029, 3615),
+"speed": 250.0
+}, {
+"script": ["Ilya"],
+"text": ["Here is good, come-come."]
+}, {
+"character": "Daiga",
+"destination": Vector2(1966, 3613),
+"speed": 220.0
+}, {
+"script": ["Ilya", "Daiga", "Ilya"],
+"text": ["Ilya has been watching, yes-yes. Now draw bow, target is that dead one behind cage.", "*Grumble grumble. . .*", "Too reckless. . . Hold in breath. . . Steady heart. . . Quiet-quiet. . . Shoot!"]
+}, {
+"character": "Daiga",
+"target": "Janja"
+}, {
+"script": ["Daiga", "Ilya", "Daiga", "Ilya"],
+"text": ["W-Wow. . . Got 'em in one.", "See? And you are telling Ilya that they don't know things.", "Huh. . . Well forgive me I guess. Please Ilya, keep an eye on my marksmanship from here on!", "Yes-Yes, Ilya will make sure we are strong."]
+}, {
+"character": "Daiga",
+"statToChange": "skill",
+"value": 1
+}])
 
 [node name="navigationRegions" type="Node2D" parent="."]
 
@@ -3370,6 +3432,7 @@ occluder = SubResource("OccluderPolygon2D_fn3mn")
 [editable path="unitContainer/EnemyUnit - Guard Augus"]
 [editable path="unitContainer/EnemyUnit - Guard Ivans"]
 [editable path="unitContainer/EnemyUnit - Admir"]
+[editable path="unitContainer/EnemyUnit - Janja"]
 [editable path="unitContainer/EnemyUnit - Kryspin"]
 [editable path="unitContainer/EnemyUnit - Ljupcho"]
 [editable path="unitContainer/EnemyUnit - Ramanas"]
